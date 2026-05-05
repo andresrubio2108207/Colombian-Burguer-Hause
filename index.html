@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Colombian Burger House – Un Mundo de Sabores</title>
+<link rel="icon" type="image/jpeg" href="./Images/logo.jpeg">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Montserrat:wght@400;500;600;700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+
+<div class="service-alert" id="serviceAlert">
+  <div class="service-alert-title">Fuera de servicio en este momento</div>
+  <div class="service-alert-text">Atendemos pedidos de lunes a domingo, de 4:00 pm a 12:00 am</div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a href="#inicio" class="nav-logo">
+    <img src="./Images/logo.jpeg" alt="Logo Colombian Burger" onerror="this.style.display='none'">
+    <div class="nav-logo-text">
+      <div class="brand">Colombian Burger</div>
+    </div>
+  </a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#inicio">Inicio</a></li>
+    <li><a href="#carta">Carta</a></li>
+    <li><a href="#combos">Combos</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+    <li><a href="#" class="cart-btn" onclick="toggleCart(event)">🛒 Carrito <span class="cart-badge" id="cartBadge">0</span></a></li>
+  </ul>
+  <div class="nav-actions">
+    <a href="#" class="cart-btn mobile-cart-btn" onclick="toggleCart(event)" id="mobileCartBtn">🛒 <span class="cart-badge" id="cartBadge2">0</span></a>
+    <div class="hamburger" onclick="toggleMenu()" id="hamburger">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="inicio">
+  <div class="hero-glow"></div>
+  <img class="hero-logo" src="./Images/logo.jpeg" alt="Colombian Burger" onerror="this.outerHTML='<div style=\'width:180px;height:180px;border-radius:50%;border:3px solid var(--gold);background:#1a1200;display:flex;align-items:center;justify-content:center;font-size:4rem;margin-bottom:2rem;\'>🍔</div>'">
+  <p class="hero-eyebrow">Bienvenidos a</p>
+  <h1 class="hero-title">Colombian<br><span>Burger</span></h1>
+  <div class="hero-cta">
+    <a href="#carta" class="btn-primary">Ver Carta</a>
+    <div class="hero-guide" aria-label="Guía rápida de uso de la página">
+      <div class="hero-guide-label">Guía para ordenar</div>
+      <div class="hero-guide-text">Sigue estos 3 pasos:</div>
+      <ul class="hero-guide-list">
+        <li><strong>1.</strong> Elige lo que más te guste en la carta.</li>
+        <li><strong>2.</strong> Agrega tus productos al carrito.</li>
+        <li><strong>3.</strong> Da click en el carrito para confirmar tu compra.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="stat"><div class="stat-num">20+</div><div class="stat-label">Hamburguesas</div></div>
+    <div class="stat"><div class="stat-num">100%</div><div class="stat-label">Ingredientes Frescos</div></div>
+    <div class="stat"><div class="stat-num">★ 5</div><div class="stat-label">Sabor Garantizado</div></div>
+  </div>
+</section>
+
+<!-- CARTA -->
+<section id="carta">
+  <div class="section-header">
+    <span class="section-eyebrow">Nuestra</span>
+    <h2 class="section-title">Carta Completa</h2>
+    <div class="gold-line"></div>
+  </div>
+
+  <div class="category-tabs" id="categoryTabs">
+    <button class="tab-btn active" onclick="filterMenu('all', this)">Todo</button>
+    <button class="tab-btn" onclick="filterMenu('hamburguesas', this)">🍔 Hamburguesas</button>
+    <button class="tab-btn" onclick="filterMenu('perros', this)">🌭 Perros Calientes</button>
+    <button class="tab-btn" onclick="filterMenu('fast', this)">⚡ Fast Food</button>
+    <button class="tab-btn" onclick="filterMenu('patacones', this)">🟡 Patacones</button>
+    <button class="tab-btn" onclick="filterMenu('salchipapas', this)">🍟 Salchipapas</button>
+    <button class="tab-btn" onclick="filterMenu('sandwiches', this)">🥪 Sándwiches</button>
+    <button class="tab-btn" onclick="filterMenu('arepas', this)">🫓 Arepas</button>
+    <button class="tab-btn" onclick="filterMenu('recomendados', this)">⭐ Recomendados</button>
+    <button class="tab-btn" onclick="filterMenu('bebidas', this)">🥤 Bebidas</button>
+    <button class="tab-btn" onclick="filterMenu('adicionales', this)">➕ Adicionales</button>
+  </div>
+
+  <div class="menu-grid" id="menuGrid"></div>
+</section>
+
+<!-- COMBOS -->
+<section id="combos" class="combos-section">
+  <div class="section-header">
+    <span class="section-eyebrow">Lo Mejor de</span>
+    <h2 class="section-title">Nuestros Combos</h2>
+    <div class="gold-line"></div>
+  </div>
+  <div class="menu-grid" id="combosGrid"></div>
+</section>
+
+<!-- CONTACTO -->
+<section id="contacto">
+  <div class="section-header">
+    <span class="section-eyebrow">Encuéntranos</span>
+    <h2 class="section-title">Contacto</h2>
+    <div class="gold-line"></div>
+  </div>
+
+  <div class="contact-grid">
+    <div class="contact-info">
+      <h3>Colombian Burger House</h3>
+      <p>Somos más que una hamburguesería — somos una experiencia. Cada bite es un viaje de sabores colombianos únicos preparados con amor.</p>
+
+      <div class="contact-item">
+        <div class="contact-icon">📞</div>
+        <div class="contact-item-text">
+          <div class="contact-item-label">Teléfono / WhatsApp</div>
+          <div class="contact-item-value">315 674 2767</div>
+        </div>
+      </div>
+
+      <div class="contact-item">
+        <div class="contact-icon">🕐</div>
+        <div class="contact-item-text">
+          <div class="contact-item-label">Horario</div>
+          <div class="contact-item-value" id="businessHoursText">Lun – Dom: 4:00 pm – 12:00 am</div>
+          <div class="contact-item-label" id="businessStatusText">Verificando horario...</div>
+        </div>
+      </div>
+
+      <div class="contact-item">
+        <div class="contact-icon">🍔</div>
+        <div class="contact-item-text">
+          <div class="contact-item-label">Servicio</div>
+          <div class="contact-item-value">Domicilios · Para llevar · En sitio</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="whatsapp-card">
+      <span class="wa-icon">💬</span>
+      <h3>¡Pide por WhatsApp!</h3>
+      <p>La forma más rápida y fácil de hacer tu pedido. Escríbenos y te atendemos al instante.</p>
+      <span class="wa-number">315 674 2767</span>
+      <a href="https://wa.me/573156742767?text=Hola!%20Quiero%20hacer%20un%20pedido%20de%20Colombian%20Burger%20House%20%F0%9F%8D%94" target="_blank" rel="noopener noreferrer" class="btn-whatsapp">
+        💬 Chatear ahora
+      </a>
+      <p class="whatsapp-response-note">Respuesta inmediata en horario de atención</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">COLOMBIAN BURGER HOUSE</div>
+  <div class="footer-sub">Un Mundo de Sabores</div>
+  <div class="footer-links">
+    <a href="#inicio">Inicio</a>
+    <a href="#carta">Carta</a>
+    <a href="#combos">Combos</a>
+    <a href="#contacto">Contacto</a>
+    <a href="https://wa.me/573156742767" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+  </div>
+  <div class="footer-copy">© 2024 Colombian Burger House · Todos los derechos reservados</div>
+  <div class="footer-hours">Horario: Lun – Dom · 4:00 pm – 12:00 am</div>
+  <div class="footer-status" id="footerBusinessStatus">Verificando horario...</div>
+</footer>
+
+<!-- CART OVERLAY & SIDEBAR -->
+<div class="cart-overlay" id="cartOverlay" onclick="toggleCart(event)"></div>
+<div class="cart-sidebar" id="cartSidebar">
+  <div class="cart-header">
+    <h2>🛒 Tu Pedido</h2>
+    <button class="close-cart" onclick="toggleCart(event)">✕</button>
+  </div>
+  <div class="cart-items" id="cartItems">
+    <div class="cart-empty">
+      <div class="empty-icon">🍔</div>
+      <p>Tu carrito está vacío.<br>¡Agrega algo delicioso!</p>
+    </div>
+  </div>
+  <div class="cart-footer" id="cartFooter" style="display:none;">
+    <div class="cart-total-row">
+      <span class="cart-total-label">Total</span>
+      <span class="cart-total-num" id="cartTotal">$0</span>
+    </div>
+    <div class="cart-actions">
+      <button class="whatsapp-order" onclick="orderWhatsApp()">💬 Pedir por WhatsApp</button>
+      <button class="clear-cart-btn" onclick="clearCart()">Vaciar carrito</button>
+    </div>
+    <p class="cart-note">Serás redirigido a WhatsApp con tu pedido</p>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+<div class="option-modal" id="optionModal" onclick="closeOptionModal(event)">
+  <div class="option-card" onclick="event.stopPropagation()">
+    <div class="option-title" id="optionModalTitle">Elige una opción</div>
+    <div class="option-text" id="optionModalText">Selecciona el sabor para continuar.</div>
+    <select class="option-select" id="optionSelect">
+      <option value="">Selecciona una opción</option>
+    </select>
+    <div class="option-actions">
+      <button class="btn-outline" type="button" onclick="closeOptionModal()">Cancelar</button>
+      <button class="btn-primary" type="button" onclick="confirmOptionSelection()">Agregar</button>
+    </div>
+  </div>
+</div>
+
+<div class="option-modal" id="orderModal" onclick="closeOrderModal(event)">
+  <div class="option-card" onclick="event.stopPropagation()">
+    <div class="option-title">Completar pedido</div>
+    <div class="option-text" id="orderModalIntro">Cuéntanos cómo quieres recibir tu pedido para enviarlo listo por WhatsApp.</div>
+    <div class="order-form">
+      <div class="field-group">
+        <label class="field-label" for="serviceType">Tipo de pedido</label>
+        <select class="field-select" id="serviceType" onchange="handleServiceTypeChange()">
+          <option value="mesa">En mesa</option>
+          <option value="domicilio">Domicilio</option>
+          <option value="recoger">Para recoger</option>
+        </select>
+      </div>
+      <div class="field-grid">
+        <div class="field-group">
+          <label class="field-label" for="customerName">Nombre</label>
+          <input class="field-input" id="customerName" type="text" placeholder="Tu nombre">
+        </div>
+      </div>
+      <div class="field-grid" id="contactGrid" style="display:none;">
+        <div class="field-group">
+          <label class="field-label" for="customerPhone">Teléfono</label>
+          <input class="field-input" id="customerPhone" type="tel" placeholder="Ej: 3001234567">
+        </div>
+        <div class="field-group">
+          <label class="field-label" for="paymentMethod">Medio de pago</label>
+          <select class="field-select" id="paymentMethod">
+            <option value="">Selecciona una opción</option>
+            <option value="Efectivo">Efectivo</option>
+            <option value="Transferencia">Transferencia</option>
+            <option value="Tarjeta">Tarjeta</option>
+          </select>
+        </div>
+      </div>
+      <div class="field-grid" id="deliveryGrid" style="display:none;">
+        <div class="field-group">
+          <label class="field-label" for="customerAddress">Dirección</label>
+          <input class="field-input" id="customerAddress" type="text" placeholder="Ej: Calle 10 # 20-30">
+        </div>
+        <div class="field-group">
+          <label class="field-label" for="customerNeighborhood">Barrio</label>
+          <input class="field-input" id="customerNeighborhood" type="text" placeholder="Ej: Centro">
+        </div>
+      </div>
+      <div class="field-group">
+        <label class="field-label" for="orderNotes">Observaciones</label>
+        <textarea class="field-textarea" id="orderNotes" placeholder="Ej: sin cebolla, pagaré con 50 mil, tocar al llegar"></textarea>
+        <div class="field-note" id="orderFieldNote">Solo se mostrarán los campos que apliquen según el tipo de pedido.</div>
+      </div>
+    </div>
+    <div class="option-actions order-actions">
+      <button class="btn-outline" type="button" onclick="closeOrderModal()">Cancelar</button>
+      <button class="btn-primary" type="button" onclick="submitOrderWhatsApp()">Enviar pedido</button>
+    </div>
+  </div>
+</div>
+
+<!-- SCROLL TOP -->
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script src="./menu-data.js"></script>
+<script src="./app.js"></script>
+</body>
+</html>

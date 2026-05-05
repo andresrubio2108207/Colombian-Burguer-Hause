@@ -114,16 +114,11 @@ function renderMenu(filter) {
   const sections = [];
   let currentSection = null;
   let insertedFavorites = false;
+  let prevCat = null;
 
   sortedItems.forEach(item => {
-    const title = item.cat === 'perros' ? getCatLabel(item.cat) : (item.sectionTitle || getCatLabel(item.cat));
-    if (!currentSection || currentSection.title !== title) {
-      currentSection = { title, items: [] };
-      sections.push(currentSection);
-    }
-    currentSection.items.push(item);
-
-    if (!insertedFavorites && item.cat === 'perros') {
+    // Insertar favoritos cuando la categoría cambia de 'perros' a otra
+    if (!insertedFavorites && prevCat === 'perros' && item.cat !== 'perros') {
       sections.push({
         title: 'Los favoritos de la casa',
         favorites: true,
@@ -132,7 +127,25 @@ function renderMenu(filter) {
       insertedFavorites = true;
       currentSection = null;
     }
+
+    const title = item.sectionTitle || getCatLabel(item.cat);
+    if (!currentSection || currentSection.title !== title) {
+      currentSection = { title, items: [] };
+      sections.push(currentSection);
+    }
+    currentSection.items.push(item);
+
+    prevCat = item.cat;
   });
+
+  // Si los perros son la última categoría, insertar favoritos al final
+  if (!insertedFavorites && prevCat === 'perros') {
+    sections.push({
+      title: 'Los favoritos de la casa',
+      favorites: true,
+      items: [...combos]
+    });
+  }
 
   grid.innerHTML = sections.map(section => `
     <section class="menu-section">

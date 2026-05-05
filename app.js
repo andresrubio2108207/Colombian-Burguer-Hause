@@ -82,9 +82,89 @@ function updateBusinessStatusUI() {
 
 function renderMenu(filter) {
   const grid = document.getElementById('menuGrid');
-  const items = filter === 'all' ? menuItems : menuItems.filter(item => item.cat === filter);
+  grid.classList.toggle('menu-grid-sections', filter === 'all');
 
-  grid.innerHTML = items.map(item => `
+  if (filter === 'favoritos') {
+    renderCombosToGrid(grid);
+    return;
+  }
+
+  if (filter !== 'all') {
+    const items = menuItems.filter(item => item.cat === filter);
+    const title = items[0]?.sectionTitle || getCatLabel(filter);
+    grid.classList.add('menu-grid-sections');
+    grid.innerHTML = `
+      <section class="menu-section">
+        <div class="menu-section-header">
+          <span class="menu-section-kicker">${title}</span>
+        </div>
+        <div class="menu-section-grid">
+          ${items.map(renderProductCard).join('')}
+        </div>
+      </section>
+    `;
+    return;
+  }
+
+  const sortedItems = [...menuItems].sort((left, right) => {
+    const categoryDiff = getCategoryOrder(left.cat) - getCategoryOrder(right.cat);
+    return categoryDiff !== 0 ? categoryDiff : left.id - right.id;
+  });
+
+  const sections = [];
+  let currentSection = null;
+  let insertedFavorites = false;
+
+  sortedItems.forEach(item => {
+    const title = item.cat === 'perros' ? getCatLabel(item.cat) : (item.sectionTitle || getCatLabel(item.cat));
+    if (!currentSection || currentSection.title !== title) {
+      currentSection = { title, items: [] };
+      sections.push(currentSection);
+    }
+    currentSection.items.push(item);
+
+    if (!insertedFavorites && item.cat === 'perros') {
+      sections.push({
+        title: 'Los favoritos de la casa',
+        favorites: true,
+        items: [...combos]
+      });
+      insertedFavorites = true;
+      currentSection = null;
+    }
+  });
+
+  grid.innerHTML = sections.map(section => `
+    <section class="menu-section">
+      <div class="menu-section-header">
+        <span class="menu-section-kicker">${section.title}</span>
+      </div>
+      <div class="menu-section-grid">
+        ${section.favorites ? section.items.map(combo => renderComboCard(combo)).join('') : section.items.map(renderProductCard).join('')}
+      </div>
+    </section>
+  `).join('');
+}
+
+function getCategoryOrder(cat) {
+  const order = {
+    hamburguesas: 1,
+    arepas: 2,
+    perros: 3,
+    fast: 4,
+    patacones: 5,
+    salchipapas: 6,
+    maicitos: 7,
+    sandwiches: 8,
+    recomendados: 9,
+    bebidas: 10,
+    adicionales: 11
+  };
+  return order[cat] || 99;
+}
+
+function renderProductCard(item) {
+  return `
     <div class="product-card">
       ${item.image ? `<img class="product-img" src="${item.image}" alt="${item.name}" onerror="this.outerHTML='<div class=\\'product-img-placeholder\\'>${item.icon}</div>'">` : `<div class="product-img-placeholder">${item.icon}</div>`}
       <div class="product-body">
@@ -92,18 +172,59 @@ function renderMenu(filter) {
         <div class="product-name">${item.name}</div>
         <div class="product-desc">${item.desc}</div>
         <div class="product-footer">
-          <div class="product-price">${item.priceLabel || formatPrice(item.price)}</div>
+          <div class="product-price">${formatPrice(item.price)}</div>
           <button class="add-btn" onclick="addToCart(${item.id})">+ Agregar</button>
         </div>
       </div>
     </div>
-  `).join('');
+  `;
 }
 
 function renderCombos() {
   const grid = document.getElementById('combosGrid');
+  renderCombosToGrid(grid);
+}
 
-  grid.innerHTML = combos.map(combo => `
+function renderCombosToGrid(grid) {
+  if (!grid) return;
+
+  const sortedCombos = [...combos].sort((left, right) => {
+    const leftTitle = left.sectionTitle || 'Combos';
+    const rightTitle = right.sectionTitle || 'Combos';
+    if (leftTitle !== rightTitle) return leftTitle.localeCompare(rightTitle);
+    return String(left.id).localeCompare(String(right.id));
+  });
+
+  if (grid) {
+    grid.classList.add('menu-grid-sections');
+  }
+
+  const sections = [];
+  let currentSection = null;
+
+  sortedCombos.forEach(combo => {
+    const title = combo.sectionTitle || 'Combos';
+    if (!currentSection || currentSection.title !== title) {
+      currentSection = { title, items: [] };
+      sections.push(currentSection);
+    }
+    currentSection.items.push(combo);
+  });
+
+  grid.innerHTML = sections.map(section => `
+    <section class="menu-section">
+      <div class="menu-section-header">
+        <span class="menu-section-kicker">${section.title}</span>
+      </div>
+      <div class="menu-section-grid">
+        ${section.items.map(combo => renderComboCard(combo)).join('')}
+      </div>
+    </section>
+  `).join('');
+}
+
+function renderComboCard(combo) {
+  return `
     <div class="combo-card">
       <div style="font-size:2.5rem;margin-bottom:0.5rem;">${combo.icon}</div>
       <div class="combo-tag">Combo Especial</div>
@@ -114,15 +235,16 @@ function renderCombos() {
         <button class="add-btn" onclick="addToCartCombo('${combo.id}', '${combo.name}', ${combo.price})">+ Agregar</button>
       </div>
     </div>
-  `).join('');
+  `;
 }
 
 function getCatLabel(cat) {
   const labels = {
     hamburguesas: 'Hamburguesa',
-    perros: 'Perro Caliente',
+    perros: 'Perros Calientes',
     fast: 'Fast Food',
     salchipapas: 'Salchipapas',
+    maicitos: 'Maicitos',
     patacones: 'Patacón',
     sandwiches: 'Sándwich',
     arepas: 'Arepa',

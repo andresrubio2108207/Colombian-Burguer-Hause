@@ -445,6 +445,40 @@ section { padding: 80px 2rem; }
   margin: 0 auto;
 }
 
+.menu-grid.menu-grid-sections {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.menu-section {
+  width: 100%;
+}
+
+.menu-section-header {
+  margin-bottom: 1rem;
+  padding: 0 0.25rem;
+}
+
+.menu-section-kicker {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--off-white);
+  background: rgba(201,168,76,0.14);
+  border: 1px solid rgba(201,168,76,0.2);
+  border-radius: 999px;
+  padding: 0.6rem 0.95rem;
+}
+
+.menu-section-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
 .product-card {
   background: var(--dark-card);
   border: 1px solid var(--dark-border);
@@ -1067,6 +1101,7 @@ footer .footer-copy { font-size: 11px; color: var(--gray); letter-spacing: 0.5px
   .hero-stats { gap: 2rem; }
   .hero-guide { max-width: 100%; }
   .menu-grid { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1rem; }
+  .menu-section-grid { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1rem; }
   .cart-sidebar {
     right: 0.75rem;
     bottom: 0.75rem;

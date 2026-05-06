@@ -177,9 +177,10 @@ function getCategoryOrder(cat) {
 }
 
 function renderProductCard(item) {
+  const imageStyle = item.imagePosition ? ` style="object-position: ${item.imagePosition};"` : '';
   return `
     <div class="product-card">
-      ${item.image ? `<img class="product-img" src="${item.image}" alt="${item.name}" onerror="this.outerHTML='<div class=\\'product-img-placeholder\\'>${item.icon}</div>'">` : `<div class="product-img-placeholder">${item.icon}</div>`}
+      ${item.image ? `<img class="product-img" src="${item.image}" alt="${item.name}"${imageStyle} onerror="this.outerHTML='<div class=\\'product-img-placeholder\\'>${item.icon}</div>'">` : `<div class="product-img-placeholder">${item.icon}</div>`}
       <div class="product-body">
         <span class="product-badge">${getCatLabel(item.cat)}</span>
         <div class="product-name">${item.name}</div>

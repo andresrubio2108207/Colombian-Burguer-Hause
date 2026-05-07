@@ -20,6 +20,14 @@ function formatPrice(n) {
   return '$' + n.toLocaleString('es-CO');
 }
 
+function formatOptionLabel(item, option) {
+  const price = option.price ?? item.price;
+  if (typeof option === 'string') {
+    return `${option} - ${formatPrice(price)}`;
+  }
+  return `${option.label} - ${formatPrice(price)}`;
+}
+
 function getOptionDetails(item, optionValue) {
   if (!item || !item.options || !item.options.length) return null;
   const option = item.options[Number(optionValue)];
@@ -406,10 +414,7 @@ function openOptionModal(item) {
   document.getElementById('optionModalText').textContent = `Selecciona el ${item.optionsLabel || 'detalle'} para agregar este producto al carrito.`;
   const select = document.getElementById('optionSelect');
   select.innerHTML = '<option value="">Selecciona una opción</option>' + item.options.map((option, index) => {
-    if (typeof option === 'string') {
-      return `<option value="${index}">${option}</option>`;
-    }
-    return `<option value="${index}">${option.label}</option>`;
+    return `<option value="${index}">${formatOptionLabel(item, option)}</option>`;
   }).join('');
   select.value = '';
   document.getElementById('optionModal').classList.add('open');

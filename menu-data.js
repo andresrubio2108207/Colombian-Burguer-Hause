@@ -15,7 +15,7 @@ window.CBH_MENU_DATA = {
     // HAMBURGUESAS
     { id: 11, cat: 'hamburguesas', sectionTitle: 'Hamburguesas desde $13.900', name: 'Burger Clasica', desc: 'Pan, carne, queso, tomate, lechuga', price: 13900, icon: '🍔' },
     { id: 12, cat: 'hamburguesas', sectionTitle: 'Hamburguesas desde $13.900', name: 'Burger Callejera', desc: 'Pan, carne, queso, tocineta, papa ripio, bañada en salsa BBQ + papa francesa', price: 17900, icon: '🍔' },
-    { id: 13, cat: 'hamburguesas', sectionTitle: 'Hamburguesas desde $13.900', name: 'Burger Hawaiana', desc: 'Pan, carne, queso, lechuga, tomate, tocineta, tajada de piña + papas a la francesa', price: 18900, icon: '🍔', image: './Images/h haw_5_11zon.webp', imagePosition: '50% 72%' },
+    { id: 13, cat: 'hamburguesas', sectionTitle: 'Hamburguesas desde $13.900', name: 'Burger Hawaiana', desc: 'Pan, carne, queso, lechuga, tomate, tocineta, tajada de piña + papas a la francesa', price: 18900, icon: '🍔', image: './Images/h haw_5_11zon.webp', imagePosition: '50% 95' },
     { id: 14, cat: 'hamburguesas', sectionTitle: 'Hamburguesas desde $13.900', name: 'Burger Super Queso', desc: 'Pan, carne, doble crema, queso cheddar, tocineta, salsa queso, tomate, lechuga + papa francesa', price: 18900, icon: '🍔' },
     { id: 15, cat: 'hamburguesas', sectionTitle: 'Hamburguesas desde $13.900', name: 'Burger Pollo', desc: 'Pan, filete de pollo a la plancha o apanado, queso, lechuga, tomate, tocineta + papa a la francesa', price: 18900, icon: '🍔', image: './Images/h pollo_3_11zon.webp', imagePosition: '50% 30%' },
     { id: 16, cat: 'hamburguesas', sectionTitle: 'Hamburguesas desde $13.900', name: 'Colombian Burger ⭐', desc: 'Pan, carne, queso, lechuga, tomate, tocineta, huevo frito, cebolla grille + papa a la francesa', price: 19900, icon: '🍔' },
@@ -37,9 +37,8 @@ window.CBH_MENU_DATA = {
 
     // FAST FOOD
     { id: 30, cat: 'fast', sectionTitle: 'Fast Food', name: 'Crispetas de Pollo', desc: 'Trozos pechuga apanado + papa francesa', price: 16900, icon: '⚡' },
-    { id: 31, cat: 'fast', sectionTitle: 'Fast Food', name: 'Super Alas X 4 ⭐', desc: 'Alitas apanadas en salsa picante o BBQ, ensalada + papa francesa', price: 19900, icon: '⚡' },
-    { id: 32, cat: 'fast', sectionTitle: 'Fast Food', name: 'Super alas X 5', desc: 'Alitas apanadas en salsa picante o BBQ, ensalada + papa francesa', price: 23900, icon: '⚡' },
-    { id: 33, cat: 'fast', sectionTitle: 'Fast Food', name: 'Nuggets', desc: 'Pollo apanado + papa francesa', price: 15900, icon: '⚡' },
+    { id: 31, cat: 'fast', sectionTitle: 'Fast Food', name: 'Super Alas ⭐', desc: 'Alitas apanadas en salsa picante o BBQ, ensalada + papa francesa', price: 19900, icon: '⚡', image: './Images/alitasx12_2_11zon.webp', imagePosition: '50% 95%', optionsLabel: 'cantidad', options: [{ label: 'X 4', price: 19900 }, { label: 'X 8', price: 35900 }, { label: 'X 12', price: 51900 }, { label: 'X 20', price: 79900 }] },
+    { id: 32, cat: 'fast', sectionTitle: 'Fast Food', name: 'Nuggets', desc: 'Pollo apanado + papa francesa', price: 15900, icon: '⚡' },
 
     // SALCHIPAPAS
     { id: 34, cat: 'salchipapas', sectionTitle: 'Salchipapas', name: 'Salchipapa', desc: 'Trozos de salchicha, papas y queso', price: 12900, icon: '🍟' },
@@ -68,7 +67,7 @@ window.CBH_MENU_DATA = {
 
     // BEBIDAS
     { id: 49, cat: 'bebidas', sectionTitle: 'Bebidas', name: 'Limonada natural personal', desc: 'Elige si la quieres de limón, cereza, sandía, hierbabuena o coco.', price: 7900, icon: '🍹', optionsLabel: 'sabor', options: [{ label: 'Limón', price: 7900 }, { label: 'Cerezada', price: 9900 }, { label: 'Sandía', price: 9900 }, { label: 'Hierbabuena', price: 9900 }, { label: 'Coco', price: 10900 }] },
-    { id: 50, cat: 'bebidas', sectionTitle: 'Bebidas', name: 'Jarra Limonada Natural', desc: 'Elige el sabor de la jarra: limón, cereza, sandía, hierbabuena o coco.', price: 15900, icon: '🍹', optionsLabel: 'sabor', options: [{ label: 'Limón', price: 15900 }, { label: 'Cerezada', price: 19900 }, { label: 'Sandía', price: 19900 }, { label: 'Hierbabuena', price: 19900 }, { label: 'Coco', price: 20900 }] },
+    { id: 50, cat: 'bebidas', sectionTitle: 'Bebidas', name: 'Jarra Limonada Natural', desc: 'Elige el sabor de la jarra: limón, cereza, sandía, hierbabuena o coco.', price: 15900, icon: '🍹', image: './Images/limonada de sandia jarra_1_11zon.webp', imagePosition: '90% 25%', optionsLabel: 'sabor', options: [{ label: 'Limón', price: 15900 }, { label: 'Cerezada', price: 19900 }, { label: 'Sandía', price: 19900 }, { label: 'Hierbabuena', price: 19900 }, { label: 'Coco', price: 20900 }] },
     { id: 55, cat: 'bebidas', sectionTitle: 'Bebidas', name: 'Té', desc: 'Elige si lo prefieres de durazno o limón.', price: 5000, icon: '🍵' },
     { id: 56, cat: 'bebidas', sectionTitle: 'Bebidas', name: 'Gaseosa Coca-Cola', desc: 'Elige la presentación: 250 ml, 350 ml, 400 ml o 1.5 L.', price: 3500, icon: '🥤', optionsLabel: 'litraje', options: [{ label: '250 ml', price: 3500 }, { label: '350 ml', price: 4500 }, { label: '400 ml', price: 5000 }, { label: '1.5 L', price: 9500 }] },
     { id: 60, cat: 'bebidas', sectionTitle: 'Bebidas', name: 'Jugo Hit PET 400ml', desc: 'Sabores: frutos tropicales, mora, mango y piña naranja.', price: 5000, icon: '🧃', optionsLabel: 'sabor', options: ['Frutos tropicales', 'Mora', 'Mango', 'Piña naranja'] },
@@ -100,9 +99,9 @@ window.CBH_MENU_DATA = {
     { id: 86, cat: 'adicionales', sectionTitle: 'Adicionales', name: 'Porción de Tajada madura X2', desc: 'Adición adicional.', price: 5900, icon: '➕' }
   ],
   combos: [
-    { id: 'c1', sectionTitle: 'Los favoritos de la casa', name: '8 alitas + Tazón + Ensalada', desc: 'Combo perfecto para compartir', price: 32900, icon: '🍗' },
-    { id: 'c2', sectionTitle: 'Los favoritos de la casa', name: '12 alitas + Tazón + 1 Lt', desc: 'Para el hambre de verdad', price: 47900, icon: '🍗' },
-    { id: 'c3', sectionTitle: 'Los favoritos de la casa', name: '20 alitas + tazón + 1 L', desc: 'La opción más poderosa para compartir', price: 78900, icon: '🍗' },
+    { id: 'c1', sectionTitle: 'Los favoritos de la casa', name: '8 alitas + Tazón de papas + Econolitro', desc: 'Combo perfecto para compartir', price: 32900, icon: '🍗', optionsLabel: 'sabor econolitro', options: [{ label: 'Pepsi', price: 32900 }, { label: 'Manzana', price: 32900 }, { label: 'Colombiana', price: 32900 }] },
+    { id: 'c2', sectionTitle: 'Los favoritos de la casa', name: '12 alitas + Tazón de papas + Econolitro', desc: 'Para el hambre de verdad', price: 47900, icon: '🍗', optionsLabel: 'sabor econolitro', options: [{ label: 'Pepsi', price: 47900 }, { label: 'Manzana', price: 47900 }, { label: 'Colombiana', price: 47900 }] },
+    { id: 'c3', sectionTitle: 'Los favoritos de la casa', name: '20 alitas + tazón de papas + Econolitro', desc: 'La opción más poderosa para compartir', price: 78900, icon: '🍗', optionsLabel: 'sabor econolitro', options: [{ label: 'Pepsi', price: 78900 }, { label: 'Manzana', price: 78900 }, { label: 'Colombiana', price: 78900 }] },
     { id: 'c4', sectionTitle: 'Los favoritos de la casa', name: 'Combo amigos', desc: '4 burger clásicas o perros clásicos más papas y gaseosa 1Lt', price: 38900, icon: '🍔' },
     { id: 'c5', sectionTitle: 'Los favoritos de la casa', name: 'Super Volcan', desc: 'Tocineta, papas, chorizo, salchicha, huevos codorniz, jamón, maíz, carne o pollo desmechado, queso, papa ripio', price: 65900, icon: '🌋' },
     { id: 'c6', sectionTitle: 'Los favoritos de la casa', name: 'PG Burger', desc: 'Burger clasica + papas + gaseosa mini', price: 17900, icon: '🍔' },

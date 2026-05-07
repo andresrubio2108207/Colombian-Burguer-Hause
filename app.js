@@ -287,6 +287,11 @@ function addToCart(id) {
 }
 
 function addToCartCombo(id, name, price) {
+  const combo = combos.find(c => c.id === id);
+  if (combo && combo.options && combo.options.length) {
+    openOptionModal(combo);
+    return;
+  }
   addItem(id, name, price, '🔥');
 }
 
@@ -404,7 +409,7 @@ function openOptionModal(item) {
     if (typeof option === 'string') {
       return `<option value="${index}">${option}</option>`;
     }
-    return `<option value="${index}">${option.label} - ${formatPrice(option.price ?? item.price)}</option>`;
+    return `<option value="${index}">${option.label}</option>`;
   }).join('');
   select.value = '';
   document.getElementById('optionModal').classList.add('open');

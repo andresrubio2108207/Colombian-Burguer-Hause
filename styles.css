@@ -288,7 +288,7 @@ nav {
   letter-spacing: 2px;
   text-transform: uppercase;
   border-radius: 4px;
-  transition: all 0.2s;
+  transition: background-color 0.2s, color 0.2s, transform 0.2s;
   border: none;
   cursor: pointer;
 }
@@ -305,7 +305,7 @@ nav {
   letter-spacing: 2px;
   text-transform: uppercase;
   border-radius: 4px;
-  transition: all 0.2s;
+  transition: background-color 0.2s, color 0.2s, transform 0.2s, border-color 0.2s;
   cursor: pointer;
   background: transparent;
 }
@@ -431,7 +431,7 @@ section { padding: 80px 2rem; }
   text-transform: uppercase;
   border-radius: 30px;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s, transform 0.2s;
 }
 
 .tab-btn:hover { border-color: var(--gold); color: var(--gold); }
@@ -443,6 +443,13 @@ section { padding: 80px 2rem; }
   gap: 1.5rem;
   max-width: 1200px;
   margin: 0 auto;
+}
+
+#carta,
+#contacto,
+footer {
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 1200px;
 }
 
 .menu-grid.menu-grid-sections {
@@ -484,7 +491,7 @@ section { padding: 80px 2rem; }
   border: 1px solid var(--dark-border);
   border-radius: 12px;
   overflow: hidden;
-  transition: all 0.3s;
+  transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
   display: flex;
   flex-direction: column;
 }
@@ -577,7 +584,7 @@ section { padding: 80px 2rem; }
   letter-spacing: 1px;
   text-transform: uppercase;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: background-color 0.2s, color 0.2s, transform 0.2s;
   white-space: nowrap;
 }
 
@@ -644,7 +651,7 @@ section { padding: 80px 2rem; }
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.2s;
+  transition: color 0.2s, border-color 0.2s, transform 0.2s;
 }
 
 .close-cart:hover { border-color: var(--gold); color: var(--gold); }
@@ -753,7 +760,7 @@ section { padding: 80px 2rem; }
   padding: 1.5rem;
   position: relative;
   overflow: hidden;
-  transition: all 0.3s;
+  transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
 }
 
 .combo-card::before {
@@ -866,7 +873,7 @@ section { padding: 80px 2rem; }
   font-weight: 700;
   font-size: 13px;
   letter-spacing: 1px;
-  transition: all 0.2s;
+  transition: background-color 0.2s, transform 0.2s;
 }
 
 .btn-whatsapp:hover { background: #1da851; transform: translateY(-2px); }
@@ -1051,7 +1058,7 @@ footer .footer-copy { font-size: 11px; color: var(--gray); letter-spacing: 0.5px
   letter-spacing: 1px;
   text-transform: uppercase;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: color 0.2s, border-color 0.2s, transform 0.2s;
 }
 
 .clear-cart-btn:hover {
@@ -1081,6 +1088,17 @@ footer .footer-copy { font-size: 11px; color: var(--gray); letter-spacing: 0.5px
 }
 
 .scroll-top.visible { opacity: 1; pointer-events: all; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
 
 @media (max-width: 768px) {
   body.service-alert-visible nav { top: 64px; }
@@ -1114,4 +1132,9 @@ footer .footer-copy { font-size: 11px; color: var(--gray); letter-spacing: 0.5px
     max-height: 62vh;
   }
   .field-grid { grid-template-columns: 1fr; }
+  nav,
+  .service-alert,
+  .hero-guide {
+    backdrop-filter: none;
+  }
 }

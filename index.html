@@ -4,9 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Colombian Burger House – Un Mundo de Sabores</title>
-<link rel="icon" type="image/jpeg" href="./Images/logo.jpeg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="image" href="./Images/logo.webp" fetchpriority="high">
+<link rel="icon" type="image/webp" href="./Images/logo.webp">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Montserrat:wght@400;500;600;700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="./styles.css">
+<script src="./menu-data.js" defer></script>
+<script src="./app.js" defer></script>
 </head>
 <body>
 
@@ -18,7 +23,7 @@
 <!-- NAV -->
 <nav>
   <a href="#inicio" class="nav-logo">
-    <img src="./Images/logo.jpeg" alt="Logo Colombian Burger" onerror="this.style.display='none'">
+    <img src="./Images/logo.webp" alt="Logo Colombian Burger House" width="384" height="384" loading="eager" decoding="async" onerror="this.style.display='none'">
     <div class="nav-logo-text">
       <div class="brand">Colombian Burger</div>
     </div>
@@ -41,7 +46,7 @@
 <!-- HERO -->
 <section id="inicio">
   <div class="hero-glow"></div>
-  <img class="hero-logo" src="./Images/logo.jpeg" alt="Colombian Burger" onerror="this.outerHTML='<div style=\'width:180px;height:180px;border-radius:50%;border:3px solid var(--gold);background:#1a1200;display:flex;align-items:center;justify-content:center;font-size:4rem;margin-bottom:2rem;\'>🍔</div>'">
+  <img class="hero-logo" src="./Images/logo.webp" alt="Colombian Burger House" width="384" height="384" loading="eager" decoding="async" fetchpriority="high" onerror="this.outerHTML='<div style=\'width:180px;height:180px;border-radius:50%;border:3px solid var(--gold);background:#1a1200;display:flex;align-items:center;justify-content:center;font-size:4rem;margin-bottom:2rem;\'>🍔</div>'">
   <p class="hero-eyebrow">Bienvenidos a</p>
   <h1 class="hero-title">Colombian<br><span>Burger</span></h1>
   <div class="hero-cta">
@@ -267,7 +272,5 @@
 <!-- SCROLL TOP -->
 <button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 
-<script src="./menu-data.js"></script>
-<script src="./app.js"></script>
 </body>
 </html>

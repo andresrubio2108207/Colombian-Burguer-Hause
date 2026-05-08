@@ -189,7 +189,7 @@ function renderProductCard(item) {
   const priceLabel = item.pricePrefix ? `${item.pricePrefix} ${formatPrice(item.price)}` : formatPrice(item.price);
   return `
     <div class="product-card">
-      ${item.image ? `<img class="product-img" src="${item.image}" alt="${item.name}"${imageStyle} onerror="this.outerHTML='<div class=\\'product-img-placeholder\\'>${item.icon}</div>'">` : `<div class="product-img-placeholder">${item.icon}</div>`}
+      ${item.image ? `<img class="product-img" src="${item.image}" alt="${item.name}" width="640" height="480" loading="lazy" decoding="async" fetchpriority="low"${imageStyle} onerror="this.outerHTML='<div class=\\'product-img-placeholder\\'>${item.icon}</div>'">` : `<div class="product-img-placeholder">${item.icon}</div>`}
       <div class="product-body">
         <span class="product-badge">${getCatLabel(item.cat)}</span>
         <div class="product-name">${item.name}</div>
@@ -201,11 +201,6 @@ function renderProductCard(item) {
       </div>
     </div>
   `;
-}
-
-function renderCombos() {
-  const grid = document.getElementById('combosGrid');
-  renderCombosToGrid(grid);
 }
 
 function renderCombosToGrid(grid) {
@@ -608,7 +603,10 @@ function toggleCart(e) {
 }
 
 function toggleMenu() {
-  document.getElementById('navLinks').classList.toggle('mobile-open');
+  const navLinks = document.getElementById('navLinks');
+  if (navLinks) {
+    navLinks.classList.toggle('mobile-open');
+  }
 }
 
 function showToast(msg) {
@@ -618,12 +616,16 @@ function showToast(msg) {
   setTimeout(() => toast.classList.remove('show'), 2200);
 }
 
-window.addEventListener('scroll', () => {
-  const btn = document.getElementById('scrollTop');
-  btn.classList.toggle('visible', window.scrollY > 400);
-});
+const scrollTopButton = document.getElementById('scrollTop');
 
-renderMenu(activeFilter);
-renderCombos();
+if (scrollTopButton) {
+  window.addEventListener('scroll', () => {
+    scrollTopButton.classList.toggle('visible', window.scrollY > 400);
+  }, { passive: true });
+}
+
 updateBusinessStatusUI();
+requestAnimationFrame(() => {
+  renderMenu(activeFilter);
+});
 setInterval(updateBusinessStatusUI, 60000);

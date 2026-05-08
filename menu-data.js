@@ -60,7 +60,7 @@ window.CBH_MENU_DATA = {
 
     // FAST FOOD
     { id: 30, cat: 'fast', sectionTitle: 'Fast Food', name: 'Crispetas de Pollo', desc: 'Trozos pechuga apanado + papa francesa', price: 16900, icon: '⚡' },
-    { id: 31, cat: 'fast', sectionTitle: 'Fast Food', name: 'Super Alas ⭐', desc: 'Alitas apanadas en salsa picante o BBQ, ensalada + papa francesa', price: 19900, icon: '⚡', image: './Images/alitasx12_2_11zon.webp', imagePosition: '50% 95%', optionsLabel: 'cantidad', options: [{ label: 'X 4', price: 19900 }, { label: 'X 8', price: 35900 }, { label: 'X 12', price: 51900 }, { label: 'X 20', price: 79900 }] },
+    { id: 31, cat: 'fast', sectionTitle: 'Fast Food', name: 'Super Alas ⭐', desc: 'Alitas apanadas en salsa picante o BBQ, ensalada + papa francesa', price: 19900, icon: '⚡', image: './Images/alitasx12_2_11zon.webp', imagePosition: '50% 95%', optionsLabel: 'cantidad', options: [{ label: 'X 4', price: 19900 }, { label: 'X 5', price: 23900 }] },
     { id: 32, cat: 'fast', sectionTitle: 'Fast Food', name: 'Nuggets', desc: 'Pollo apanado + papa francesa', price: 15900, icon: '⚡' },
 
     // SALCHIPAPAS
@@ -122,7 +122,7 @@ window.CBH_MENU_DATA = {
     { id: 86, cat: 'adicionales', sectionTitle: 'Adicionales', name: 'Porción de Tajada madura X2', desc: 'Adición adicional.', price: 5900, icon: '➕' }
   ],
   combos: [
-    { id: 'c1', sectionTitle: 'Los favoritos de la casa', name: '8 alitas + Tazón de papas', desc: 'Combo perfecto para compartir', price: 32900, icon: '🍗', optionsLabel: 'sabor econolitro', options: [{ label: 'Pepsi', price: 32900 }, { label: 'Manzana', price: 32900 }, { label: 'Colombiana', price: 32900 }] },
+    { id: 'c1', sectionTitle: 'Los favoritos de la casa', name: '8 alitas + Tazón de papas, + ensalada', desc: 'Combo perfecto para compartir', price: 32900, icon: '🍗', optionsLabel: 'sabor econolitro', options: [{ label: 'Pepsi', price: 32900 }, { label: 'Manzana', price: 32900 }, { label: 'Colombiana', price: 32900 }] },
     { id: 'c2', sectionTitle: 'Los favoritos de la casa', name: '12 alitas + Tazón de papas + Econolitro', desc: 'Para el hambre de verdad', price: 47900, icon: '🍗', optionsLabel: 'sabor econolitro', options: [{ label: 'Pepsi', price: 47900 }, { label: 'Manzana', price: 47900 }, { label: 'Colombiana', price: 47900 }] },
     { id: 'c3', sectionTitle: 'Los favoritos de la casa', name: '20 alitas + tazón de papas + Econolitro', desc: 'La opción más poderosa para compartir', price: 78900, icon: '🍗', optionsLabel: 'sabor econolitro', options: [{ label: 'Pepsi', price: 78900 }, { label: 'Manzana', price: 78900 }, { label: 'Colombiana', price: 78900 }] },
     { id: 'c4', sectionTitle: 'Los favoritos de la casa', name: 'Combo amigos', desc: '4 burger clásicas o perros clásicos más papas y gaseosa 1Lt', price: 38900, icon: '🍔' },

@@ -1034,9 +1034,9 @@ footer .footer-copy { font-size: 11px; color: var(--gray); letter-spacing: 0.5px
 }
 
 .field-note {
-  font-size: 11px;
-  color: var(--gray);
-  line-height: 1.5;
+  font-size: 13px;
+  color: #767676;
+  line-height: 1.45;
   margin-top: -0.2rem;
 }
 

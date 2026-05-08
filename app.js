@@ -463,7 +463,7 @@ function handleServiceTypeChange() {
 
   if (serviceType === 'mesa') {
     intro.textContent = 'Si estás consumiendo en el local, dinos tu número de mesa para llevarte el pedido correctamente.';
-    note.textContent = 'Usa observaciones para aclaraciones del producto, cambios o recomendaciones de preparación.';
+    note.textContent = '';
     notes.placeholder = 'Ej: sin cebolla, sin salsa, carne bien asada, papas aparte';
     return;
   }

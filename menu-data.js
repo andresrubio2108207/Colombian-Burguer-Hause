@@ -36,7 +36,7 @@ window.CBH_MENU_DATA = {
     { id: 10, cat: 'arepas', sectionTitle: 'Arepas', name: 'Arepa Criolla', desc: 'Carne desmechada, chorizo ahumado, maíz tierno, tocineta y queso mozzarella', price: 13900, icon: '🫓' },
 
     // HAMBURGUESAS
-    { id: 11, cat: 'hamburguesas', sectionTitle: 'Hamburguesas desde $13.900', name: 'Burger Clasica', desc: 'Pan, carne, queso, tomate, lechuga', price: 13900, icon: '🍔' },
+    { id: 11, cat: 'hamburguesas', sectionTitle: 'Hamburguesas desde $13.900', name: 'Burger Clasica', desc: 'Pan, carne, queso, tomate, lechuga', price: 13900, icon: '🍔', image: './Images/burguer clasica_4_11zon.webp', imagePosition: '90% 90%' },
     { id: 12, cat: 'hamburguesas', sectionTitle: 'Hamburguesas desde $13.900', name: 'Burger Callejera', desc: 'Pan, carne, queso, tocineta, papa ripio, bañada en salsa BBQ + papa francesa', price: 17900, icon: '🍔' },
     { id: 13, cat: 'hamburguesas', sectionTitle: 'Hamburguesas desde $13.900', name: 'Burger Hawaiana', desc: 'Pan, carne, queso, lechuga, tomate, tocineta, tajada de piña + papas a la francesa', price: 18900, icon: '🍔', image: './Images/h haw_5_11zon.webp', imagePosition: '50% 65%' },
     { id: 14, cat: 'hamburguesas', sectionTitle: 'Hamburguesas desde $13.900', name: 'Burger Super Queso', desc: 'Pan, carne, doble crema, queso cheddar, tocineta, salsa queso, tomate, lechuga + papa francesa', price: 18900, icon: '🍔' },
@@ -46,7 +46,7 @@ window.CBH_MENU_DATA = {
     { id: 18, cat: 'hamburguesas', sectionTitle: 'Favoritas de la casa', name: 'Colombian Filet Mignon ⭐', desc: 'Pan, carne, tocineta, salsa de champiñones, lechuga, tomate + papa a la francesa', price: 21900, icon: '🍔' },
     { id: 19, cat: 'hamburguesas', sectionTitle: 'Favoritas de la casa', name: 'Burger Mexicana ⭐', desc: 'Pan, carne, queso, guacamole, frijol refrito, jalapeño, tomate, lechuga, tocineta, tostacoes, lechuga + papa francesa', price: 22900, icon: '🍔', image: './Images/h mexicana_2_11zon.webp', imagePosition: '50% 42%' },
     { id: 20, cat: 'hamburguesas', sectionTitle: 'Las Premium VIP', name: 'Colombian Mix 👑', desc: 'Pan, carne, pollo, queso, maíz tierno, lechuga, tomate + papa a la francesa', price: 23900, icon: '🍔' },
-    { id: 21, cat: 'hamburguesas', sectionTitle: 'Las Premium VIP', name: 'Colombian SuperHouse 👑🔥', desc: 'Pan, carne, tocineta, doble queso, lechuga, tomate + papa a la francesa', price: 23900, icon: '🍔' },
+    { id: 21, cat: 'hamburguesas', sectionTitle: 'Las Premium VIP', name: 'Colombian SuperHouse 👑🔥', desc: 'Pan, carne, tocineta, doble queso, lechuga, tomate + papa a la francesa', price: 23900, icon: '🍔', image: './Images/burguer colombian super hause_3_11zon.webp', imagePosition: '50% 60%' },
     { id: 22, cat: 'hamburguesas', sectionTitle: 'Las Premium VIP', name: 'Burger Criolla 👑🔥', desc: 'Doble carne desmechada bañada en salsa criolla de la casa, queso, maíz tierno, maduritos, tocineta, lechuga, tomate + papa a la francesa', price: 26900, icon: '🍔', image: './Images/h criolla_4_11zon.webp', imagePosition: '50% 62%' },
     { id: 23, cat: 'hamburguesas', sectionTitle: 'Las Premium VIP', name: 'Burger Marinera 👑🔥', desc: 'Camarones, carne de res bañada en salsa marinera, doble tocineta, carne desmechada, cebolla morada, tajadas mango, queso mozarella, lechuga', price: 28900, icon: '🍔', image: './Images/Burguer marinera.webp' },
     { id: 24, cat: 'hamburguesas', sectionTitle: 'Las Premium VIP', name: 'Burger Pecadora', desc: 'Pan, doble carne, mermelada de tocineta, cebolla crunchy, queso, lechuga', price: 28900, icon: '🍔' },
@@ -66,7 +66,7 @@ window.CBH_MENU_DATA = {
     // SALCHIPAPAS
     { id: 34, cat: 'salchipapas', sectionTitle: 'Salchipapas', name: 'Salchipapa', desc: 'Trozos de salchicha, papas y queso', price: 12900, icon: '🍟' },
     { id: 35, cat: 'salchipapas', sectionTitle: 'Salchipapas', name: 'Choripapa', desc: 'Trozos de chorizo, papas y queso', price: 12900, icon: '🍟' },
-    { id: 36, cat: 'salchipapas', sectionTitle: 'Salchipapas', name: 'Salchipapa especial ⭐', desc: 'Carne desmechada, pollo desmechado, chorizo, salchicha, huevos de codorniz, maíz tierno + papa', price: 22900, icon: '🍟' },
+    { id: 36, cat: 'salchipapas', sectionTitle: 'Salchipapas', name: 'Salchipapa especial ⭐', desc: 'Carne desmechada, pollo desmechado, chorizo, salchicha, huevos de codorniz, maíz tierno + papa', price: 22900, icon: '🍟', image: './Images/salchipapa especial_1_11zon.webp' },
     { id: 37, cat: 'salchipapas', sectionTitle: 'Salchipapas', name: 'Colombian Fusion', desc: 'Salchicha, chorizo, queso + papa', price: 16900, icon: '🍟' },
 
     // PATACONES
@@ -91,11 +91,11 @@ window.CBH_MENU_DATA = {
     // BEBIDAS
     { id: 49, cat: 'bebidas', sectionTitle: 'Bebidas', name: 'Limonada personal', desc: 'Elige si la quieres de limón, cereza, sandía, hierbabuena o coco.', price: 7900, pricePrefix: 'desde', icon: '🍹', optionsLabel: 'sabor', options: limonadaPersonalOptions },
     { id: 50, cat: 'bebidas', sectionTitle: 'Bebidas', name: 'Jarra de limonada', desc: 'Elige el sabor de la jarra: limón, cereza, sandía, hierbabuena o coco.', price: 15900, pricePrefix: 'desde', icon: '🍹', image: './Images/limonada de sandia jarra_1_11zon.webp', imagePosition: '90% 25%', optionsLabel: 'sabor', options: limonadaJarraOptions },
-    { id: 55, cat: 'bebidas', sectionTitle: 'Bebidas', name: 'Té', desc: 'Elige si lo prefieres de durazno o limón.', price: 5000, icon: '🍵' },
-    { id: 56, cat: 'bebidas', sectionTitle: 'Bebidas', name: 'Gaseosa Coca-Cola', desc: 'Todas las gaseosas son Coca-Cola. Elige la presentación: 250 ml, 350 ml, 400 ml o 1.5 L.', price: 3500, pricePrefix: 'desde', icon: '🥤', optionsLabel: 'presentación', options: cocaColaOptions },
-    { id: 60, cat: 'bebidas', sectionTitle: 'Bebidas', name: 'Jugo Hit PET 400ml', desc: 'Sabores: frutos tropicales, mora, mango y piña naranja.', price: 5000, icon: '🧃', optionsLabel: 'sabor', options: ['Frutos tropicales', 'Mora', 'Mango', 'Piña naranja'] },
+    { id: 55, cat: 'bebidas', sectionTitle: 'Bebidas', name: 'Té', desc: 'Elige si lo prefieres de durazno o limón.', price: 5000, icon: '🍵', image: './Images/te_2_11zon.webp', imagePosition: '50% 50%' },
+    { id: 56, cat: 'bebidas', sectionTitle: 'Bebidas', name: 'Gaseosa Coca-Cola', desc: 'Todas las gaseosas son Coca-Cola. Elige la presentación: 250 ml, 350 ml, 400 ml o 1.5 L.', price: 3500, pricePrefix: 'desde', icon: '🥤', image: './Images/cocacola 400ml_11zon.webp', imagePosition: '50% 50%', optionsLabel: 'presentación', options: cocaColaOptions },
+    { id: 60, cat: 'bebidas', sectionTitle: 'Bebidas', name: 'Jugo Hit PET 400ml', desc: 'Sabores: frutos tropicales, mora, mango y piña naranja.', price: 5000, icon: '🧃', image: './Images/jugo hit botella_3_11zon.webp', imagePosition: '50% 50%', optionsLabel: 'sabor', options: ['Frutos tropicales', 'Mora', 'Mango', 'Piña naranja'] },
     { id: 61, cat: 'bebidas', sectionTitle: 'Bebidas', name: 'Jugo Hit Caja 1L', desc: 'Sabores: frutos tropicales, mora, mango y piña naranja.', price: 9000, icon: '🧃', optionsLabel: 'sabor', options: ['Frutos tropicales', 'Mora', 'Mango', 'Piña naranja'] },
-    { id: 62, cat: 'bebidas', sectionTitle: 'Bebidas', name: 'Econolitro Postobon', desc: 'Elige sabor: Pepsi, Colombiana o Manzana.', price: 7500, icon: '🥤', optionsLabel: 'sabor', options: [{ label: 'Pepsi', price: 7500 }, { label: 'Colombiana', price: 7500 }, { label: 'Manzana', price: 7500 }] },
+    { id: 62, cat: 'bebidas', sectionTitle: 'Bebidas', name: 'Econolitro Postobon', desc: 'Elige sabor: Pepsi, Colombiana o Manzana.', price: 7500, icon: '🥤', image: './Images/econolitro_1_11zon.webp', imagePosition: '50% 50%', optionsLabel: 'sabor', options: [{ label: 'Pepsi', price: 7500 }, { label: 'Colombiana', price: 7500 }, { label: 'Manzana', price: 7500 }] },
     { id: 63, cat: 'bebidas', sectionTitle: 'Bebidas', name: 'Jugo natural en Agua (Personal)', desc: 'Personal. Elige sabor: maracuyá, mora, lulo, fresa o mango.', price: 8900, icon: '🥭', optionsLabel: 'sabor', options: ['Maracuyá', 'Mora', 'Lulo', 'Fresa', 'Mango'] },
     { id: 64, cat: 'bebidas', sectionTitle: 'Bebidas', name: 'Jarra de jugo natural en agua', desc: 'Jarra. Elige sabor: maracuyá, mora, lulo o fresa.', price: 19900, icon: '🍍', optionsLabel: 'sabor', options: ['Maracuyá', 'Mora', 'Lulo', 'Fresa'] },
     { id: 65, cat: 'bebidas', sectionTitle: 'Bebidas', name: 'Jugo natural en leche (Personal)', desc: 'Personal. Elige sabor: maracuyá, mora, lulo, fresa o mango.', price: 9900, icon: '🥛', optionsLabel: 'sabor', options: ['Maracuyá', 'Mora', 'Lulo', 'Fresa', 'Mango'] },
@@ -130,7 +130,7 @@ window.CBH_MENU_DATA = {
     { id: 'c6', sectionTitle: 'Los favoritos de la casa', name: 'PG Burger', desc: 'Burger clasica + papas + gaseosa mini', price: 17900, icon: '🍔' },
     { id: 'c7', sectionTitle: 'Los favoritos de la casa', name: 'PG Perro', desc: 'Perro clasico + papas + gaseosa mini', price: 17900, icon: '🌭' },
     { id: 'c8', sectionTitle: 'Los favoritos de la casa', name: 'Perro Clasico 2*1 ⭐', desc: 'Dos perros clásicos', price: 17900, icon: '🌭' },
-    { id: 'c9', sectionTitle: 'Los favoritos de la casa', name: 'Hamburguesa Clasica 2*1 ⭐', desc: 'Dos hamburguesas clásicas', price: 17900, icon: '🍔' },
+    { id: 'c9', sectionTitle: 'Los favoritos de la casa', name: 'Hamburguesa Clasica 2*1 ⭐', desc: 'Dos hamburguesas clásicas', price: 17900, icon: '🍔', image: './Images/clasicas 2x1_2_11zon.webp' },
     { id: 'c10', sectionTitle: 'Los favoritos de la casa', name: 'Burger Clasica o Perro Clasico 2*1 + papas ⭐', desc: 'El clásico con papas', price: 23900, icon: '🍔' },
     { id: 'c11', sectionTitle: 'Los favoritos de la casa', name: 'Burger o perro clasico + 3 alas bbq + papas', desc: 'Combo con alas y papas', price: 26900, icon: '🍗' },
     { id: 'c12', sectionTitle: 'Los favoritos de la casa', name: '2 Burger clasica o perro clasico + 3 alas bbq + papas', desc: 'Combo doble con alas y papas', price: 34900, icon: '🍗' },

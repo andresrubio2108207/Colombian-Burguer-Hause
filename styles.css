@@ -1015,6 +1015,11 @@ footer .footer-copy { font-size: 11px; color: var(--gray); letter-spacing: 0.5px
 .field-textarea:focus,
 .field-select:focus { border-color: var(--gold); }
 
+.field-input::placeholder,
+.field-textarea::placeholder {
+  color: #767676;
+}
+
 .field-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;

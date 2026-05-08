@@ -451,20 +451,23 @@ function getServiceLabel(value) {
 
 function handleServiceTypeChange() {
   const serviceType = document.getElementById('serviceType').value;
+  const mesaGrid = document.getElementById('mesaGrid');
   const contactGrid = document.getElementById('contactGrid');
   const deliveryGrid = document.getElementById('deliveryGrid');
   const intro = document.getElementById('orderModalIntro');
   const note = document.getElementById('orderFieldNote');
   const notes = document.getElementById('orderNotes');
 
+  const isMesa = serviceType === 'mesa';
   const isDomicilio = serviceType === 'domicilio';
   const needsContact = serviceType === 'domicilio' || serviceType === 'recoger';
 
+  mesaGrid.style.display = isMesa ? 'grid' : 'none';
   contactGrid.style.display = needsContact ? 'grid' : 'none';
   deliveryGrid.style.display = isDomicilio ? 'grid' : 'none';
 
   if (serviceType === 'mesa') {
-    intro.textContent = 'Si estás consumiendo en el local, puedes dejarnos detalles del pedido para prepararlo justo como lo quieres.';
+    intro.textContent = 'Si estás consumiendo en el local, dinos tu número de mesa para llevarte el pedido correctamente.';
     note.textContent = 'Usa observaciones para aclaraciones del producto, cambios o recomendaciones de preparación.';
     notes.placeholder = 'Ej: sin cebolla, sin salsa, carne bien asada, papas aparte';
     return;
@@ -494,6 +497,7 @@ function loadSavedOrderProfile() {
     const profile = JSON.parse(raw);
     document.getElementById('serviceType').value = profile.serviceType || 'mesa';
     document.getElementById('customerName').value = profile.customerName || '';
+    document.getElementById('tableNumber').value = profile.tableNumber || '';
     document.getElementById('customerPhone').value = profile.customerPhone || '';
     document.getElementById('paymentMethod').value = profile.paymentMethod || '';
     document.getElementById('customerAddress').value = profile.customerAddress || '';
@@ -522,6 +526,7 @@ function submitOrderWhatsApp() {
 
   const serviceType = document.getElementById('serviceType').value;
   const customerName = document.getElementById('customerName').value.trim();
+  const tableNumber = document.getElementById('tableNumber').value.trim();
   const customerPhone = document.getElementById('customerPhone').value.trim();
   const paymentMethod = document.getElementById('paymentMethod').value;
   const customerAddress = document.getElementById('customerAddress').value.trim();
@@ -530,6 +535,11 @@ function submitOrderWhatsApp() {
 
   if (!customerName) {
     showToast('Escribe tu nombre para continuar');
+    return;
+  }
+
+  if (serviceType === 'mesa' && !tableNumber) {
+    showToast('Indica el número de mesa');
     return;
   }
 
@@ -551,6 +561,7 @@ function submitOrderWhatsApp() {
   const profile = {
     serviceType,
     customerName,
+    tableNumber,
     customerPhone,
     paymentMethod,
     customerAddress,
@@ -565,6 +576,10 @@ function submitOrderWhatsApp() {
     `Tipo de pedido: ${getServiceLabel(serviceType)}`,
     `Nombre: ${customerName}`
   ];
+
+  if (serviceType === 'mesa') {
+    headerLines.push(`Mesa: ${tableNumber}`);
+  }
 
   if (serviceType === 'domicilio' || serviceType === 'recoger') {
     headerLines.push(`Teléfono: ${customerPhone}`);

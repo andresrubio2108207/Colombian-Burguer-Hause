@@ -186,6 +186,7 @@ function getCategoryOrder(cat) {
 
 function renderProductCard(item) {
   const imageStyle = item.imagePosition ? ` style="object-position: ${item.imagePosition};"` : '';
+  const priceLabel = item.pricePrefix ? `${item.pricePrefix} ${formatPrice(item.price)}` : formatPrice(item.price);
   return `
     <div class="product-card">
       ${item.image ? `<img class="product-img" src="${item.image}" alt="${item.name}"${imageStyle} onerror="this.outerHTML='<div class=\\'product-img-placeholder\\'>${item.icon}</div>'">` : `<div class="product-img-placeholder">${item.icon}</div>`}
@@ -194,7 +195,7 @@ function renderProductCard(item) {
         <div class="product-name">${item.name}</div>
         <div class="product-desc">${item.desc}</div>
         <div class="product-footer">
-          <div class="product-price">${formatPrice(item.price)}</div>
+          <div class="product-price">${priceLabel}</div>
           <button class="add-btn" onclick="addToCart(${item.id})">+ Agregar</button>
         </div>
       </div>

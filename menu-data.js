@@ -56,7 +56,7 @@ window.CBH_MENU_DATA = {
     { id: 26, cat: 'perros', name: 'Perro Clasico', desc: 'Pan, salchicha americana, queso, papa ripio', price: 13900, icon: '🌭' },
     { id: 27, cat: 'perros', name: 'Perro Especial ⭐', desc: 'Pan, salchicha, queso, cebolla, tocineta, papa ripio + papa francesa', price: 16900, icon: '🌭' },
     { id: 28, cat: 'perros', name: 'Perro Criollo 👑', desc: 'Pan, salchicha, carne desmechada, maíz, cebolla, queso, tocineta + papa francesa', price: 20900, icon: '🌭' },
-    { id: 29, cat: 'perros', name: 'La Perra 🔥', desc: 'Salchicha americana, huevos codorniz, chorizo, queso, jamón, papa ripio, tocineta, lechuga, zanahoria, salsa showy', price: 23900, icon: '🌭' },
+    { id: 29, cat: 'perros', name: 'La Perra 🔥', desc: 'Salchicha americana, huevos codorniz, chorizo, queso, jamón, papa ripio, tocineta, lechuga, zanahoria, salsa showy', price: 23900, icon: '🌭', image: './Images/la perra.webp', imagePosition: '50% 50%' },
 
     // FAST FOOD
     { id: 30, cat: 'fast', sectionTitle: 'Fast Food', name: 'Crispetas de Pollo', desc: 'Trozos pechuga apanado + papa francesa', price: 16900, icon: '⚡' },

@@ -122,7 +122,7 @@ window.CBH_MENU_DATA = {
     { id: 86, cat: 'adicionales', sectionTitle: 'Adicionales', name: 'Porción de Tajada madura X2', desc: 'Adición adicional.', price: 5900, icon: '➕' }
   ],
   combos: [
-    { id: 'c1', sectionTitle: 'Los favoritos de la casa', name: '8 alitas + Tazón de papas + Econolitro', desc: 'Combo perfecto para compartir', price: 32900, icon: '🍗', optionsLabel: 'sabor econolitro', options: [{ label: 'Pepsi', price: 32900 }, { label: 'Manzana', price: 32900 }, { label: 'Colombiana', price: 32900 }] },
+    { id: 'c1', sectionTitle: 'Los favoritos de la casa', name: '8 alitas + Tazón de papas', desc: 'Combo perfecto para compartir', price: 32900, icon: '🍗', optionsLabel: 'sabor econolitro', options: [{ label: 'Pepsi', price: 32900 }, { label: 'Manzana', price: 32900 }, { label: 'Colombiana', price: 32900 }] },
     { id: 'c2', sectionTitle: 'Los favoritos de la casa', name: '12 alitas + Tazón de papas + Econolitro', desc: 'Para el hambre de verdad', price: 47900, icon: '🍗', optionsLabel: 'sabor econolitro', options: [{ label: 'Pepsi', price: 47900 }, { label: 'Manzana', price: 47900 }, { label: 'Colombiana', price: 47900 }] },
     { id: 'c3', sectionTitle: 'Los favoritos de la casa', name: '20 alitas + tazón de papas + Econolitro', desc: 'La opción más poderosa para compartir', price: 78900, icon: '🍗', optionsLabel: 'sabor econolitro', options: [{ label: 'Pepsi', price: 78900 }, { label: 'Manzana', price: 78900 }, { label: 'Colombiana', price: 78900 }] },
     { id: 'c4', sectionTitle: 'Los favoritos de la casa', name: 'Combo amigos', desc: '4 burger clásicas o perros clásicos más papas y gaseosa 1Lt', price: 38900, icon: '🍔' },

@@ -126,16 +126,16 @@ window.CBH_MENU_DATA = {
     { id: 'c2', sectionTitle: 'Los favoritos de la casa', name: '12 alitas + Tazón de papas + Econolitro', desc: 'Para el hambre de verdad', price: 47900, icon: '🍗', optionsLabel: 'sabor econolitro', options: [{ label: 'Pepsi', price: 47900 }, { label: 'Manzana', price: 47900 }, { label: 'Colombiana', price: 47900 }] },
     { id: 'c3', sectionTitle: 'Los favoritos de la casa', name: '20 alitas + tazón de papas + Econolitro', desc: 'La opción más poderosa para compartir', price: 78900, icon: '🍗', optionsLabel: 'sabor econolitro', options: [{ label: 'Pepsi', price: 78900 }, { label: 'Manzana', price: 78900 }, { label: 'Colombiana', price: 78900 }] },
     { id: 'c4', sectionTitle: 'Los favoritos de la casa', name: 'Combo amigos', desc: '4 burger clásicas o perros clásicos más papas y gaseosa 1Lt', price: 38900, icon: '🍔' },
-    { id: 'c5', sectionTitle: 'Los favoritos de la casa', name: 'Super Volcan', desc: 'Tocineta, papas, chorizo, salchicha, huevos codorniz, jamón, maíz, carne o pollo desmechado, queso, papa ripio', price: 65900, icon: '🌋' },
-    { id: 'c6', sectionTitle: 'Los favoritos de la casa', name: 'PG Burger', desc: 'Burger clasica + papas + gaseosa mini', price: 17900, icon: '🍔' },
-    { id: 'c7', sectionTitle: 'Los favoritos de la casa', name: 'PG Perro', desc: 'Perro clasico + papas + gaseosa mini', price: 17900, icon: '🌭' },
-    { id: 'c8', sectionTitle: 'Los favoritos de la casa', name: 'Perro Clasico 2*1 ⭐', desc: 'Dos perros clásicos', price: 17900, icon: '🌭' },
-    { id: 'c9', sectionTitle: 'Los favoritos de la casa', name: 'Hamburguesa Clasica 2*1 ⭐', desc: 'Dos hamburguesas clásicas', price: 17900, icon: '🍔', image: './Images/clasicas 2x1_2_11zon.webp' },
-    { id: 'c10', sectionTitle: 'Los favoritos de la casa', name: 'Burger Clasica o Perro Clasico 2*1 + papas ⭐', desc: 'El clásico con papas', price: 23900, icon: '🍔' },
-    { id: 'c11', sectionTitle: 'Los favoritos de la casa', name: 'Burger o perro clasico + 3 alas bbq + papas', desc: 'Combo con alas y papas', price: 26900, icon: '🍗' },
-    { id: 'c12', sectionTitle: 'Los favoritos de la casa', name: '2 Burger clasica o perro clasico + 3 alas bbq + papas', desc: 'Combo doble con alas y papas', price: 34900, icon: '🍗' },
-    { id: 'c13', sectionTitle: 'Los favoritos de la casa', name: '3 burger clasicas o perro clasico + papas + gaseosa 1 lt', desc: 'Combo grupal', price: 38900, icon: '🍔' },
-    { id: 'c14', sectionTitle: 'Los favoritos de la casa', name: '1 salchi especial + 1 burger callejera', desc: 'Dúo especial de la casa', price: 32900, icon: '🔥' },
-    { id: 'c15', sectionTitle: 'Los favoritos de la casa', name: '3 Especial Burger', desc: 'Callejera, superqueso, burgerpollo, colombian y gaseosa 1lt', price: 53900, icon: '🔥' }
+    { id: 'c5', sectionTitle: 'Los favoritos de la casa', name: 'Super Volcan', desc: 'Tocineta, papas, chorizo, salchicha, huevos codorniz, jamón, maíz, carne o pollo desmechado, queso, papa ripio', price: 70900, icon: '🌋' },
+    { id: 'c6', sectionTitle: 'Los favoritos de la casa', name: 'PG Burger', desc: 'Burger clasica + papas + gaseosa mini', price: 19900, icon: '🍔' },
+    { id: 'c7', sectionTitle: 'Los favoritos de la casa', name: 'PG Perro', desc: 'Perro clasico + papas + gaseosa mini', price: 19900, icon: '🌭' },
+    { id: 'c8', sectionTitle: 'Los favoritos de la casa', name: 'Perro Clasico 2*1 ⭐', desc: 'Dos perros clásicos', price: 19900, icon: '🌭' },
+    { id: 'c9', sectionTitle: 'Los favoritos de la casa', name: 'Hamburguesa Clasica 2*1 ⭐', desc: 'Dos hamburguesas clásicas', price: 19900, icon: '🍔', image: './Images/clasicas 2x1_2_11zon.webp' },
+    { id: 'c10', sectionTitle: 'Los favoritos de la casa', name: 'Burger Clasica o Perro Clasico 2*1 + papas ⭐', desc: 'El clásico con papas', price: 25900, icon: '🍔' },
+    { id: 'c11', sectionTitle: 'Los favoritos de la casa', name: 'Burger o perro clasico + 3 alas bbq + papas', desc: 'Combo con alas y papas', price: 28900, icon: '🍗' },
+    { id: 'c12', sectionTitle: 'Los favoritos de la casa', name: '2 Burger clasica o perro clasico + 3 alas bbq + papas', desc: 'Combo doble con alas y papas', price: 38900, icon: '🍗' },
+    { id: 'c13', sectionTitle: 'Los favoritos de la casa', name: '3 burger clasicas o perro clasico + papas + gaseosa 1 lt', desc: 'Combo grupal', price: 45900, icon: '🍔' },
+    { id: 'c14', sectionTitle: 'Los favoritos de la casa', name: '1 salchi especial + 1 burger callejera', desc: 'Dúo especial de la casa', price: 37900, icon: '🔥' },
+    { id: 'c15', sectionTitle: 'Los favoritos de la casa', name: '3 Especial Burger', desc: 'Callejera, superqueso, burgerpollo, colombian y gaseosa 1lt', price: 58900, icon: '🔥' }
   ]
 };

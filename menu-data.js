@@ -86,7 +86,7 @@ window.CBH_MENU_DATA = {
     { id: 45, cat: 'recomendados', sectionTitle: 'Recomendados', name: 'Pincho de pollo, res, o mixto', desc: 'Ensalada + papa a la francesa', price: 23900, icon: '🍢' },
     { id: 46, cat: 'recomendados', sectionTitle: 'Recomendados', name: 'Pechuga de pollo', desc: 'Ensalada + papa a la francesa', price: 33900, icon: '🍗' },
     { id: 47, cat: 'recomendados', sectionTitle: 'Recomendados', name: 'Ensalada Colombian House', desc: 'Trozos de pollo, lechuga, tomate, maíz tierno, queso, jamón, vinagreta, huevos codorniz', price: 19900, icon: '🥗' },
-    { id: 48, cat: 'recomendados', sectionTitle: 'Recomendados', name: 'Picada Colombian House', desc: 'Res, pollo, costilla, papa a la francesa, rollos jamón, queso, huevo codorniz, tomate, batavia, yucas, aros cebolla, chorizo, salchicha, tomate', price: 48900, icon: '🍱', image: './Images/picada h_1_11zon.webp', imagePosition: '50% 84%' },
+    { id: 48, cat: 'recomendados', sectionTitle: 'Recomendados', name: 'Picada Colombian House', desc: 'Res, pollo, costilla, papa a la francesa, rollos jamón, queso, huevo codorniz, tomate, batavia, yucas, aros cebolla, chorizo, salchicha, tomate', price: 52900, icon: '🍱', image: './Images/picada h_1_11zon.webp', imagePosition: '50% 84%' },
 
     // BEBIDAS
     { id: 49, cat: 'bebidas', sectionTitle: 'Bebidas', name: 'Limonada personal', desc: 'Elige si la quieres de limón, cereza, sandía, hierbabuena o coco.', price: 7900, pricePrefix: 'desde', icon: '🍹', optionsLabel: 'sabor', options: limonadaPersonalOptions },

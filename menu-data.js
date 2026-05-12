@@ -54,7 +54,7 @@ window.CBH_MENU_DATA = {
 
     // PERROS
     { id: 26, cat: 'perros', name: 'Perro Clasico', desc: 'Pan, salchicha americana, queso, papa ripio', price: 13900, icon: '🌭' },
-    { id: 27, cat: 'perros', name: 'Perro Especial ⭐', desc: 'Pan, salchicha, queso, cebolla, tocineta, papa ripio + papa francesa', price: 16900, icon: '🌭' },
+    { id: 27, cat: 'perros', name: 'Perro Especial ⭐', desc: 'Pan, salchicha, queso, cebolla, tocineta, papa ripio + papa francesa', price: 17900, icon: '🌭' },
     { id: 28, cat: 'perros', name: 'Perro Criollo 👑', desc: 'Pan, salchicha, carne desmechada, maíz, cebolla, queso, tocineta + papa francesa', price: 22900, icon: '🌭' },
     { id: 29, cat: 'perros', name: 'La Perra 🔥', desc: 'Salchicha americana, huevos codorniz, chorizo, queso, jamón, papa ripio, tocineta, lechuga, zanahoria, salsa showy', price: 23900, icon: '🌭', image: './Images/la perra.webp', imagePosition: '50% 50%' },
 
@@ -99,7 +99,7 @@ window.CBH_MENU_DATA = {
     { id: 63, cat: 'bebidas', sectionTitle: 'Bebidas', name: 'Jugo natural en Agua (Personal)', desc: 'Personal. Elige sabor: maracuyá, mora, lulo, fresa o mango.', price: 8900, icon: '🥭', optionsLabel: 'sabor', options: ['Maracuyá', 'Mora', 'Lulo', 'Fresa', 'Mango'] },
     { id: 64, cat: 'bebidas', sectionTitle: 'Bebidas', name: 'Jarra de jugo natural en agua', desc: 'Jarra. Elige sabor: maracuyá, mora, lulo o fresa.', price: 19900, icon: '🍍', optionsLabel: 'sabor', options: ['Maracuyá', 'Mora', 'Lulo', 'Fresa'] },
     { id: 65, cat: 'bebidas', sectionTitle: 'Bebidas', name: 'Jugo natural en leche (Personal)', desc: 'Personal. Elige sabor: maracuyá, mora, lulo, fresa o mango.', price: 9900, icon: '🥛', optionsLabel: 'sabor', options: ['Maracuyá', 'Mora', 'Lulo', 'Fresa', 'Mango'] },
-    { id: 66, cat: 'bebidas', sectionTitle: 'Bebidas', name: 'Jarra de jugo natural en leche', desc: 'Jarra. Elige sabor: maracuyá, mora, lulo o fresa.', price: 21900, icon: '🥛', optionsLabel: 'sabor', options: ['Maracuyá', 'Mora', 'Lulo', 'Fresa'] },
+    { id: 66, cat: 'bebidas', sectionTitle: 'Bebidas', name: 'Jarra de jugo natural en leche', desc: 'Jarra. Elige sabor: maracuyá, mora, lulo o fresa.', price: 22900, icon: '🥛', optionsLabel: 'sabor', options: ['Maracuyá', 'Mora', 'Lulo', 'Fresa'] },
     { id: 67, cat: 'bebidas', sectionTitle: 'Bebidas', name: 'Agua', desc: 'Agua embotellada personal.', price: 4500, icon: '💧' },
     { id: 68, cat: 'bebidas', sectionTitle: 'Bebidas', name: 'Soda', desc: 'Bebida soda personal.', price: 5000, icon: '🥤' },
     { id: 69, cat: 'bebidas', sectionTitle: 'Bebidas', name: 'Zumo de limón', desc: 'Bebida de limón personal.', price: 2000, icon: '🍋' },

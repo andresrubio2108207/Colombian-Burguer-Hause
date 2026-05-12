@@ -64,8 +64,8 @@ window.CBH_MENU_DATA = {
     { id: 32, cat: 'fast', sectionTitle: 'Fast Food', name: 'Nuggets', desc: 'Pollo apanado + papa francesa', price: 15900, icon: '⚡' },
 
     // SALCHIPAPAS
-    { id: 34, cat: 'salchipapas', sectionTitle: 'Salchipapas', name: 'Salchipapa', desc: 'Trozos de salchicha, papas y queso', price: 12900, icon: '🍟' },
-    { id: 35, cat: 'salchipapas', sectionTitle: 'Salchipapas', name: 'Choripapa', desc: 'Trozos de chorizo, papas y queso', price: 12900, icon: '🍟' },
+    { id: 34, cat: 'salchipapas', sectionTitle: 'Salchipapas', name: 'Salchipapa', desc: 'Trozos de salchicha, papas y queso', price: 13900, icon: '🍟' },
+    { id: 35, cat: 'salchipapas', sectionTitle: 'Salchipapas', name: 'Choripapa', desc: 'Trozos de chorizo, papas y queso', price: 13900, icon: '🍟' },
     { id: 36, cat: 'salchipapas', sectionTitle: 'Salchipapas', name: 'Salchipapa especial ⭐', desc: 'Carne desmechada, pollo desmechado, chorizo, salchicha, huevos de codorniz, maíz tierno + papa', price: 23900, icon: '🍟', image: './Images/salchipapa especial_1_11zon.webp' },
     { id: 37, cat: 'salchipapas', sectionTitle: 'Salchipapas', name: 'Colombian Fusion', desc: 'Salchicha, chorizo, queso + papa', price: 16900, icon: '🍟' },
 

@@ -44,10 +44,10 @@ window.CBH_MENU_DATA = {
     { id: 16, cat: 'hamburguesas', sectionTitle: 'Hamburguesas desde $13.900', name: 'Colombian Burger ⭐', desc: 'Pan, carne, queso, lechuga, tomate, tocineta, huevo frito, cebolla grille + papa a la francesa', price: 19900, icon: '🍔' },
     { id: 17, cat: 'hamburguesas', sectionTitle: 'Favoritas de la casa', name: 'Colombian Pork 👑', desc: 'Pan, carne, 3 tocinetas, 2 quesos, lechuga, tomate + papa a la francesa', price: 21900, icon: '🍔' },
     { id: 18, cat: 'hamburguesas', sectionTitle: 'Favoritas de la casa', name: 'Colombian Filet Mignon ⭐', desc: 'Pan, carne, tocineta, salsa de champiñones, lechuga, tomate + papa a la francesa', price: 21900, icon: '🍔' },
-    { id: 19, cat: 'hamburguesas', sectionTitle: 'Favoritas de la casa', name: 'Burger Mexicana ⭐', desc: 'Pan, carne, queso, guacamole, frijol refrito, jalapeño, tomate, lechuga, tocineta, tostacoes, lechuga + papa francesa', price: 22900, icon: '🍔', image: './Images/h mexicana_2_11zon.webp', imagePosition: '50% 42%' },
+    { id: 19, cat: 'hamburguesas', sectionTitle: 'Favoritas de la casa', name: 'Burger Mexicana ⭐', desc: 'Pan, carne, queso, guacamole, frijol refrito, jalapeño, tomate, lechuga, tocineta, tostacoes, lechuga + papa francesa', price: 22900, icon: '🍔', image: './Images/h mexicana_2_11zon.jpeg', imagePosition: '50% 70%' },
     { id: 20, cat: 'hamburguesas', sectionTitle: 'Las Premium VIP', name: 'Colombian Mix 👑', desc: 'Pan, carne, pollo, queso, maíz tierno, lechuga, tomate + papa a la francesa', price: 23900, icon: '🍔' },
-    { id: 21, cat: 'hamburguesas', sectionTitle: 'Las Premium VIP', name: 'Colombian SuperHouse 👑🔥', desc: 'Pan, carne, tocineta, doble queso, lechuga, tomate + papa a la francesa', price: 23900, icon: '🍔', image: './Images/burguer colombian super hause_3_11zon.webp', imagePosition: '50% 60%' },
-    { id: 22, cat: 'hamburguesas', sectionTitle: 'Las Premium VIP', name: 'Burger Criolla 👑🔥', desc: 'Doble carne desmechada bañada en salsa criolla de la casa, queso, maíz tierno, maduritos, tocineta, lechuga, tomate + papa a la francesa', price: 26900, icon: '🍔', image: './Images/h criolla_4_11zon.webp', imagePosition: '50% 62%' },
+    { id: 21, cat: 'hamburguesas', sectionTitle: 'Las Premium VIP', name: 'Colombian SuperHouse 👑🔥', desc: 'Pan, doble carne, tocineta, doble queso, lechuga, tomate + papa a la francesa', price: 24900, icon: '🍔', image: './Images/burguer colombian super hause_3_11zon.webp', imagePosition: '50% 60%' },
+    { id: 22, cat: 'hamburguesas', sectionTitle: 'Las Premium VIP', name: 'Burger Criolla 👑🔥', desc: 'Doble carne desmechada mas carne de hamburguesa bañada en salsa criolla de la casa, queso, maíz tierno, maduritos, tocineta, lechuga, tomate + papa a la francesa', price: 27900, icon: '🍔', image: './Images/h criolla_1_11zon.webp', imagePosition: '50% 78%' },
     { id: 23, cat: 'hamburguesas', sectionTitle: 'Las Premium VIP', name: 'Burger Marinera 👑🔥', desc: 'Camarones, carne de res bañada en salsa marinera, doble tocineta, carne desmechada, cebolla morada, tajadas mango, queso mozarella, lechuga', price: 28900, icon: '🍔', image: './Images/Burguer marinera.webp' },
     { id: 24, cat: 'hamburguesas', sectionTitle: 'Las Premium VIP', name: 'Burger Pecadora (Próximamente)', desc: 'Pan, doble carne, mermelada de tocineta, cebolla crunchy, queso, lechuga', price: 28900, icon: '🍔', available: false },
     { id: 25, cat: 'hamburguesas', sectionTitle: 'Las Premium VIP', name: 'Burger Infiel (Próximamente)', desc: 'Pan, doble carne, queso crema, cebolla crunchy, queso, piña', price: 28900, icon: '🍔', available: false },
@@ -66,7 +66,7 @@ window.CBH_MENU_DATA = {
     // SALCHIPAPAS
     { id: 34, cat: 'salchipapas', sectionTitle: 'Salchipapas', name: 'Salchipapa', desc: 'Trozos de salchicha, papas y queso', price: 13900, icon: '🍟' },
     { id: 35, cat: 'salchipapas', sectionTitle: 'Salchipapas', name: 'Choripapa', desc: 'Trozos de chorizo, papas y queso', price: 13900, icon: '🍟' },
-    { id: 36, cat: 'salchipapas', sectionTitle: 'Salchipapas', name: 'Salchipapa especial ⭐', desc: 'Carne desmechada, pollo desmechado, chorizo, salchicha, huevos de codorniz, maíz tierno + papa', price: 24900, icon: '🍟', image: './Images/salchipapa especial_1_11zon.webp' },
+    { id: 36, cat: 'salchipapas', sectionTitle: 'Salchipapas', name: 'Salchipapa especial ⭐', desc: 'Carne desmechada, pollo desmechado, chorizo, salchicha, huevos de codorniz, maíz tierno + papa', price: 24900, icon: '🍟', image: './Images/salchipapa especial_1_11zon.webp', imagePosition: '50% 45%' },
     { id: 37, cat: 'salchipapas', sectionTitle: 'Salchipapas', name: 'Colombian Fusion', desc: 'Salchicha, chorizo, queso + papa', price: 17900, icon: '🍟' },
 
     // PATACONES
@@ -77,8 +77,7 @@ window.CBH_MENU_DATA = {
     { id: 40, cat: 'maicitos', sectionTitle: 'Maicitos', name: 'Maicitos de Pollo', desc: 'Maíz tierno, pollo en bechamel con champiñones gratinados, queso mozzarella + papa francesa', price: 16900, icon: '🌽' },
     { id: 41, cat: 'maicitos', sectionTitle: 'Maicitos', name: 'Maicitos Rancheros', desc: 'Maíz tierno, tocineta, chorizo, jamón, queso, salsa ranchera carne desmechada, tostadas', price: 18900, icon: '🌽' },
 
-    // SANDWICHES
-    { id: 42, cat: 'sandwiches', sectionTitle: 'Sandwich', name: 'Sandwich Ropa Vieja', desc: 'Carne o pollo desmechado, lechuga, queso, tomate, salsa bechamel con champiñones + papa francesa', price: 20900, icon: '🥪' },
+    { id: 42, cat: 'perros', name: 'Sandwich Ropa Vieja', desc: 'Carne o pollo desmechado, lechuga, queso, tomate, salsa bechamel con champiñones + papa francesa', price: 22900, icon: '🥪' },
 
     // RECOMENDADOS
     { id: 43, cat: 'recomendados', sectionTitle: 'Recomendados', name: 'Churrasco', desc: 'Ensalada + papa a la francesa', price: 33900, icon: '🥩' },
@@ -122,9 +121,9 @@ window.CBH_MENU_DATA = {
     { id: 86, cat: 'adicionales', sectionTitle: 'Adicionales', name: 'Porción de Tajada madura X2', desc: 'Adición adicional.', price: 5900, icon: '➕' }
   ],
   combos: [
-    { id: 'c1', sectionTitle: 'Los favoritos de la casa', name: '8 alitas + Tazón de papas, + ensalada', desc: 'Combo perfecto para compartir', price: 36900, icon: '🍗', optionsLabel: 'sabor econolitro', options: [{ label: 'Pepsi', price: 36900 }, { label: 'Manzana', price: 36900 }, { label: 'Colombiana', price: 36900 }] },
-    { id: 'c2', sectionTitle: 'Los favoritos de la casa', name: '12 alitas + Tazón de papas + Econolitro', desc: 'Para el hambre de verdad', price: 56900, icon: '🍗', optionsLabel: 'sabor econolitro', options: [{ label: 'Pepsi', price: 56900 }, { label: 'Manzana', price: 56900 }, { label: 'Colombiana', price: 56900 }] },
-    { id: 'c3', sectionTitle: 'Los favoritos de la casa', name: '20 alitas + tazón de papas + Econolitro', desc: 'La opción más poderosa para compartir', price: 93900, icon: '🍗', optionsLabel: 'sabor econolitro', options: [{ label: 'Pepsi', price: 93900 }, { label: 'Manzana', price: 93900 }, { label: 'Colombiana', price: 93900 }] },
+    { id: 'c1', sectionTitle: 'Los favoritos de la casa', name: '8 alitas + Tazón de papas, + ensalada', desc: 'Combo perfecto para compartir', price: 36900, icon: '🍗', image: './Images/8 alas_4_11zon.webp', imagePosition: '50% 52%', optionsLabel: 'sabor econolitro', options: [{ label: 'Pepsi', price: 36900 }, { label: 'Manzana', price: 36900 }, { label: 'Colombiana', price: 36900 }] },
+    { id: 'c2', sectionTitle: 'Los favoritos de la casa', name: '12 alitas + Tazón de papas + Econolitro', desc: 'Para el hambre de verdad', price: 56900, icon: '🍗', image: './Images/alitasx12_2_11zon.webp', imagePosition: '50% 95%', optionsLabel: 'sabor econolitro', options: [{ label: 'Pepsi', price: 56900 }, { label: 'Manzana', price: 56900 }, { label: 'Colombiana', price: 56900 }] },
+    { id: 'c3', sectionTitle: 'Los favoritos de la casa', name: '20 alitas + tazón de papas + Econolitro', desc: 'La opción más poderosa para compartir', price: 93900, icon: '🍗', image: './Images/20 alas_3_11zon.webp', imagePosition: '50% 72%', optionsLabel: 'sabor econolitro', options: [{ label: 'Pepsi', price: 93900 }, { label: 'Manzana', price: 93900 }, { label: 'Colombiana', price: 93900 }] },
     { id: 'c4', sectionTitle: 'Los favoritos de la casa', name: 'Combo amigos', desc: '4 burger clásicas o perros clásicos más papas y gaseosa 1Lt', price: 58900, icon: '🍔' },
     { id: 'c5', sectionTitle: 'Los favoritos de la casa', name: 'Super Volcan', desc: 'Tocineta, papas, chorizo, salchicha, huevos codorniz, jamón, maíz, carne o pollo desmechado, queso, papa ripio', price: 70900, icon: '🌋' },
     { id: 'c6', sectionTitle: 'Los favoritos de la casa', name: 'PG Burger', desc: 'Burger clasica + papas + gaseosa mini', price: 19900, icon: '🍔' },
@@ -132,10 +131,10 @@ window.CBH_MENU_DATA = {
     { id: 'c8', sectionTitle: 'Los favoritos de la casa', name: 'Perro Clasico 2*1 ⭐', desc: 'Dos perros clásicos', price: 19900, icon: '🌭' },
     { id: 'c9', sectionTitle: 'Los favoritos de la casa', name: 'Hamburguesa Clasica 2*1 ⭐', desc: 'Dos hamburguesas clásicas', price: 19900, icon: '🍔', image: './Images/clasicas 2x1_2_11zon.webp' },
     { id: 'c10', sectionTitle: 'Los favoritos de la casa', name: 'Burger Clasica o Perro Clasico 2*1 + papas ⭐', desc: 'El clásico con papas', price: 25900, icon: '🍔' },
-    { id: 'c11', sectionTitle: 'Los favoritos de la casa', name: 'Burger o perro clasico + 3 alas bbq + papas', desc: 'Combo con alas y papas', price: 28900, icon: '🍗' },
+    { id: 'c11', sectionTitle: 'Los favoritos de la casa', name: 'Burger o perro clasico + 3 alas bbq + papas', desc: 'Combo con alas y papas', price: 28900, icon: '🍗', image: './Images/h mas 3 alas_6_11zon.webp', imagePosition: '50% 58%' },
     { id: 'c12', sectionTitle: 'Los favoritos de la casa', name: '2 Burger clasica o perro clasico + 3 alas bbq + papas', desc: 'Combo doble con alas y papas', price: 38900, icon: '🍗' },
     { id: 'c13', sectionTitle: 'Los favoritos de la casa', name: '3 burger clasicas o perro clasico + papas + gaseosa 1 lt', desc: 'Combo grupal', price: 45900, icon: '🍔' },
     { id: 'c14', sectionTitle: 'Los favoritos de la casa', name: '1 salchi especial + 1 burger callejera', desc: 'Dúo especial de la casa', price: 37900, icon: '🔥' },
-    { id: 'c15', sectionTitle: 'Los favoritos de la casa', name: '3 Especial Burger', desc: 'Callejera, superqueso, burgerpollo, colombian y gaseosa 1lt', price: 58900, icon: '🔥' }
+    { id: 'c15', sectionTitle: 'Los favoritos de la casa', name: '3 Especial Burger', desc: 'Callejera, superqueso, burgerpollo, colombian y gaseosa 1lt', price: 58900, icon: '🔥', image: './Images/3 burguer especiales_1_11zon.jpeg', imagePosition: '50% 74%' }
   ]
 };

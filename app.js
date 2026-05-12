@@ -176,7 +176,6 @@ function getCategoryOrder(cat) {
     patacones: 5,
     salchipapas: 6,
     maicitos: 7,
-    sandwiches: 8,
     recomendados: 9,
     bebidas: 10,
     adicionales: 11
@@ -275,7 +274,6 @@ function getCatLabel(cat) {
     salchipapas: 'Salchipapas',
     maicitos: 'Maicitos',
     patacones: 'Patacón',
-    sandwiches: 'Sándwich',
     arepas: 'Arepa',
     recomendados: '⭐ Recomendado',
     bebidas: 'Bebida',
@@ -289,6 +287,14 @@ function filterMenu(cat, btn) {
   document.querySelectorAll('.tab-btn').forEach(tab => tab.classList.remove('active'));
   if (btn) btn.classList.add('active');
   renderMenu(cat);
+}
+
+function showFavoritesFromNav(event) {
+  if (event) event.preventDefault();
+  const favoritesTab = document.getElementById('favoritesTab');
+  filterMenu('favoritos', favoritesTab);
+  const carta = document.getElementById('carta');
+  if (carta) carta.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
 function addToCart(id) {

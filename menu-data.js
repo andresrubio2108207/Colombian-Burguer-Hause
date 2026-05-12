@@ -49,13 +49,13 @@ window.CBH_MENU_DATA = {
     { id: 21, cat: 'hamburguesas', sectionTitle: 'Las Premium VIP', name: 'Colombian SuperHouse 👑🔥', desc: 'Pan, carne, tocineta, doble queso, lechuga, tomate + papa a la francesa', price: 23900, icon: '🍔', image: './Images/burguer colombian super hause_3_11zon.webp', imagePosition: '50% 60%' },
     { id: 22, cat: 'hamburguesas', sectionTitle: 'Las Premium VIP', name: 'Burger Criolla 👑🔥', desc: 'Doble carne desmechada bañada en salsa criolla de la casa, queso, maíz tierno, maduritos, tocineta, lechuga, tomate + papa a la francesa', price: 26900, icon: '🍔', image: './Images/h criolla_4_11zon.webp', imagePosition: '50% 62%' },
     { id: 23, cat: 'hamburguesas', sectionTitle: 'Las Premium VIP', name: 'Burger Marinera 👑🔥', desc: 'Camarones, carne de res bañada en salsa marinera, doble tocineta, carne desmechada, cebolla morada, tajadas mango, queso mozarella, lechuga', price: 28900, icon: '🍔', image: './Images/Burguer marinera.webp' },
-    { id: 24, cat: 'hamburguesas', sectionTitle: 'Las Premium VIP', name: 'Burger Pecadora', desc: 'Pan, doble carne, mermelada de tocineta, cebolla crunchy, queso, lechuga', price: 28900, icon: '🍔' },
-    { id: 25, cat: 'hamburguesas', sectionTitle: 'Las Premium VIP', name: 'Burger Infiel', desc: 'Pan, doble carne, queso crema, cebolla crunchy, queso, piña', price: 28900, icon: '🍔' },
+    { id: 24, cat: 'hamburguesas', sectionTitle: 'Las Premium VIP', name: 'Burger Pecadora (Próximamente)', desc: 'Pan, doble carne, mermelada de tocineta, cebolla crunchy, queso, lechuga', price: 28900, icon: '🍔', available: false },
+    { id: 25, cat: 'hamburguesas', sectionTitle: 'Las Premium VIP', name: 'Burger Infiel (Próximamente)', desc: 'Pan, doble carne, queso crema, cebolla crunchy, queso, piña', price: 28900, icon: '🍔', available: false },
 
     // PERROS
     { id: 26, cat: 'perros', name: 'Perro Clasico', desc: 'Pan, salchicha americana, queso, papa ripio', price: 13900, icon: '🌭' },
     { id: 27, cat: 'perros', name: 'Perro Especial ⭐', desc: 'Pan, salchicha, queso, cebolla, tocineta, papa ripio + papa francesa', price: 16900, icon: '🌭' },
-    { id: 28, cat: 'perros', name: 'Perro Criollo 👑', desc: 'Pan, salchicha, carne desmechada, maíz, cebolla, queso, tocineta + papa francesa', price: 20900, icon: '🌭' },
+    { id: 28, cat: 'perros', name: 'Perro Criollo 👑', desc: 'Pan, salchicha, carne desmechada, maíz, cebolla, queso, tocineta + papa francesa', price: 22900, icon: '🌭' },
     { id: 29, cat: 'perros', name: 'La Perra 🔥', desc: 'Salchicha americana, huevos codorniz, chorizo, queso, jamón, papa ripio, tocineta, lechuga, zanahoria, salsa showy', price: 23900, icon: '🌭', image: './Images/la perra.webp', imagePosition: '50% 50%' },
 
     // FAST FOOD

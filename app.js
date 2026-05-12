@@ -187,6 +187,10 @@ function getCategoryOrder(cat) {
 function renderProductCard(item) {
   const imageStyle = item.imagePosition ? ` style="object-position: ${item.imagePosition};"` : '';
   const priceLabel = item.pricePrefix ? `${item.pricePrefix} ${formatPrice(item.price)}` : formatPrice(item.price);
+  const isAvailable = item.available !== false;
+  const addButton = isAvailable
+    ? `<button class="add-btn" onclick="addToCart(${item.id})">+ Agregar</button>`
+    : `<button class="add-btn disabled" disabled>Próximamente</button>`;
   return `
     <div class="product-card">
       ${item.image ? `<img class="product-img" src="${item.image}" alt="${item.name}" width="640" height="480" loading="lazy" decoding="async" fetchpriority="low"${imageStyle} onerror="this.outerHTML='<div class=\\'product-img-placeholder\\'>${item.icon}</div>'">` : `<div class="product-img-placeholder">${item.icon}</div>`}
@@ -196,7 +200,7 @@ function renderProductCard(item) {
         <div class="product-desc">${item.desc}</div>
         <div class="product-footer">
           <div class="product-price">${priceLabel}</div>
-          <button class="add-btn" onclick="addToCart(${item.id})">+ Agregar</button>
+          ${addButton}
         </div>
       </div>
     </div>
@@ -242,15 +246,22 @@ function renderCombosToGrid(grid) {
 }
 
 function renderComboCard(combo) {
+  const imageStyle = combo.imagePosition ? ` style="object-position: ${combo.imagePosition};"` : '';
+  const isAvailable = combo.available !== false;
+  const addBtn = isAvailable
+    ? `<button class="add-btn" onclick="addToCartCombo('${combo.id}', '${combo.name}', ${combo.price})">+ Agregar</button>`
+    : `<button class="add-btn disabled" disabled>Próximamente</button>`;
   return `
     <div class="combo-card">
-      <div style="font-size:2.5rem;margin-bottom:0.5rem;">${combo.icon}</div>
-      <div class="combo-tag">Combo Especial</div>
-      <div class="combo-name">${combo.name}</div>
-      <div class="combo-desc">${combo.desc}</div>
-      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:0.75rem;">
-        <div class="combo-price">${formatPrice(combo.price)}</div>
-        <button class="add-btn" onclick="addToCartCombo('${combo.id}', '${combo.name}', ${combo.price})">+ Agregar</button>
+      ${combo.image ? `<img class="combo-img" src="${combo.image}" alt="${combo.name}" width="640" height="480" loading="lazy" decoding="async" fetchpriority="low"${imageStyle} onerror="this.outerHTML='<div class=\\'combo-img-placeholder\\'>${combo.icon}</div>'">` : `<div class="combo-img-placeholder">${combo.icon}</div>`}
+      <div class="combo-body">
+        <div class="combo-tag">Combo Especial</div>
+        <div class="combo-name">${combo.name}</div>
+        <div class="combo-desc">${combo.desc}</div>
+        <div class="combo-footer">
+          <div class="combo-price">${formatPrice(combo.price)}</div>
+          ${addBtn}
+        </div>
       </div>
     </div>
   `;

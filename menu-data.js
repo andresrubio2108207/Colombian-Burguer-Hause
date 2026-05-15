@@ -131,7 +131,7 @@ window.CBH_MENU_DATA = {
     { id: 'c8', sectionTitle: 'Los favoritos de la casa', name: 'Perro Clasico 2*1 ⭐', desc: 'Dos perros clásicos', price: 19900, icon: '🌭' },
     { id: 'c9', sectionTitle: 'Los favoritos de la casa', name: 'Hamburguesa Clasica 2*1 ⭐', desc: 'Dos hamburguesas clásicas', price: 19900, icon: '🍔', image: './Images/clasicas 2x1_2_11zon.webp' },
     { id: 'c10', sectionTitle: 'Los favoritos de la casa', name: 'Burger Clasica o Perro Clasico 2*1 + papas ⭐', desc: 'El clásico con papas', price: 25900, icon: '🍔' },
-    { id: 'c11', sectionTitle: 'Los favoritos de la casa', name: 'Burger o perro clasico + 3 alas bbq + papas', desc: 'Combo con alas y papas', price: 28900, icon: '🍗', image: './Images/h mas 3 alas_6_11zon.webp', imagePosition: '50% 35%' },
+    { id: 'c11', sectionTitle: 'Los favoritos de la casa', name: 'Burger o perro clasico + 3 alas bbq + papas', desc: 'Combo con alas y papas', price: 28900, icon: '🍗', image: './Images/h mas 3 alas_6_11zon.webp', imagePosition: '50% 20%' },
     { id: 'c12', sectionTitle: 'Los favoritos de la casa', name: '2 Burger clasica o perro clasico + 3 alas bbq + papas', desc: 'Combo doble con alas y papas', price: 38900, icon: '🍗' },
     { id: 'c13', sectionTitle: 'Los favoritos de la casa', name: '3 burger clasicas o perro clasico + papas + gaseosa 1 lt', desc: 'Combo grupal', price: 45900, icon: '🍔' },
     { id: 'c14', sectionTitle: 'Los favoritos de la casa', name: '1 salchi especial + 1 burger callejera', desc: 'Dúo especial de la casa', price: 37900, icon: '🔥' },

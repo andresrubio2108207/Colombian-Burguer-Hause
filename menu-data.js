@@ -37,9 +37,9 @@ window.CBH_MENU_DATA = {
 
     // HAMBURGUESAS
     { id: 11, cat: 'hamburguesas', sectionTitle: 'Hamburguesas desde $13.900', name: 'Burger Clasica', desc: 'Pan, carne, queso, tomate, lechuga', price: 13900, icon: '🍔', image: './Images/burguer clasica_4_11zon.webp', imagePosition: '90% 90%' },
-    { id: 12, cat: 'hamburguesas', sectionTitle: 'Hamburguesas desde $13.900', name: 'Burger Callejera', desc: 'Pan, carne, queso, tocineta, papa ripio, bañada en salsa BBQ + papa francesa', price: 17900, icon: '🍔' },
+    { id: 12, cat: 'hamburguesas', sectionTitle: 'Hamburguesas desde $13.900', name: 'Burger Callejera', desc: 'Pan, carne, queso, tocineta, papa ripio, bañada en salsa BBQ + papa francesa', price: 17900, icon: '🍔', image: './Images/h callejera_1_11zon.webp', imagePosition: '50% 50%' },
     { id: 13, cat: 'hamburguesas', sectionTitle: 'Hamburguesas desde $13.900', name: 'Burger Hawaiana', desc: 'Pan, carne, queso, lechuga, tomate, tocineta, tajada de piña + papas a la francesa', price: 18900, icon: '🍔', image: './Images/h haw_5_11zon.webp', imagePosition: '50% 65%' },
-    { id: 14, cat: 'hamburguesas', sectionTitle: 'Hamburguesas desde $13.900', name: 'Burger Super Queso', desc: 'Pan, carne, doble crema, queso cheddar, tocineta, salsa queso, tomate, lechuga + papa francesa', price: 18900, icon: '🍔' },
+    { id: 14, cat: 'hamburguesas', sectionTitle: 'Hamburguesas desde $13.900', name: 'Burger Super Queso', desc: 'Pan, carne, doble crema, queso cheddar, tocineta, salsa queso, tomate, lechuga + papa francesa', price: 18900, icon: '🍔', image: './Images/h super queso_2_11zon.webp', imagePosition: '50% 50%' },
     { id: 15, cat: 'hamburguesas', sectionTitle: 'Hamburguesas desde $13.900', name: 'Burger Pollo', desc: 'Pan, filete de pollo a la plancha o apanado, queso, lechuga, tomate, tocineta + papa a la francesa', price: 18900, icon: '🍔', image: './Images/h pollo_3_11zon.webp', imagePosition: '50% 30%' },
     { id: 16, cat: 'hamburguesas', sectionTitle: 'Hamburguesas desde $13.900', name: 'Colombian Burger ⭐', desc: 'Pan, carne, queso, lechuga, tomate, tocineta, huevo frito, cebolla grille + papa a la francesa', price: 19900, icon: '🍔' },
     { id: 17, cat: 'hamburguesas', sectionTitle: 'Favoritas de la casa', name: 'Colombian Pork 👑', desc: 'Pan, carne, 3 tocinetas, 2 quesos, lechuga, tomate + papa a la francesa', price: 21900, icon: '🍔', image: './Images/burguer colombian pork_3_11zon.webp', imagePosition: '50% 60%' },
@@ -67,7 +67,7 @@ window.CBH_MENU_DATA = {
     { id: 34, cat: 'salchipapas', sectionTitle: 'Salchipapas', name: 'Salchipapa', desc: 'Trozos de salchicha, papas y queso', price: 13900, icon: '🍟' },
     { id: 35, cat: 'salchipapas', sectionTitle: 'Salchipapas', name: 'Choripapa', desc: 'Trozos de chorizo, papas y queso', price: 13900, icon: '🍟' },
     { id: 36, cat: 'salchipapas', sectionTitle: 'Salchipapas', name: 'Salchipapa especial ⭐', desc: 'Carne desmechada, pollo desmechado, chorizo, salchicha, huevos de codorniz, maíz tierno + papa', price: 24900, icon: '🍟', image: './Images/salchipapa especial_1_11zon.webp', imagePosition: '50% 45%' },
-    { id: 37, cat: 'salchipapas', sectionTitle: 'Salchipapas', name: 'Colombian Fusion', desc: 'Salchicha, chorizo, queso + papa', price: 17900, icon: '🍟', image: './Images/salchiapapa mixta_5_11zon.webp', imagePosition: '50% 45%' },
+    { id: 37, cat: 'salchipapas', sectionTitle: 'Salchipapas', name: 'Colombian Fusion', desc: 'Salchicha, chorizo, queso + papa', price: 17900, icon: '🍟' },
 
     // PATACONES
     { id: 38, cat: 'patacones', sectionTitle: 'Patacones', name: 'Patacona carne o pollo 🔥', desc: 'Carne o pollo desmechado, maíz tierno, queso, ensalada, salsa de la casa, champiñones + papa francesa', price: 22900, icon: '🟡' },
@@ -80,7 +80,7 @@ window.CBH_MENU_DATA = {
     { id: 42, cat: 'perros', name: 'Sandwich Ropa Vieja', desc: 'Carne o pollo desmechado, lechuga, queso, tomate, salsa bechamel con champiñones + papa francesa', price: 22900, icon: '🥪' },
 
     // RECOMENDADOS
-    { id: 43, cat: 'recomendados', sectionTitle: 'Recomendados', name: 'Churrasco', desc: 'Ensalada + papa a la francesa', price: 33900, icon: '🥩', image: './Images/churrasco_4_11zon.webp', imagePosition: '50% 50%' },
+    { id: 43, cat: 'recomendados', sectionTitle: 'Recomendados', name: 'Churrasco', desc: 'Ensalada + papa a la francesa', price: 33900, icon: '🥩', image: './Images/churrasco (2)_2_11zon.webp', imagePosition: '50% 95%' },
     { id: 44, cat: 'recomendados', sectionTitle: 'Recomendados', name: 'Costillas de Cerdo', desc: 'Ensalada + papa a la francesa', price: 33900, icon: '🥩' },
     { id: 45, cat: 'recomendados', sectionTitle: 'Recomendados', name: 'Pincho de pollo, res, o mixto', desc: 'Ensalada + papa a la francesa', price: 23900, icon: '🍢' },
     { id: 46, cat: 'recomendados', sectionTitle: 'Recomendados', name: 'Pechuga de pollo', desc: 'Ensalada + papa a la francesa', price: 33900, icon: '🍗' },
@@ -88,7 +88,7 @@ window.CBH_MENU_DATA = {
     { id: 48, cat: 'recomendados', sectionTitle: 'Recomendados', name: 'Picada Colombian House', desc: 'Res, pollo, costilla, papa a la francesa, rollos jamón, queso, huevo codorniz, tomate, batavia, yucas, aros cebolla, chorizo, salchicha, tomate', price: 52900, icon: '🍱', image: './Images/picada h_1_11zon.webp', imagePosition: '50% 84%' },
 
     // BEBIDAS
-    { id: 49, cat: 'bebidas', sectionTitle: 'Bebidas', name: 'Limonada personal', desc: 'Elige si la quieres de limón, cereza, sandía, hierbabuena o coco.', price: 7900, pricePrefix: 'desde', icon: '🍹', optionsLabel: 'sabor', options: limonadaPersonalOptions },
+    { id: 49, cat: 'bebidas', sectionTitle: 'Bebidas', name: 'Limonada personal', desc: 'Elige si la quieres de limón, cereza, sandía, hierbabuena o coco.', price: 7900, pricePrefix: 'desde', icon: '🍹', image: './Images/limonada personal hb_1_11zon.webp', imagePosition: '50% 50%', optionsLabel: 'sabor', options: limonadaPersonalOptions },
     { id: 50, cat: 'bebidas', sectionTitle: 'Bebidas', name: 'Jarra de limonada', desc: 'Elige el sabor de la jarra: limón, cereza, sandía, hierbabuena o coco.', price: 15900, pricePrefix: 'desde', icon: '🍹', image: './Images/limonada de sandia jarra_1_11zon.webp', imagePosition: '90% 25%', optionsLabel: 'sabor', options: limonadaJarraOptions },
     { id: 55, cat: 'bebidas', sectionTitle: 'Bebidas', name: 'Té', desc: 'Elige si lo prefieres de durazno o limón.', price: 5000, icon: '🍵', image: './Images/te_2_11zon.webp', imagePosition: '50% 50%' },
     { id: 56, cat: 'bebidas', sectionTitle: 'Bebidas', name: 'Gaseosa Coca-Cola', desc: 'Todas las gaseosas son Coca-Cola. Elige la presentación: 250 ml, 350 ml, 400 ml o 1.5 L.', price: 3500, pricePrefix: 'desde', icon: '🥤', image: './Images/cocacola 400ml_11zon.webp', imagePosition: '50% 50%', optionsLabel: 'presentación', options: cocaColaOptions },

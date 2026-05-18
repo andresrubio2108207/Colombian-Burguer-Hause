@@ -74,7 +74,7 @@ window.CBH_MENU_DATA = {
     { id: 39, cat: 'patacones', sectionTitle: 'Patacones', name: 'Patacona Mixta', desc: 'Carne desmechada, pollo desmechado, chorizo, salchicha, maíz tierno, queso + papa a la francesa y salsa de la casa', price: 24900, icon: '🟡', image: './Images/Patacona mixta.webp' },
 
     // MAICITOS
-    { id: 40, cat: 'maicitos', sectionTitle: 'Maicitos', name: 'Maicitos de Pollo', desc: 'Maíz tierno, pollo en bechamel con champiñones gratinados, queso mozzarella + papa francesa', price: 16900, icon: '🌽' },
+    { id: 40, cat: 'maicitos', sectionTitle: 'Maicitos', name: 'Maicitos de Pollo', desc: 'Maíz tierno, pollo en bechamel con champiñones gratinados, queso mozzarella + tostada', price: 16900, icon: '🌽' },
     { id: 41, cat: 'maicitos', sectionTitle: 'Maicitos', name: 'Maicitos Rancheros', desc: 'Maíz tierno, tocineta, chorizo, jamón, queso, salsa ranchera carne desmechada, tostadas', price: 18900, icon: '🌽' },
 
     { id: 42, cat: 'perros', name: 'Sandwich Ropa Vieja', desc: 'Carne o pollo desmechado, lechuga, queso, tomate, salsa bechamel con champiñones + papa francesa', price: 22900, icon: '🥪' },

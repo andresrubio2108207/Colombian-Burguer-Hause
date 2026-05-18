@@ -80,7 +80,7 @@ window.CBH_MENU_DATA = {
     { id: 42, cat: 'perros', name: 'Sandwich Ropa Vieja', desc: 'Carne o pollo desmechado, lechuga, queso, tomate, salsa bechamel con champiñones + papa francesa', price: 22900, icon: '🥪' },
 
     // RECOMENDADOS
-    { id: 43, cat: 'recomendados', sectionTitle: 'Recomendados', name: 'Churrasco', desc: 'Ensalada + papa a la francesa', price: 33900, icon: '🥩', image: './Images/churrasco (2)_2_11zon.webp', imagePosition: '50% 95%' },
+    { id: 43, cat: 'recomendados', sectionTitle: 'Recomendados', name: 'Churrasco', desc: 'Ensalada + papa a la francesa', price: 33900, icon: '🥩', image: './Images/churrasco (2)_2_11zon.webp', imagePosition: '50% 83%' },
     { id: 44, cat: 'recomendados', sectionTitle: 'Recomendados', name: 'Costillas de Cerdo', desc: 'Ensalada + papa a la francesa', price: 33900, icon: '🥩' },
     { id: 45, cat: 'recomendados', sectionTitle: 'Recomendados', name: 'Pincho de pollo, res, o mixto', desc: 'Ensalada + papa a la francesa', price: 23900, icon: '🍢' },
     { id: 46, cat: 'recomendados', sectionTitle: 'Recomendados', name: 'Pechuga de pollo', desc: 'Ensalada + papa a la francesa', price: 33900, icon: '🍗' },

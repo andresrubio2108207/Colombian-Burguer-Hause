@@ -187,6 +187,7 @@ function renderProductCard(item) {
   const imageStyle = item.imagePosition ? ` style="object-position: ${item.imagePosition};"` : '';
   const priceLabel = item.pricePrefix ? `${item.pricePrefix} ${formatPrice(item.price)}` : formatPrice(item.price);
   const isAvailable = item.available !== false;
+  const descMarkup = item.desc ? `<div class="product-desc">${item.desc}</div>` : '';
   const addButton = isAvailable
     ? `<button class="add-btn" onclick="addToCart(${item.id})">+ Agregar</button>`
     : `<button class="add-btn disabled" disabled>Próximamente</button>`;
@@ -196,7 +197,7 @@ function renderProductCard(item) {
       <div class="product-body">
         <span class="product-badge">${getCatLabel(item.cat)}</span>
         <div class="product-name">${item.name}</div>
-        <div class="product-desc">${item.desc}</div>
+        ${descMarkup}
         <div class="product-footer">
           <div class="product-price">${priceLabel}</div>
           ${addButton}

@@ -41,7 +41,7 @@ window.CBH_MENU_DATA = {
     { id: 13, cat: 'hamburguesas', sectionTitle: 'Hamburguesas desde $13.900', name: 'Burger Hawaiana', desc: 'Pan, carne, queso, lechuga, tomate, tocineta, tajada de piña + papas a la francesa', price: 18900, icon: '🍔', image: './Images/h haw_5_11zon.webp', imagePosition: '50% 65%' },
     { id: 14, cat: 'hamburguesas', sectionTitle: 'Hamburguesas desde $13.900', name: 'Burger Super Queso', desc: 'Pan, carne, doble crema, queso cheddar, tocineta, salsa queso, tomate, lechuga + papa francesa', price: 18900, icon: '🍔', image: './Images/h super queso_2_11zon.webp', imagePosition: '50% 50%' },
     { id: 15, cat: 'hamburguesas', sectionTitle: 'Hamburguesas desde $13.900', name: 'Burger Pollo', desc: 'Pan, filete de pollo a la plancha o apanado, queso, lechuga, tomate, tocineta + papa a la francesa', price: 18900, icon: '🍔', image: './Images/h pollo_3_11zon.webp', imagePosition: '50% 30%' },
-    { id: 16, cat: 'hamburguesas', sectionTitle: 'Hamburguesas desde $13.900', name: 'Colombian Burger ⭐', desc: 'Pan, carne, queso, lechuga, tomate, tocineta, huevo frito, cebolla grille + papa a la francesa', price: 19900, icon: '🍔' },
+    { id: 16, cat: 'hamburguesas', sectionTitle: 'Hamburguesas desde $13.900', name: 'Colombian Burger ⭐', desc: 'Pan, carne, queso, lechuga, tomate, tocineta, huevo frito, cebolla grille + papa a la francesa', price: 19900, icon: '🍔', image: './Images/Colombian Burguer_1_11zon.webp', imagePosition: '50% 60%' },
     { id: 17, cat: 'hamburguesas', sectionTitle: 'Favoritas de la casa', name: 'Colombian Pork 👑', desc: 'Pan, carne, 3 tocinetas, 2 quesos, lechuga, tomate + papa a la francesa', price: 21900, icon: '🍔', image: './Images/burguer colombian pork_3_11zon.webp', imagePosition: '50% 60%' },
     { id: 18, cat: 'hamburguesas', sectionTitle: 'Favoritas de la casa', name: 'Colombian Filet Mignon ⭐', desc: 'Pan, carne, tocineta, salsa de champiñones, lechuga, tomate + papa a la francesa', price: 21900, icon: '🍔', image: './Images/b filet migon_1_11zon.webp', imagePosition: '50% 50%' },
     { id: 19, cat: 'hamburguesas', sectionTitle: 'Favoritas de la casa', name: 'Burger Mexicana ⭐', desc: 'Pan, carne, queso, guacamole, frijol refrito, jalapeño, tomate, lechuga, tocineta, tostacoes, lechuga + papa francesa', price: 23900, icon: '🍔', image: './Images/h mexicana_2_11zon.jpeg', imagePosition: '50% 70%' },
@@ -55,7 +55,7 @@ window.CBH_MENU_DATA = {
     // PERROS
     { id: 26, cat: 'perros', name: 'Perro Clasico', desc: 'Pan, salchicha americana, queso, papa ripio', price: 13900, icon: '🌭' },
     { id: 27, cat: 'perros', name: 'Perro Especial ⭐', desc: 'Pan, salchicha, queso, cebolla, tocineta, papa ripio + papa francesa', price: 17900, icon: '🌭' },
-    { id: 28, cat: 'perros', name: 'Perro Criollo 👑', desc: 'Pan, salchicha, carne desmechada, maíz, cebolla, queso, tocineta + papa francesa', price: 22900, icon: '🌭' },
+    { id: 28, cat: 'perros', name: 'Perro Criollo 👑', desc: 'Pan, salchicha, carne desmechada, maíz, cebolla, queso, tocineta + papa francesa', price: 22900, icon: '🌭', image: './Images/Perro criollo_2_11zon.webp', imagePosition: '50% 76%' },
     { id: 29, cat: 'perros', name: 'La Perra 🔥', desc: 'Salchicha americana, huevos codorniz, chorizo, queso, jamón, papa ripio, tocineta, lechuga, zanahoria, salsa showy', price: 23900, icon: '🌭', image: './Images/la perra.webp', imagePosition: '50% 50%' },
 
     // FAST FOOD

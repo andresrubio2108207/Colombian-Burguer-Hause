@@ -23,18 +23,6 @@ const cocaColaOptions = [
 
 window.CBH_MENU_DATA = {
   fallbackMenuItems: [
-    // AREPAS
-    { id: 1, cat: 'arepas', sectionTitle: 'Arepas', name: 'Arepa Mix ⭐', desc: 'Pollo y carne desmechada, chorizo ahumado, chicharrón, queso mozzarella y maduro picado', price: 14900, icon: '🫓' },
-    { id: 2, cat: 'arepas', sectionTitle: 'Arepas', name: 'Arepa Ahumada', desc: 'Salchicha, maíz tierno, carne desmechada y queso mozzarella', price: 12900, icon: '🫓' },
-    { id: 3, cat: 'arepas', sectionTitle: 'Arepas', name: 'Arepa Colombiana', desc: 'Carne y pollo asado, chicharrón, maduro picado y queso mozzarella', price: 14900, icon: '🫓' },
-    { id: 4, cat: 'arepas', sectionTitle: 'Arepas', name: 'Arepa Filet Mignon ⭐', desc: 'Pollo desmechado, maíz tierno, champiñones, papa ripio, salsa bechamel y queso mozzarella', price: 14900, icon: '🫓' },
-    { id: 5, cat: 'arepas', sectionTitle: 'Arepas', name: 'Arepa Mexicana ⭐', desc: 'Jalapeño, frijol, aguacate, maíz tierno, carne desmechada y queso criollo', price: 14900, icon: '🫓' },
-    { id: 6, cat: 'arepas', sectionTitle: 'Arepas', name: 'Arepa Desgranada', desc: 'Maíz tierno, papa ripio, chorizo ahumado, carne asada, queso costeño, jamón y queso mozzarella', price: 13900, icon: '🫓' },
-    { id: 7, cat: 'arepas', sectionTitle: 'Arepas', name: 'Arepa Hawaiana', desc: 'Jamón, pollo asado, piña, maíz tierno y queso mozzarella', price: 13900, icon: '🫓' },
-    { id: 8, cat: 'arepas', sectionTitle: 'Arepas', name: 'Arepa Trifasica', desc: 'Carne asada de cerdo y de res, pollo asado, maíz tierno, maduro y queso mozzarella', price: 14900, icon: '🫓' },
-    { id: 9, cat: 'arepas', sectionTitle: 'Arepas', name: 'Arepa Super Queso', desc: 'Arepa al carbón, queso mozzarella y queso costeño', price: 8900, icon: '🫓' },
-    { id: 10, cat: 'arepas', sectionTitle: 'Arepas', name: 'Arepa Criolla', desc: 'Carne desmechada, chorizo ahumado, maíz tierno, tocineta y queso mozzarella', price: 13900, icon: '🫓' },
-
     // HAMBURGUESAS
     { id: 11, cat: 'hamburguesas', sectionTitle: 'Hamburguesas desde $13.900', name: 'Burger Clasica', desc: 'Pan, carne, queso, tomate, lechuga', price: 13900, icon: '🍔', image: './Images/burguer clasica_4_11zon.webp', imagePosition: '90% 90%' },
     { id: 12, cat: 'hamburguesas', sectionTitle: 'Hamburguesas desde $13.900', name: 'Burger Callejera', desc: 'Pan, carne, queso, tocineta, papa ripio, bañada en salsa BBQ + papa francesa', price: 17900, icon: '🍔', image: './Images/h callejera_1_11zon.webp', imagePosition: '50% 50%' },

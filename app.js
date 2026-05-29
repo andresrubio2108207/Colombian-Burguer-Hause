@@ -170,7 +170,6 @@ function renderMenu(filter) {
 function getCategoryOrder(cat) {
   const order = {
     hamburguesas: 1,
-    arepas: 2,
     perros: 3,
     fast: 4,
     patacones: 5,
@@ -275,7 +274,6 @@ function getCatLabel(cat) {
     salchipapas: 'Salchipapas',
     maicitos: 'Maicitos',
     patacones: 'Patacón',
-    arepas: 'Arepa',
     recomendados: '⭐ Recomendado',
     bebidas: 'Bebida',
     adicionales: 'Adicional'

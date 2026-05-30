@@ -40,6 +40,14 @@ window.CBH_MENU_DATA = {
     { id: 24, cat: 'hamburguesas', sectionTitle: 'Las Premium VIP', name: 'Burger Pecadora (Próximamente)', desc: 'Pan, doble carne, mermelada de tocineta, cebolla crunchy, queso, lechuga', price: 28900, icon: '🍔', available: false },
     { id: 25, cat: 'hamburguesas', sectionTitle: 'Las Premium VIP', name: 'Burger Infiel (Próximamente)', desc: 'Pan, doble carne, queso crema, cebolla crunchy, queso, piña', price: 28900, icon: '🍔', available: false },
 
+    // ALAS
+    { id: 31, cat: 'alas', sectionTitle: 'Alas y combos', name: 'Super Alas ⭐', desc: 'Alitas apanadas en salsa picante o BBQ, ensalada + papa francesa', price: 19900, icon: '🍗', image: './Images/alitasx12_2_11zon.webp', imagePosition: '50% 95%', optionsLabel: 'cantidad', options: [{ label: 'X 4', price: 19900 }, { label: 'X 5', price: 23900 }] },
+    { id: 87, cat: 'alas', sectionTitle: 'Alas y combos', name: '8 alitas + Tazón de papas + ensalada', desc: 'Combo perfecto para compartir', price: 36900, icon: '🍗', image: './Images/8 alas_4_11zon.webp', imagePosition: '50% 52%', optionsLabel: 'sabor econolitro', options: [{ label: 'Pepsi', price: 36900 }, { label: 'Manzana', price: 36900 }, { label: 'Colombiana', price: 36900 }] },
+    { id: 88, cat: 'alas', sectionTitle: 'Alas y combos', name: '12 alitas + Tazón de papas + Econolitro', desc: 'Para el hambre de verdad', price: 56900, icon: '🍗', image: './Images/alitasx12_2_11zon.webp', imagePosition: '50% 95%', optionsLabel: 'sabor econolitro', options: [{ label: 'Pepsi', price: 56900 }, { label: 'Manzana', price: 56900 }, { label: 'Colombiana', price: 56900 }] },
+    { id: 89, cat: 'alas', sectionTitle: 'Alas y combos', name: '20 alitas + Tazón de papas + Econolitro', desc: 'La opción más poderosa para compartir', price: 93900, icon: '🍗', image: './Images/20 alas_3_11zon.webp', imagePosition: '50% 72%', optionsLabel: 'sabor econolitro', options: [{ label: 'Pepsi', price: 93900 }, { label: 'Manzana', price: 93900 }, { label: 'Colombiana', price: 93900 }] },
+    { id: 90, cat: 'alas', sectionTitle: 'Alas y combos', name: 'Burger o perro clasico + 3 alas BBQ + papas', desc: 'Combo con alas y papas', price: 28900, icon: '🍗', image: './Images/h mas 3 alas_6_11zon.webp', imagePosition: '50% 20%' },
+    { id: 91, cat: 'alas', sectionTitle: 'Alas y combos', name: '2 Burger clasica o perro clasico + 3 alas BBQ + papas', desc: 'Combo doble con alas y papas', price: 38900, icon: '🍗' },
+
     // PERROS
     { id: 26, cat: 'perros', name: 'Perro Clasico', desc: 'Pan, salchicha americana, queso, papa ripio', price: 13900, icon: '🌭' },
     { id: 27, cat: 'perros', name: 'Perro Especial ⭐', desc: 'Pan, salchicha, queso, cebolla, tocineta, papa ripio + papa francesa', price: 17900, icon: '🌭' },
@@ -47,8 +55,7 @@ window.CBH_MENU_DATA = {
     { id: 29, cat: 'perros', name: 'La Perra 🔥', desc: 'Salchicha americana, huevos codorniz, chorizo, queso, jamón, papa ripio, tocineta, lechuga, zanahoria, salsa showy', price: 23900, icon: '🌭', image: './Images/la perra.webp', imagePosition: '50% 50%' },
 
     // FAST FOOD
-    { id: 30, cat: 'fast', sectionTitle: 'Fast Food', name: 'Crispetas de Pollo', desc: 'Trozos pechuga apanado + papa francesa', price: 16900, icon: '⚡' },
-    { id: 31, cat: 'fast', sectionTitle: 'Fast Food', name: 'Super Alas ⭐', desc: 'Alitas apanadas en salsa picante o BBQ, ensalada + papa francesa', price: 19900, icon: '⚡', image: './Images/alitasx12_2_11zon.webp', imagePosition: '50% 95%', optionsLabel: 'cantidad', options: [{ label: 'X 4', price: 19900 }, { label: 'X 5', price: 23900 }] },
+    { id: 30, cat: 'fast', sectionTitle: 'Fast Food', name: 'Crispetas de Pollo', desc: 'Trozos pechuga apanado + papa francesa', price: 18900, icon: '⚡' },
     { id: 32, cat: 'fast', sectionTitle: 'Fast Food', name: 'Nuggets', desc: 'Pollo apanado + papa francesa', price: 15900, icon: '⚡' },
 
     // SALCHIPAPAS
@@ -109,9 +116,6 @@ window.CBH_MENU_DATA = {
     { id: 86, cat: 'adicionales', sectionTitle: 'Adicionales', name: 'Porción de Tajada madura X2', price: 5900, icon: '➕' }
   ],
   combos: [
-    { id: 'c1', sectionTitle: 'Los favoritos de la casa', name: '8 alitas + Tazón de papas, + ensalada', desc: 'Combo perfecto para compartir', price: 36900, icon: '🍗', image: './Images/8 alas_4_11zon.webp', imagePosition: '50% 52%', optionsLabel: 'sabor econolitro', options: [{ label: 'Pepsi', price: 36900 }, { label: 'Manzana', price: 36900 }, { label: 'Colombiana', price: 36900 }] },
-    { id: 'c2', sectionTitle: 'Los favoritos de la casa', name: '12 alitas + Tazón de papas + Econolitro', desc: 'Para el hambre de verdad', price: 56900, icon: '🍗', image: './Images/alitasx12_2_11zon.webp', imagePosition: '50% 95%', optionsLabel: 'sabor econolitro', options: [{ label: 'Pepsi', price: 56900 }, { label: 'Manzana', price: 56900 }, { label: 'Colombiana', price: 56900 }] },
-    { id: 'c3', sectionTitle: 'Los favoritos de la casa', name: '20 alitas + tazón de papas + Econolitro', desc: 'La opción más poderosa para compartir', price: 93900, icon: '🍗', image: './Images/20 alas_3_11zon.webp', imagePosition: '50% 72%', optionsLabel: 'sabor econolitro', options: [{ label: 'Pepsi', price: 93900 }, { label: 'Manzana', price: 93900 }, { label: 'Colombiana', price: 93900 }] },
     { id: 'c4', sectionTitle: 'Los favoritos de la casa', name: 'Combo amigos', desc: '4 burger clásicas o perros clásicos más papas y gaseosa 1Lt', price: 58900, icon: '🍔', image: './Images/combo amigos_2_11zon.webp', imagePosition: '50% 65%' },
     { id: 'c5', sectionTitle: 'Los favoritos de la casa', name: 'Super Volcan', desc: 'Tocineta, papas, chorizo, salchicha, huevos codorniz, jamón, maíz, carne o pollo desmechado, queso, papa ripio', price: 70900, icon: '🌋' },
     { id: 'c6', sectionTitle: 'Los favoritos de la casa', name: 'PG Burger', desc: 'Burger clasica + papas + gaseosa mini', price: 19900, icon: '🍔' },
@@ -119,8 +123,6 @@ window.CBH_MENU_DATA = {
     { id: 'c8', sectionTitle: 'Los favoritos de la casa', name: 'Perro Clasico 2*1 ⭐', desc: 'Dos perros clásicos', price: 19900, icon: '🌭' },
     { id: 'c9', sectionTitle: 'Los favoritos de la casa', name: 'Hamburguesa Clasica 2*1 ⭐', desc: 'Dos hamburguesas clásicas', price: 19900, icon: '🍔', image: './Images/clasicas 2x1_2_11zon.webp' },
     { id: 'c10', sectionTitle: 'Los favoritos de la casa', name: 'Burger Clasica o Perro Clasico 2*1 + papas ⭐', desc: 'El clásico con papas', price: 25900, icon: '🍔' },
-    { id: 'c11', sectionTitle: 'Los favoritos de la casa', name: 'Burger o perro clasico + 3 alas bbq + papas', desc: 'Combo con alas y papas', price: 28900, icon: '🍗', image: './Images/h mas 3 alas_6_11zon.webp', imagePosition: '50% 20%' },
-    { id: 'c12', sectionTitle: 'Los favoritos de la casa', name: '2 Burger clasica o perro clasico + 3 alas bbq + papas', desc: 'Combo doble con alas y papas', price: 38900, icon: '🍗' },
     { id: 'c13', sectionTitle: 'Los favoritos de la casa', name: '3 burger clasicas o perro clasico + papas + gaseosa 1 lt', desc: 'Combo grupal', price: 45900, icon: '🍔' },
     { id: 'c14', sectionTitle: 'Los favoritos de la casa', name: '1 salchi especial + 1 burger callejera', desc: 'Dúo especial de la casa', price: 37900, icon: '🔥' },
     { id: 'c15', sectionTitle: 'Los favoritos de la casa', name: '3 Especial Burger', desc: 'Callejera, superqueso, burgerpollo, colombian y gaseosa 1lt', price: 58900, icon: '🔥', image: './Images/3 burguer especiales_1_11zon.jpeg', imagePosition: '50% 74%' }

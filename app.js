@@ -170,6 +170,7 @@ function renderMenu(filter) {
 function getCategoryOrder(cat) {
   const order = {
     hamburguesas: 1,
+    alas: 2,
     perros: 3,
     fast: 4,
     patacones: 5,
@@ -269,6 +270,7 @@ function renderComboCard(combo) {
 function getCatLabel(cat) {
   const labels = {
     hamburguesas: 'Hamburguesa',
+    alas: 'Alas',
     perros: 'Perros Calientes',
     fast: 'Fast Food',
     salchipapas: 'Salchipapas',

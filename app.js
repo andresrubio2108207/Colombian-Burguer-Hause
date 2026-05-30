@@ -270,7 +270,7 @@ function renderComboCard(combo) {
 function getCatLabel(cat) {
   const labels = {
     hamburguesas: 'Hamburguesa',
-    alas: 'Alas',
+    alas: 'Super alas',
     perros: 'Perros Calientes',
     fast: 'Fast Food',
     salchipapas: 'Salchipapas',

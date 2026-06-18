@@ -73,7 +73,7 @@ window.CBH_MENU_DATA = {
     { id: 40, cat: 'maicitos', sectionTitle: 'Maicitos', name: 'Maicitos de Pollo', desc: 'Maíz tierno, pollo en bechamel con champiñones gratinados, queso mozzarella + tostada', price: 18900, icon: '🌽' },
     { id: 41, cat: 'maicitos', sectionTitle: 'Maicitos', name: 'Maicitos Rancheros', desc: 'Maíz tierno, tocineta, chorizo, jamón, queso, salsa ranchera carne desmechada, tostadas', price: 19900, icon: '🌽' },
 
-    { id: 42, cat: 'perros', name: 'Sandwich Ropa Vieja', desc: 'Carne o pollo desmechado, lechuga, queso, tomate, salsa bechamel con champiñones + papa francesa', price: 22900, icon: '🥪' },
+    { id: 42, cat: 'perros', name: 'Sandwich Ropa Vieja', desc: 'Carne o pollo desmechado, lechuga, queso, tomate, salsa bechamel con champiñones + papa francesa', price: 22900, icon: '🥪', image: './Images/Sandwich ropa vieja_11zon.webp', imagePosition: '50% 55%' },
 
     // RECOMENDADOS
     { id: 43, cat: 'recomendados', sectionTitle: 'Recomendados', name: 'Churrasco', desc: 'Ensalada + papa a la francesa', price: 33900, icon: '🥩', image: './Images/churrasco (2)_2_11zon.webp', imagePosition: '50% 83%' },

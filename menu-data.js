@@ -7,7 +7,7 @@ const limonadaPersonalOptions = [
 ];
 
 const limonadaJarraOptions = [
-  { label: 'Limón', price: 15900 },
+  { label: 'Limón', price: 16900 },
   { label: 'Cerezada', price: 19900 },
   { label: 'Sandía', price: 19900 },
   { label: 'Hierbabuena', price: 19900 },
@@ -85,7 +85,7 @@ window.CBH_MENU_DATA = {
 
     // BEBIDAS
     { id: 49, cat: 'bebidas', sectionTitle: 'Bebidas', name: 'Limonada personal', desc: 'Elige si la quieres de limón, cereza, sandía, hierbabuena o coco.', price: 7900, pricePrefix: 'desde', icon: '🍹', image: './Images/limonada personal hb_1_11zon.webp', imagePosition: '50% 50%', optionsLabel: 'sabor', options: limonadaPersonalOptions },
-    { id: 50, cat: 'bebidas', sectionTitle: 'Bebidas', name: 'Jarra de limonada', desc: 'Elige el sabor de la jarra: limón, cereza, sandía, hierbabuena o coco.', price: 15900, pricePrefix: 'desde', icon: '🍹', image: './Images/limonada de sandia jarra_1_11zon.webp', imagePosition: '90% 25%', optionsLabel: 'sabor', options: limonadaJarraOptions },
+    { id: 50, cat: 'bebidas', sectionTitle: 'Bebidas', name: 'Jarra de limonada', desc: 'Elige el sabor de la jarra: limón, cereza, sandía, hierbabuena o coco.', price: 16900, pricePrefix: 'desde', icon: '🍹', image: './Images/limonada de sandia jarra_1_11zon.webp', imagePosition: '90% 25%', optionsLabel: 'sabor', options: limonadaJarraOptions },
     { id: 55, cat: 'bebidas', sectionTitle: 'Bebidas', name: 'Té', desc: 'Elige si lo prefieres de durazno o limón.', price: 5000, icon: '🍵', image: './Images/te_2_11zon.webp', imagePosition: '50% 50%' },
     { id: 56, cat: 'bebidas', sectionTitle: 'Bebidas', name: 'Gaseosa Coca-Cola', desc: 'Todas las gaseosas son Coca-Cola. Elige la presentación: 250 ml, 350 ml, 400 ml o 1.5 L.', price: 3500, pricePrefix: 'desde', icon: '🥤', image: './Images/cocacola 400ml_11zon.webp', imagePosition: '50% 50%', optionsLabel: 'presentación', options: cocaColaOptions },
     { id: 60, cat: 'bebidas', sectionTitle: 'Bebidas', name: 'Jugo Hit PET 400ml', desc: 'Sabores: frutos tropicales, mora, mango y piña naranja.', price: 5000, icon: '🧃', image: './Images/jugo hit botella_3_11zon.webp', imagePosition: '50% 50%', optionsLabel: 'sabor', options: ['Frutos tropicales', 'Mora', 'Mango', 'Piña naranja'] },

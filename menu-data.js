@@ -11,7 +11,7 @@ const limonadaJarraOptions = [
   { label: 'Cerezada', price: 19900 },
   { label: 'Sandía', price: 19900 },
   { label: 'Hierbabuena', price: 19900 },
-  { label: 'Coco', price: 20900 }
+  { label: 'Coco', price: 21900 }
 ];
 
 const cocaColaOptions = [
@@ -25,20 +25,20 @@ window.CBH_MENU_DATA = {
   fallbackMenuItems: [
     // HAMBURGUESAS
     { id: 11, cat: 'hamburguesas', sectionTitle: 'Hamburguesas desde $13.900', name: 'Burger Clasica', desc: 'Pan, carne, queso, tomate, lechuga', price: 13900, icon: '🍔', image: './Images/burguer clasica_4_11zon.webp', imagePosition: '90% 90%' },
-    { id: 12, cat: 'hamburguesas', sectionTitle: 'Hamburguesas desde $13.900', name: 'Burger Callejera', desc: 'Pan, carne, queso, tocineta, papa ripio, bañada en salsa BBQ + papa francesa', price: 17900, icon: '🍔', image: './Images/h callejera_1_11zon.webp', imagePosition: '50% 50%' },
-    { id: 13, cat: 'hamburguesas', sectionTitle: 'Hamburguesas desde $13.900', name: 'Burger Hawaiana', desc: 'Pan, carne, queso, lechuga, tomate, tocineta, tajada de piña + papas a la francesa', price: 18900, icon: '🍔', image: './Images/h haw_5_11zon.webp', imagePosition: '50% 65%' },
-    { id: 14, cat: 'hamburguesas', sectionTitle: 'Hamburguesas desde $13.900', name: 'Burger Super Queso', desc: 'Pan, carne, doble crema, queso cheddar, tocineta, salsa queso, tomate, lechuga + papa francesa', price: 18900, icon: '🍔', image: './Images/h super queso_2_11zon.webp', imagePosition: '50% 50%' },
-    { id: 15, cat: 'hamburguesas', sectionTitle: 'Hamburguesas desde $13.900', name: 'Burger Pollo', desc: 'Pan, filete de pollo a la plancha o apanado, queso, lechuga, tomate, tocineta + papa a la francesa', price: 18900, icon: '🍔', image: './Images/h pollo_3_11zon.webp', imagePosition: '50% 30%' },
-    { id: 16, cat: 'hamburguesas', sectionTitle: 'Hamburguesas desde $13.900', name: 'Colombian Burger ⭐', desc: 'Pan, carne, queso, lechuga, tomate, tocineta, huevo frito, cebolla grille + papa a la francesa', price: 19900, icon: '🍔', image: './Images/Colombian Burguer_1_11zon.webp', imagePosition: '50% 60%' },
-    { id: 17, cat: 'hamburguesas', sectionTitle: 'Favoritas de la casa', name: 'Colombian Pork 👑', desc: 'Pan, carne, 3 tocinetas, 2 quesos, lechuga, tomate + papa a la francesa', price: 21900, icon: '🍔', image: './Images/burguer colombian pork_3_11zon.webp', imagePosition: '50% 60%' },
-    { id: 18, cat: 'hamburguesas', sectionTitle: 'Favoritas de la casa', name: 'Colombian Filet Mignon ⭐', desc: 'Pan, carne, tocineta, salsa de champiñones, lechuga, tomate + papa a la francesa', price: 21900, icon: '🍔', image: './Images/b filet migon_1_11zon.webp', imagePosition: '50% 50%' },
-    { id: 19, cat: 'hamburguesas', sectionTitle: 'Favoritas de la casa', name: 'Burger Mexicana ⭐', desc: 'Pan, carne, queso, guacamole, frijol refrito, jalapeño, tomate, lechuga, tocineta, tostacoes, lechuga + papa francesa', price: 23900, icon: '🍔', image: './Images/h mexicana_2_11zon.jpeg', imagePosition: '50% 70%' },
-    { id: 20, cat: 'hamburguesas', sectionTitle: 'Las Premium VIP', name: 'Colombian Mix 👑', desc: 'Pan, carne, pollo, queso, maíz tierno, lechuga, tomate + papa a la francesa', price: 23900, icon: '🍔', image: './Images/Colombian mix_1_11zon.webp', imagePosition: '50% 50%' },
-    { id: 21, cat: 'hamburguesas', sectionTitle: 'Las Premium VIP', name: 'Colombian SuperHouse 👑🔥', desc: 'Pan, doble carne, tocineta, doble queso, lechuga, tomate + papa a la francesa', price: 24900, icon: '🍔', image: './Images/burguer colombian super hause_3_11zon.webp', imagePosition: '50% 60%' },
-    { id: 22, cat: 'hamburguesas', sectionTitle: 'Las Premium VIP', name: 'Burger Criolla 👑🔥', desc: 'Doble carne desmechada mas carne de hamburguesa bañada en salsa criolla de la casa, queso, maíz tierno, maduritos, tocineta, lechuga, tomate + papa a la francesa', price: 27900, icon: '🍔', image: './Images/h criolla 2.0_1_11zon.webp', imagePosition: '50% 48%' },
-    { id: 23, cat: 'hamburguesas', sectionTitle: 'Las Premium VIP', name: 'Burger Marinera 👑🔥', desc: 'Camarones, carne de res bañada en salsa marinera, doble tocineta, carne desmechada, cebolla morada, tajadas mango, queso mozarella, lechuga', price: 28900, icon: '🍔', image: './Images/Burguer marinera.webp' },
-    { id: 24, cat: 'hamburguesas', sectionTitle: 'Las Premium VIP', name: 'Burger Pecadora (Próximamente)', desc: 'Pan, doble carne, mermelada de tocineta, cebolla crunchy, queso, lechuga', price: 28900, icon: '🍔', available: false },
-    { id: 25, cat: 'hamburguesas', sectionTitle: 'Las Premium VIP', name: 'Burger Infiel (Próximamente)', desc: 'Pan, doble carne, queso crema, cebolla crunchy, queso, piña', price: 28900, icon: '🍔', available: false },
+    { id: 12, cat: 'hamburguesas', sectionTitle: 'Hamburguesas desde $13.900', name: 'Burger Callejera', desc: 'Pan, carne, queso, tocineta, papa ripio, cebolla crispy, bañada en salsa BBQ + papa francesa', price: 17900, icon: '🍔', image: './Images/h callejera_1_11zon.webp', imagePosition: '50% 50%' },
+    { id: 13, cat: 'hamburguesas', sectionTitle: 'Hamburguesas desde $13.900', name: 'Burger Hawaiana', desc: 'Pan, carne, queso, lechuga, tomate, tocineta, cebolla crispy, tajada de piña + papas a la francesa', price: 18900, icon: '🍔', image: './Images/h haw_5_11zon.webp', imagePosition: '50% 65%' },
+    { id: 14, cat: 'hamburguesas', sectionTitle: 'Hamburguesas desde $13.900', name: 'Burger Super Queso', desc: 'Pan, carne, doble crema, queso cheddar, tocineta, salsa queso, tomate, lechuga, cebolla crispy + papa francesa', price: 18900, icon: '🍔', image: './Images/h super queso_2_11zon.webp', imagePosition: '50% 50%' },
+    { id: 15, cat: 'hamburguesas', sectionTitle: 'Hamburguesas desde $13.900', name: 'Burger Pollo', desc: 'Pan, filete de pollo a la plancha o apanado, queso, lechuga, tomate, tocineta, cebolla crispy + papa a la francesa', price: 18900, icon: '🍔', image: './Images/h pollo_3_11zon.webp', imagePosition: '50% 30%' },
+    { id: 16, cat: 'hamburguesas', sectionTitle: 'Hamburguesas desde $13.900', name: 'Colombian Burger ⭐', desc: 'Pan, carne, queso, lechuga, tomate, tocineta, huevo frito, cebolla grille, cebolla crispy + papa a la francesa', price: 19900, icon: '🍔', image: './Images/Colombian Burguer_1_11zon.webp', imagePosition: '50% 60%' },
+    { id: 17, cat: 'hamburguesas', sectionTitle: 'Favoritas de la casa', name: 'Colombian Pork 👑', desc: 'Pan, carne, 3 tocinetas, 2 quesos, lechuga, tomate, cebolla crispy + papa a la francesa', price: 21900, icon: '🍔', image: './Images/burguer colombian pork_3_11zon.webp', imagePosition: '50% 60%' },
+    { id: 18, cat: 'hamburguesas', sectionTitle: 'Favoritas de la casa', name: 'Colombian Filet Mignon ⭐', desc: 'Pan, carne, tocineta, salsa de champiñones, lechuga, tomate, cebolla crispy + papa a la francesa', price: 21900, icon: '🍔', image: './Images/b filet migon_1_11zon.webp', imagePosition: '50% 50%' },
+    { id: 19, cat: 'hamburguesas', sectionTitle: 'Favoritas de la casa', name: 'Burger Mexicana ⭐', desc: 'Pan, carne, queso, guacamole, frijol refrito, jalapeño, tomate, lechuga, tocineta, tostacoes, cebolla crispy + papa francesa', price: 23900, icon: '🍔', image: './Images/h mexicana_2_11zon.jpeg', imagePosition: '50% 70%' },
+    { id: 20, cat: 'hamburguesas', sectionTitle: 'Las Premium VIP', name: 'Colombian Mix 👑', desc: 'Pan, carne, pollo, queso, maíz tierno, lechuga, tomate, cebolla crispy + papa a la francesa', price: 23900, icon: '🍔', image: './Images/Colombian mix_1_11zon.webp', imagePosition: '50% 50%' },
+    { id: 21, cat: 'hamburguesas', sectionTitle: 'Las Premium VIP', name: 'Colombian SuperHouse 👑🔥', desc: 'Pan, doble carne, tocineta, doble queso, lechuga, tomate, cebolla crispy + papa a la francesa', price: 24900, icon: '🍔', image: './Images/burguer colombian super hause_3_11zon.webp', imagePosition: '50% 60%' },
+    { id: 22, cat: 'hamburguesas', sectionTitle: 'Las Premium VIP', name: 'Burger Criolla 👑🔥', desc: 'Doble carne desmechada mas carne de hamburguesa bañada en salsa criolla de la casa, queso, maíz tierno, maduritos, tocineta, lechuga, tomate, cebolla crispy + papa a la francesa', price: 27900, icon: '🍔', image: './Images/h criolla 2.0_1_11zon.webp', imagePosition: '50% 48%' },
+    { id: 23, cat: 'hamburguesas', sectionTitle: 'Las Premium VIP', name: 'Burger Marinera 👑🔥', desc: 'Camarones, carne de res bañada en salsa marinera, doble tocineta, carne desmechada, cebolla morada, cebolla crispy, tajadas mango, queso mozarella, lechuga', price: 28900, icon: '🍔', image: './Images/Burguer marinera.webp' },
+    { id: 24, cat: 'hamburguesas', sectionTitle: 'Las Premium VIP', name: 'Burger Pecadora (Próximamente)', desc: 'Pan, doble carne, mermelada de tocineta, cebolla crispy, queso, lechuga', price: 28900, icon: '🍔', available: false },
+    { id: 25, cat: 'hamburguesas', sectionTitle: 'Las Premium VIP', name: 'Burger Infiel (Próximamente)', desc: 'Pan, doble carne, queso crema, cebolla crispy, queso, piña', price: 28900, icon: '🍔', available: false },
 
     // ALAS
     { id: 31, cat: 'alas', sectionTitle: 'Super alas', name: 'Super Alas ⭐', desc: 'Alitas apanadas en salsa picante o BBQ, ensalada + papa francesa', price: 19900, icon: '🍗', image: './Images/alitasx12_2_11zon.webp', imagePosition: '50% 95%', optionsLabel: 'cantidad', options: [{ label: 'X 4', price: 19900 }, { label: 'X 5', price: 23900 }] },
@@ -63,23 +63,24 @@ window.CBH_MENU_DATA = {
     { id: 35, cat: 'salchipapas', sectionTitle: 'Salchipapas', name: 'Choripapa', desc: 'Trozos de chorizo, papas y queso', price: 13900, icon: '🍟' },
     { id: 36, cat: 'salchipapas', sectionTitle: 'Salchipapas', name: 'Salchipapa especial ⭐', desc: 'Carne desmechada, pollo desmechado, chorizo, salchicha, huevos de codorniz, maíz tierno + papa', price: 24900, icon: '🍟', image: './Images/salchipapa especial_1_11zon.webp', imagePosition: '50% 45%' },
     { id: 37, cat: 'salchipapas', sectionTitle: 'Salchipapas', name: 'Colombian Fusion', desc: 'Salchicha, chorizo, queso + papa', price: 17900, icon: '🍟' },
+    { id: 92, cat: 'salchipapas', sectionTitle: 'Salchipapas', name: 'Salchimonster', desc: 'Papa francesa, pollo y carne desmechado, chorizo, queso, maduro y huevo de codorniz', price: 38900, icon: '🍟', image: './Images/Salchimonster_11zon.webp', imagePosition: '50% 55%' },
 
     // PATACONES
     { id: 38, cat: 'patacones', sectionTitle: 'Patacones', name: 'Patacona carne o pollo 🔥', desc: 'Carne o pollo desmechado, maíz tierno, queso, ensalada, salsa de la casa, champiñones + papa francesa', price: 22900, icon: '🟡' },
     { id: 39, cat: 'patacones', sectionTitle: 'Patacones', name: 'Patacona Mixta', desc: 'Carne desmechada, pollo desmechado, chorizo, salchicha, maíz tierno, queso + papa a la francesa y salsa de la casa', price: 24900, icon: '🟡', image: './Images/Patacona mixta.webp' },
 
     // MAICITOS
-    { id: 40, cat: 'maicitos', sectionTitle: 'Maicitos', name: 'Maicitos de Pollo', desc: 'Maíz tierno, pollo en bechamel con champiñones gratinados, queso mozzarella + tostada', price: 16900, icon: '🌽' },
-    { id: 41, cat: 'maicitos', sectionTitle: 'Maicitos', name: 'Maicitos Rancheros', desc: 'Maíz tierno, tocineta, chorizo, jamón, queso, salsa ranchera carne desmechada, tostadas', price: 18900, icon: '🌽' },
+    { id: 40, cat: 'maicitos', sectionTitle: 'Maicitos', name: 'Maicitos de Pollo', desc: 'Maíz tierno, pollo en bechamel con champiñones gratinados, queso mozzarella + tostada', price: 18900, icon: '🌽' },
+    { id: 41, cat: 'maicitos', sectionTitle: 'Maicitos', name: 'Maicitos Rancheros', desc: 'Maíz tierno, tocineta, chorizo, jamón, queso, salsa ranchera carne desmechada, tostadas', price: 19900, icon: '🌽' },
 
     { id: 42, cat: 'perros', name: 'Sandwich Ropa Vieja', desc: 'Carne o pollo desmechado, lechuga, queso, tomate, salsa bechamel con champiñones + papa francesa', price: 22900, icon: '🥪' },
 
     // RECOMENDADOS
     { id: 43, cat: 'recomendados', sectionTitle: 'Recomendados', name: 'Churrasco', desc: 'Ensalada + papa a la francesa', price: 33900, icon: '🥩', image: './Images/churrasco (2)_2_11zon.webp', imagePosition: '50% 83%' },
-    { id: 44, cat: 'recomendados', sectionTitle: 'Recomendados', name: 'Costillas de Cerdo', desc: 'Ensalada + papa a la francesa', price: 33900, icon: '🥩' },
+    { id: 44, cat: 'recomendados', sectionTitle: 'Recomendados', name: 'Costillas de Cerdo', desc: 'Ensalada + papa a la francesa', price: 33900, icon: '🥩', image: './Images/Costillas bbq_11zon.webp', imagePosition: '50% 78%' },
     { id: 45, cat: 'recomendados', sectionTitle: 'Recomendados', name: 'Pincho de pollo, res, o mixto', desc: 'Ensalada + papa a la francesa', price: 23900, icon: '🍢' },
     { id: 46, cat: 'recomendados', sectionTitle: 'Recomendados', name: 'Pechuga de pollo', desc: 'Ensalada + papa a la francesa', price: 33900, icon: '🍗' },
-    { id: 47, cat: 'recomendados', sectionTitle: 'Recomendados', name: 'Ensalada Colombian House', desc: 'Trozos de pollo, lechuga, tomate, maíz tierno, queso, jamón, vinagreta, huevos codorniz', price: 19900, icon: '🥗' },
+    { id: 47, cat: 'recomendados', sectionTitle: 'Recomendados', name: 'Ensalada Colombian House', desc: 'Trozos de pollo, lechuga, tomate, maíz tierno, queso, jamón, vinagreta, huevos codorniz', price: 19900, icon: '🥗', image: './Images/Ensalada colombian burguer hause_11zon.webp', imagePosition: '50% 68%' },
     { id: 48, cat: 'recomendados', sectionTitle: 'Recomendados', name: 'Picada Colombian House', desc: 'Res, pollo, costilla, papa a la francesa, rollos jamón, queso, huevo codorniz, tomate, batavia, yucas, aros cebolla, chorizo, salchicha, tomate', price: 52900, icon: '🍱', image: './Images/picada h_1_11zon.webp', imagePosition: '50% 84%' },
 
     // BEBIDAS

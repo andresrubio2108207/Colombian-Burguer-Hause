@@ -63,7 +63,7 @@ window.CBH_MENU_DATA = {
     { id: 35, cat: 'salchipapas', sectionTitle: 'Salchipapas', name: 'Choripapa', desc: 'Trozos de chorizo, papas y queso', price: 13900, icon: '🍟' },
     { id: 36, cat: 'salchipapas', sectionTitle: 'Salchipapas', name: 'Salchipapa especial ⭐', desc: 'Carne desmechada, pollo desmechado, chorizo, salchicha, huevos de codorniz, maíz tierno + papa', price: 24900, icon: '🍟', image: './Images/salchipapa especial_1_11zon.webp', imagePosition: '50% 45%' },
     { id: 37, cat: 'salchipapas', sectionTitle: 'Salchipapas', name: 'Colombian Fusion', desc: 'Salchicha, chorizo, queso + papa', price: 17900, icon: '🍟' },
-    { id: 92, cat: 'salchipapas', sectionTitle: 'Salchipapas', name: 'Salchimonster', desc: 'Papa francesa, pollo y carne desmechado, chorizo, queso, maduro y huevo de codorniz', price: 38900, icon: '🍟', image: './Images/Salchimonster_11zon.webp', imagePosition: '50% 55%' },
+    { id: 92, cat: 'salchipapas', sectionTitle: 'Salchipapas', name: 'Salchimonster', desc: 'Papa francesa, pollo y carne desmechado, chorizo, queso, maduro y huevo de codorniz', price: 38900, icon: '🍟', image: './Images/Salchimonster (1)_1_11zon.webp', imagePosition: '50% 82%' },
 
     // PATACONES
     { id: 38, cat: 'patacones', sectionTitle: 'Patacones', name: 'Patacona carne o pollo 🔥', desc: 'Carne o pollo desmechado, maíz tierno, queso, ensalada, salsa de la casa, champiñones + papa francesa', price: 22900, icon: '🟡' },

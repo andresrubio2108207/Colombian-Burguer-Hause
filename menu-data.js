@@ -63,7 +63,7 @@ window.CBH_MENU_DATA = {
     { id: 35, cat: 'salchipapas', sectionTitle: 'Salchipapas', name: 'Choripapa', desc: 'Trozos de chorizo, papas y queso', price: 13900, icon: '🍟' },
     { id: 36, cat: 'salchipapas', sectionTitle: 'Salchipapas', name: 'Salchipapa especial ⭐', desc: 'Carne desmechada, pollo desmechado, chorizo, salchicha, huevos de codorniz, maíz tierno + papa', price: 24900, icon: '🍟', image: './Images/salchipapa especial_1_11zon.webp', imagePosition: '50% 45%' },
     { id: 37, cat: 'salchipapas', sectionTitle: 'Salchipapas', name: 'Colombian Fusion', desc: 'Salchicha, chorizo, queso + papa', price: 17900, icon: '🍟' },
-    { id: 92, cat: 'salchipapas', sectionTitle: 'Salchipapas', name: 'Salchimonster', desc: 'Papa francesa, pollo y carne desmechado, chorizo, queso, maduro y huevo de codorniz', price: 38900, icon: '🍟', image: './Images/Salchimonster (1)_1_11zon.webp', imagePosition: '50% 82%' },
+    { id: 92, cat: 'salchipapas', sectionTitle: 'Salchipapas', name: 'Salchimonster', desc: 'Papa francesa, pollo y carne desmechado, chorizo, queso, maduro y huevo de codorniz', price: 38900, icon: '🍟', image: './Images/Salchimonster_11zon.webp', imagePosition: '50% 62%' },
 
     // PATACONES
     { id: 38, cat: 'patacones', sectionTitle: 'Patacones', name: 'Patacona carne o pollo 🔥', desc: 'Carne o pollo desmechado, maíz tierno, queso, ensalada, salsa de la casa, champiñones + papa francesa', price: 22900, icon: '🟡' },
@@ -118,7 +118,7 @@ window.CBH_MENU_DATA = {
   ],
   combos: [
     { id: 'c4', sectionTitle: 'Los favoritos de la casa', name: 'Combo amigos', desc: '4 burger clásicas o perros clásicos más papas y gaseosa 1Lt', price: 58900, icon: '🍔', image: './Images/combo amigos_2_11zon.webp', imagePosition: '50% 65%' },
-    { id: 'c5', sectionTitle: 'Los favoritos de la casa', name: 'Super Volcan', desc: 'Tocineta, papas, chorizo, salchicha, huevos codorniz, jamón, maíz, carne o pollo desmechado, queso, papa ripio', price: 70900, icon: '🌋' },
+    { id: 'c5', sectionTitle: 'Los favoritos de la casa', name: 'Super Volcan', desc: 'Tocineta, papas, chorizo, salchicha, huevos codorniz, jamón, maíz, carne o pollo desmechado, queso, papa ripio', price: 70900, icon: '🌋', image: './Images/Super volcan.webp', imagePosition: '50% 90%' },
     { id: 'c6', sectionTitle: 'Los favoritos de la casa', name: 'PG Burger', desc: 'Burger clasica + papas + gaseosa mini', price: 19900, icon: '🍔' },
     { id: 'c7', sectionTitle: 'Los favoritos de la casa', name: 'PG Perro', desc: 'Perro clasico + papas + gaseosa mini', price: 19900, icon: '🌭' },
     { id: 'c8', sectionTitle: 'Los favoritos de la casa', name: 'Perro Clasico 2*1 ⭐', desc: 'Dos perros clásicos', price: 19900, icon: '🌭' },

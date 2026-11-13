@@ -1,13 +1,1156 @@
 <!doctype html>
-<html>
+<html lang="es">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="noindex" />
   <title>Admin – Colombian Burger House</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #090700;
+      --surface: #110e05;
+      --surface2: #1a1608;
+      --border: #2a2210;
+      --gold: #C9A84C;
+      --gold-light: #F0C96B;
+      --gold-dim: rgba(201,168,76,0.15);
+      --text: #f0e6c8;
+      --text-muted: #7a6e54;
+      --red: #c0392b;
+      --green: #27ae60;
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    /* ── LOGIN ─────────────────────────────── */
+    #loginScreen {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(ellipse at 50% 0%, #1e1500 0%, var(--bg) 70%);
+      padding: 2rem;
+    }
+    .login-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 3rem 2.5rem;
+      max-width: 380px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 24px 60px rgba(0,0,0,0.6);
+    }
+    .login-logo {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      border: 2px solid var(--gold);
+      object-fit: cover;
+      margin-bottom: 1.5rem;
+    }
+    .login-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.7rem;
+      font-weight: 900;
+      color: var(--gold);
+      margin-bottom: 0.3rem;
+    }
+    .login-sub {
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 2rem;
+    }
+    .login-btn {
+      width: 100%;
+      padding: 14px;
+      background: var(--gold);
+      color: #0a0700;
+      border: none;
+      border-radius: 8px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+    }
+    .login-btn:hover { background: var(--gold-light); transform: translateY(-1px); }
+
+    /* ── APP SHELL ─────────────────────────── */
+    #adminApp { display: none; min-height: 100vh; }
+
+    .admin-header {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2rem;
+      height: 60px;
+      gap: 1rem;
+    }
+    .admin-header-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .admin-header-logo {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      border: 1.5px solid var(--gold);
+      object-fit: cover;
+    }
+    .admin-header-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      color: var(--gold);
+      font-weight: 700;
+    }
+    .admin-header-right { display: flex; align-items: center; gap: 0.75rem; }
+    .admin-user-email {
+      font-size: 11px;
+      color: var(--text-muted);
+      max-width: 180px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .btn-logout {
+      padding: 6px 14px;
+      background: transparent;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--text-muted);
+      font-family: 'Montserrat', sans-serif;
+      font-size: 11px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-logout:hover { border-color: var(--gold); color: var(--gold); }
+
+    /* ── LAYOUT ────────────────────────────── */
+    .admin-layout {
+      display: flex;
+      min-height: calc(100vh - 60px);
+    }
+
+    .admin-sidebar {
+      width: 220px;
+      flex-shrink: 0;
+      background: var(--surface);
+      border-right: 1px solid var(--border);
+      padding: 1.5rem 1rem;
+      position: sticky;
+      top: 60px;
+      height: calc(100vh - 60px);
+      overflow-y: auto;
+    }
+    .sidebar-section-label {
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
+      padding: 0 0.5rem;
+    }
+    .sidebar-btn {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      padding: 8px 10px;
+      background: transparent;
+      border: none;
+      border-radius: 6px;
+      color: var(--text-muted);
+      font-family: 'Montserrat', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      text-align: left;
+      transition: background 0.15s, color 0.15s;
+      margin-bottom: 2px;
+    }
+    .sidebar-btn:hover { background: var(--gold-dim); color: var(--text); }
+    .sidebar-btn.active { background: var(--gold-dim); color: var(--gold); }
+    .sidebar-count {
+      background: var(--surface2);
+      border-radius: 10px;
+      padding: 2px 7px;
+      font-size: 10px;
+      color: var(--text-muted);
+    }
+    .sidebar-btn.active .sidebar-count { background: rgba(201,168,76,0.2); color: var(--gold); }
+    .sidebar-divider { border: none; border-top: 1px solid var(--border); margin: 1rem 0; }
+
+    /* ── MAIN ──────────────────────────────── */
+    .admin-main {
+      flex: 1;
+      padding: 2rem;
+      overflow-y: auto;
+    }
+    .admin-main-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .admin-main-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      color: var(--gold);
+      font-weight: 700;
+    }
+    .admin-main-sub { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+    .btn-add {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 10px 20px;
+      background: var(--gold);
+      color: #0a0700;
+      border: none;
+      border-radius: 8px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .btn-add:hover { background: var(--gold-light); }
+
+    /* ── CARDS GRID ────────────────────────── */
+    .items-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1rem;
+    }
+    .item-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: border-color 0.2s, transform 0.15s;
+    }
+    .item-card:hover { border-color: rgba(201,168,76,0.4); transform: translateY(-2px); }
+    .item-card.unavailable { opacity: 0.5; }
+    .card-img {
+      width: 100%;
+      height: 140px;
+      object-fit: cover;
+      display: block;
+    }
+    .card-img-placeholder {
+      width: 100%;
+      height: 140px;
+      background: var(--surface2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+    }
+    .card-body { padding: 0.9rem; }
+    .card-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 0.4rem;
+    }
+    .card-cat {
+      font-size: 9px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      background: var(--surface2);
+      padding: 3px 8px;
+      border-radius: 10px;
+    }
+    .card-unavailable-badge {
+      font-size: 9px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--red);
+      background: rgba(192,57,43,0.12);
+      padding: 3px 8px;
+      border-radius: 10px;
+    }
+    .card-name {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 0.25rem;
+      line-height: 1.3;
+    }
+    .card-price {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      color: var(--gold);
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+    }
+    .card-actions { display: flex; gap: 0.5rem; }
+    .btn-edit {
+      flex: 1;
+      padding: 7px;
+      background: var(--gold-dim);
+      border: 1px solid rgba(201,168,76,0.3);
+      border-radius: 6px;
+      color: var(--gold);
+      font-family: 'Montserrat', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .btn-edit:hover { background: rgba(201,168,76,0.25); }
+    .btn-toggle {
+      padding: 7px 10px;
+      background: transparent;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--text-muted);
+      font-size: 14px;
+      cursor: pointer;
+      transition: border-color 0.15s, color 0.15s;
+      title: 'Activar/Desactivar';
+    }
+    .btn-toggle:hover { border-color: var(--gold); color: var(--gold); }
+
+    /* ── MODAL ─────────────────────────────── */
+    .modal-overlay {
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,0.75);
+      z-index: 200;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 2rem 1rem;
+      overflow-y: auto;
+      backdrop-filter: blur(4px);
+    }
+    .modal-overlay.hidden { display: none; }
+    .modal {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      width: 100%;
+      max-width: 560px;
+      box-shadow: 0 32px 80px rgba(0,0,0,0.7);
+    }
+    .modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.25rem 1.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .modal-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      color: var(--gold);
+      font-weight: 700;
+    }
+    .btn-close {
+      width: 32px; height: 32px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--text-muted);
+      font-size: 16px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: color 0.15s;
+    }
+    .btn-close:hover { color: var(--text); }
+    .modal-body { padding: 1.5rem; display: flex; flex-direction: column; gap: 1rem; }
+    .modal-footer {
+      display: flex;
+      gap: 0.75rem;
+      padding: 1.25rem 1.5rem;
+      border-top: 1px solid var(--border);
+      justify-content: flex-end;
+    }
+
+    /* ── FORM ──────────────────────────────── */
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+    .form-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+    .form-input, .form-select, .form-textarea {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text);
+      font-family: 'Montserrat', sans-serif;
+      font-size: 13px;
+      padding: 10px 12px;
+      transition: border-color 0.2s;
+      outline: none;
+      width: 100%;
+    }
+    .form-input:focus, .form-select:focus, .form-textarea:focus {
+      border-color: var(--gold);
+    }
+    .form-select { appearance: none; cursor: pointer; }
+    .form-textarea { resize: vertical; min-height: 80px; }
+    .form-toggle-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 10px 14px;
+    }
+    .form-toggle-label { font-size: 13px; color: var(--text); }
+    .toggle-switch {
+      position: relative;
+      width: 44px;
+      height: 24px;
+    }
+    .toggle-switch input { opacity: 0; width: 0; height: 0; }
+    .toggle-track {
+      position: absolute; inset: 0;
+      background: var(--border);
+      border-radius: 12px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .toggle-track::before {
+      content: '';
+      position: absolute;
+      width: 18px; height: 18px;
+      left: 3px; top: 3px;
+      background: var(--text-muted);
+      border-radius: 50%;
+      transition: transform 0.2s, background 0.2s;
+    }
+    .toggle-switch input:checked + .toggle-track { background: var(--gold); }
+    .toggle-switch input:checked + .toggle-track::before {
+      transform: translateX(20px);
+      background: #0a0700;
+    }
+
+    /* Image upload */
+    .img-upload-area {
+      border: 2px dashed var(--border);
+      border-radius: 10px;
+      padding: 1.5rem;
+      text-align: center;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+      position: relative;
+    }
+    .img-upload-area:hover { border-color: var(--gold); background: var(--gold-dim); }
+    .img-upload-area input[type=file] {
+      position: absolute; inset: 0;
+      opacity: 0;
+      cursor: pointer;
+      width: 100%; height: 100%;
+    }
+    .img-preview {
+      width: 100%;
+      max-height: 160px;
+      object-fit: cover;
+      border-radius: 8px;
+      display: block;
+      margin-bottom: 0.75rem;
+    }
+    .img-upload-hint { font-size: 12px; color: var(--text-muted); }
+    .img-upload-hint strong { color: var(--gold); }
+
+    /* Buttons */
+    .btn-primary {
+      padding: 11px 24px;
+      background: var(--gold);
+      color: #0a0700;
+      border: none;
+      border-radius: 8px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .btn-primary:hover { background: var(--gold-light); }
+    .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
+    .btn-secondary {
+      padding: 11px 24px;
+      background: transparent;
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .btn-secondary:hover { color: var(--text); border-color: var(--text-muted); }
+    .btn-danger {
+      padding: 11px 20px;
+      background: transparent;
+      color: var(--red);
+      border: 1px solid rgba(192,57,43,0.3);
+      border-radius: 8px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-right: auto;
+      transition: background 0.15s;
+    }
+    .btn-danger:hover { background: rgba(192,57,43,0.1); }
+
+    /* ── TOAST ─────────────────────────────── */
+    #toast {
+      position: fixed;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%) translateY(80px);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px 24px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text);
+      z-index: 999;
+      transition: transform 0.3s ease;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+      white-space: nowrap;
+    }
+    #toast.show { transform: translateX(-50%) translateY(0); }
+    #toast.success { border-color: var(--gold); color: var(--gold); }
+    #toast.error { border-color: var(--red); color: var(--red); }
+
+    /* ── LOADING ───────────────────────────── */
+    .loading-state {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      padding: 4rem;
+      color: var(--text-muted);
+    }
+    .spinner {
+      width: 36px; height: 36px;
+      border: 3px solid var(--border);
+      border-top-color: var(--gold);
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    @media (max-width: 768px) {
+      .admin-sidebar { display: none; }
+      .items-grid { grid-template-columns: 1fr 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+      .admin-main { padding: 1rem; }
+    }
+    @media (max-width: 480px) {
+      .items-grid { grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
 <body>
-  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+
+<!-- LOGIN -->
+<div id="loginScreen">
+  <div class="login-card">
+    <img src="../Images/logo.webp" alt="Logo" class="login-logo" onerror="this.style.display='none'">
+    <div class="login-title">Panel Admin</div>
+    <div class="login-sub">Colombian Burger House</div>
+    <button class="login-btn" id="loginBtn">Iniciar sesión</button>
+  </div>
+</div>
+
+<!-- APP -->
+<div id="adminApp">
+  <header class="admin-header">
+    <div class="admin-header-brand">
+      <img src="../Images/logo.webp" alt="Logo" class="admin-header-logo" onerror="this.style.display='none'">
+      <div class="admin-header-title">Panel Admin</div>
+    </div>
+    <div class="admin-header-right">
+      <span class="admin-user-email" id="userEmail"></span>
+      <button class="btn-logout" id="logoutBtn">Salir</button>
+    </div>
+  </header>
+
+  <div class="admin-layout">
+    <aside class="admin-sidebar" id="sidebar"></aside>
+    <main class="admin-main" id="mainContent"></main>
+  </div>
+</div>
+
+<!-- EDIT MODAL -->
+<div class="modal-overlay hidden" id="modalOverlay">
+  <div class="modal">
+    <div class="modal-header">
+      <span class="modal-title" id="modalTitle">Editar producto</span>
+      <button class="btn-close" id="closeModal">✕</button>
+    </div>
+    <div class="modal-body" id="modalBody"></div>
+    <div class="modal-footer" id="modalFooter"></div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div id="toast"></div>
+
+<script>
+const CAT_LABELS = {
+  hamburguesas: 'Hamburguesas', alas: 'Alas', perros: 'Perros',
+  fast: 'Fast Food', salchipapas: 'Salchipapas', patacones: 'Patacones',
+  maicitos: 'Maicitos', recomendados: 'Recomendados', bebidas: 'Bebidas', adicionales: 'Adicionales'
+};
+const CAT_ORDER = ['hamburguesas','alas','perros','fast','salchipapas','patacones','maicitos','recomendados','bebidas','adicionales'];
+
+let user = null;
+let menuData = { menuItems: [], combos: [] };
+let fileSha = '';
+let activeSection = 'items';
+let activeCategory = 'all';
+let saving = false;
+
+// ── AUTH ──────────────────────────────────────
+netlifyIdentity.on('init', u => { if (u) { user = u; initApp(); } });
+netlifyIdentity.on('login', u => { user = u; netlifyIdentity.close(); initApp(); });
+netlifyIdentity.on('logout', () => { user = null; show('loginScreen'); hide('adminApp'); });
+
+document.getElementById('loginBtn').addEventListener('click', () => netlifyIdentity.open('login'));
+document.getElementById('logoutBtn').addEventListener('click', () => netlifyIdentity.logout());
+
+async function getToken() {
+  if (!user) return null;
+  return await user.jwt();
+}
+
+async function initApp() {
+  hide('loginScreen');
+  show('adminApp');
+  document.getElementById('userEmail').textContent = user.email;
+  document.getElementById('mainContent').innerHTML = `<div class="loading-state"><div class="spinner"></div><span>Cargando menú…</span></div>`;
+  await loadMenuData();
+  renderSidebar();
+  renderMain();
+}
+
+// ── DATA ──────────────────────────────────────
+async function loadMenuData() {
+  const token = await getToken();
+  const res = await fetch('/.netlify/git/github/contents/menu-data.json', {
+    headers: { Authorization: `Bearer ${token}` }
+  });
+  if (!res.ok) { showToast('Error cargando datos', 'error'); return; }
+  const json = await res.json();
+  fileSha = json.sha;
+  menuData = JSON.parse(decodeURIComponent(escape(atob(json.content.replace(/\n/g, '')))));
+}
+
+async function saveMenuData(msg) {
+  if (saving) return;
+  saving = true;
+  const token = await getToken();
+  const content = btoa(unescape(encodeURIComponent(JSON.stringify(menuData, null, 2))));
+  const res = await fetch('/.netlify/git/github/contents/menu-data.json', {
+    method: 'PUT',
+    headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
+    body: JSON.stringify({ message: msg || 'actualizar menú', content, sha: fileSha })
+  });
+  saving = false;
+  if (!res.ok) { showToast('Error al guardar', 'error'); return false; }
+  const data = await res.json();
+  fileSha = data.content.sha;
+  return true;
+}
+
+async function uploadImage(file) {
+  const token = await getToken();
+  const base64 = await fileToBase64(file);
+  const safeName = file.name.replace(/\s+/g, '-').replace(/[^a-zA-Z0-9.\-_]/g, '');
+  const path = `Images/${Date.now()}-${safeName}`;
+  const res = await fetch(`/.netlify/git/github/contents/${path}`, {
+    method: 'PUT',
+    headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
+    body: JSON.stringify({ message: `subir imagen ${safeName}`, content: base64 })
+  });
+  if (!res.ok) { showToast('Error subiendo imagen', 'error'); return null; }
+  return `./${path}`;
+}
+
+function fileToBase64(file) {
+  return new Promise((resolve, reject) => {
+    const r = new FileReader();
+    r.onload = () => resolve(r.result.split(',')[1]);
+    r.onerror = reject;
+    r.readAsDataURL(file);
+  });
+}
+
+// ── SIDEBAR ───────────────────────────────────
+function renderSidebar() {
+  const counts = {};
+  menuData.menuItems.forEach(i => { counts[i.cat] = (counts[i.cat] || 0) + 1; });
+  const totalItems = menuData.menuItems.length;
+  const totalCombos = menuData.combos.length;
+
+  const html = `
+    <div class="sidebar-section-label">Secciones</div>
+    <button class="sidebar-btn ${activeSection === 'items' && activeCategory === 'all' ? 'active' : ''}"
+      onclick="setFilter('items','all')">
+      Todo el menú <span class="sidebar-count">${totalItems}</span>
+    </button>
+    <button class="sidebar-btn ${activeSection === 'combos' ? 'active' : ''}"
+      onclick="setFilter('combos','all')">
+      Combos <span class="sidebar-count">${totalCombos}</span>
+    </button>
+    <hr class="sidebar-divider">
+    <div class="sidebar-section-label">Categorías</div>
+    ${CAT_ORDER.map(cat => `
+      <button class="sidebar-btn ${activeSection === 'items' && activeCategory === cat ? 'active' : ''}"
+        onclick="setFilter('items','${cat}')">
+        ${CAT_LABELS[cat]} <span class="sidebar-count">${counts[cat] || 0}</span>
+      </button>
+    `).join('')}
+  `;
+  document.getElementById('sidebar').innerHTML = html;
+}
+
+function setFilter(section, cat) {
+  activeSection = section;
+  activeCategory = cat;
+  renderSidebar();
+  renderMain();
+}
+
+// ── MAIN ──────────────────────────────────────
+function renderMain() {
+  const el = document.getElementById('mainContent');
+  if (activeSection === 'combos') {
+    renderCombos(el);
+  } else {
+    renderItems(el);
+  }
+}
+
+function renderItems(el) {
+  const items = activeCategory === 'all'
+    ? menuData.menuItems
+    : menuData.menuItems.filter(i => i.cat === activeCategory);
+
+  const title = activeCategory === 'all' ? 'Todo el menú' : CAT_LABELS[activeCategory];
+
+  el.innerHTML = `
+    <div class="admin-main-header">
+      <div>
+        <div class="admin-main-title">${title}</div>
+        <div class="admin-main-sub">${items.length} producto${items.length !== 1 ? 's' : ''}</div>
+      </div>
+      <button class="btn-add" onclick="openAddItem()">+ Agregar producto</button>
+    </div>
+    <div class="items-grid">
+      ${items.map(item => renderItemCard(item)).join('')}
+    </div>
+  `;
+}
+
+function renderCombos(el) {
+  const combos = menuData.combos;
+  el.innerHTML = `
+    <div class="admin-main-header">
+      <div>
+        <div class="admin-main-title">Combos</div>
+        <div class="admin-main-sub">${combos.length} combo${combos.length !== 1 ? 's' : ''}</div>
+      </div>
+      <button class="btn-add" onclick="openAddCombo()">+ Agregar combo</button>
+    </div>
+    <div class="items-grid">
+      ${combos.map(combo => renderComboCard(combo)).join('')}
+    </div>
+  `;
+}
+
+function renderItemCard(item) {
+  const available = item.available !== false;
+  const imgHtml = item.image
+    ? `<img class="card-img" src="${item.image.replace(/^\.\//, '../')}" alt="${item.name}" onerror="this.outerHTML='<div class=\\'card-img-placeholder\\'>${item.icon || '🍔'}</div>'">`
+    : `<div class="card-img-placeholder">${item.icon || '🍔'}</div>`;
+  return `
+    <div class="item-card ${!available ? 'unavailable' : ''}">
+      ${imgHtml}
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="card-cat">${CAT_LABELS[item.cat] || item.cat}</span>
+          ${!available ? '<span class="card-unavailable-badge">No disponible</span>' : ''}
+        </div>
+        <div class="card-name">${item.name}</div>
+        <div class="card-price">${formatPrice(item.price)}</div>
+        <div class="card-actions">
+          <button class="btn-edit" onclick="openEditItem(${item.id})">✏ Editar</button>
+          <button class="btn-toggle" title="${available ? 'Desactivar' : 'Activar'}" onclick="toggleItem(${item.id})">${available ? '👁' : '🚫'}</button>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function renderComboCard(combo) {
+  const available = combo.available !== false;
+  const imgHtml = combo.image
+    ? `<img class="card-img" src="${combo.image.replace(/^\.\//, '../')}" alt="${combo.name}" onerror="this.outerHTML='<div class=\\'card-img-placeholder\\'>${combo.icon || '🍔'}</div>'">`
+    : `<div class="card-img-placeholder">${combo.icon || '🍔'}</div>`;
+  return `
+    <div class="item-card ${!available ? 'unavailable' : ''}">
+      ${imgHtml}
+      <div class="card-body">
+        <div class="card-meta">
+          <span class="card-cat">Combo</span>
+          ${!available ? '<span class="card-unavailable-badge">No disponible</span>' : ''}
+        </div>
+        <div class="card-name">${combo.name}</div>
+        <div class="card-price">${formatPrice(combo.price)}</div>
+        <div class="card-actions">
+          <button class="btn-edit" onclick="openEditCombo('${combo.id}')">✏ Editar</button>
+          <button class="btn-toggle" title="${available ? 'Desactivar' : 'Activar'}" onclick="toggleCombo('${combo.id}')">${available ? '👁' : '🚫'}</button>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+// ── TOGGLE AVAILABILITY ───────────────────────
+async function toggleItem(id) {
+  const idx = menuData.menuItems.findIndex(i => i.id === id);
+  if (idx < 0) return;
+  menuData.menuItems[idx].available = !(menuData.menuItems[idx].available !== false);
+  renderMain(); renderSidebar();
+  const ok = await saveMenuData('cambiar disponibilidad producto');
+  showToast(ok ? '✓ Guardado' : 'Error', ok ? 'success' : 'error');
+}
+
+async function toggleCombo(id) {
+  const idx = menuData.combos.findIndex(c => c.id === id);
+  if (idx < 0) return;
+  menuData.combos[idx].available = !(menuData.combos[idx].available !== false);
+  renderMain();
+  const ok = await saveMenuData('cambiar disponibilidad combo');
+  showToast(ok ? '✓ Guardado' : 'Error', ok ? 'success' : 'error');
+}
+
+// ── MODALS ────────────────────────────────────
+function openEditItem(id) {
+  const item = menuData.menuItems.find(i => i.id === id);
+  if (!item) return;
+  openItemModal(item, false);
+}
+
+function openAddItem() {
+  const newItem = {
+    id: Math.max(0, ...menuData.menuItems.map(i => i.id)) + 1,
+    cat: activeCategory !== 'all' ? activeCategory : 'hamburguesas',
+    name: '', desc: '', price: 15000, icon: '🍔', available: true
+  };
+  openItemModal(newItem, true);
+}
+
+function openEditCombo(id) {
+  const combo = menuData.combos.find(c => c.id === id);
+  if (!combo) return;
+  openComboModal(combo, false);
+}
+
+function openAddCombo() {
+  const newCombo = {
+    id: 'c' + (Math.max(0, ...menuData.combos.map(c => parseInt(c.id.replace('c','')) || 0)) + 1),
+    name: '', desc: '', price: 20000, icon: '🍔', sectionTitle: 'Los favoritos de la casa', available: true
+  };
+  openComboModal(newCombo, true);
+}
+
+function openItemModal(item, isNew) {
+  const title = isNew ? 'Nuevo producto' : 'Editar producto';
+  document.getElementById('modalTitle').textContent = title;
+
+  const imgSrc = item.image ? item.image.replace(/^\.\//, '../') : '';
+  document.getElementById('modalBody').innerHTML = `
+    <div class="form-group">
+      <label class="form-label">Foto del producto</label>
+      <div class="img-upload-area" id="imgUploadArea">
+        ${imgSrc ? `<img class="img-preview" id="imgPreview" src="${imgSrc}" onerror="this.style.display='none'">` : ''}
+        <input type="file" id="imgFile" accept="image/*" onchange="previewImg(this)">
+        <div class="img-upload-hint"><strong>Haz clic</strong> para subir una foto</div>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">Nombre</label>
+        <input class="form-input" id="fName" value="${esc(item.name)}" placeholder="Nombre del producto">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Categoría</label>
+        <select class="form-select" id="fCat">
+          ${CAT_ORDER.map(c => `<option value="${c}" ${item.cat === c ? 'selected' : ''}>${CAT_LABELS[c]}</option>`).join('')}
+        </select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Descripción / Ingredientes</label>
+      <textarea class="form-textarea" id="fDesc" placeholder="Ingredientes...">${esc(item.desc || '')}</textarea>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">Precio (pesos)</label>
+        <input class="form-input" id="fPrice" type="number" value="${item.price}" min="0" step="100">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Ícono emoji</label>
+        <input class="form-input" id="fIcon" value="${esc(item.icon || '🍔')}" placeholder="🍔">
+      </div>
+    </div>
+    <div class="form-toggle-row">
+      <span class="form-toggle-label">Disponible para pedir</span>
+      <label class="toggle-switch">
+        <input type="checkbox" id="fAvailable" ${item.available !== false ? 'checked' : ''}>
+        <span class="toggle-track"></span>
+      </label>
+    </div>
+  `;
+
+  document.getElementById('modalFooter').innerHTML = `
+    ${!isNew ? `<button class="btn-danger" onclick="deleteItem(${item.id})">Eliminar</button>` : ''}
+    <button class="btn-secondary" onclick="closeModal()">Cancelar</button>
+    <button class="btn-primary" id="saveBtn" onclick="saveItem(${item.id}, ${isNew})">Guardar</button>
+  `;
+
+  showModal();
+}
+
+function openComboModal(combo, isNew) {
+  document.getElementById('modalTitle').textContent = isNew ? 'Nuevo combo' : 'Editar combo';
+  const imgSrc = combo.image ? combo.image.replace(/^\.\//, '../') : '';
+  document.getElementById('modalBody').innerHTML = `
+    <div class="form-group">
+      <label class="form-label">Foto del combo</label>
+      <div class="img-upload-area">
+        ${imgSrc ? `<img class="img-preview" id="imgPreview" src="${imgSrc}" onerror="this.style.display='none'">` : ''}
+        <input type="file" id="imgFile" accept="image/*" onchange="previewImg(this)">
+        <div class="img-upload-hint"><strong>Haz clic</strong> para subir una foto</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Nombre</label>
+      <input class="form-input" id="fName" value="${esc(combo.name)}" placeholder="Nombre del combo">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Descripción</label>
+      <textarea class="form-textarea" id="fDesc">${esc(combo.desc || '')}</textarea>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">Precio (pesos)</label>
+        <input class="form-input" id="fPrice" type="number" value="${combo.price}" min="0" step="100">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Ícono emoji</label>
+        <input class="form-input" id="fIcon" value="${esc(combo.icon || '🍔')}" placeholder="🍔">
+      </div>
+    </div>
+    <div class="form-toggle-row">
+      <span class="form-toggle-label">Disponible para pedir</span>
+      <label class="toggle-switch">
+        <input type="checkbox" id="fAvailable" ${combo.available !== false ? 'checked' : ''}>
+        <span class="toggle-track"></span>
+      </label>
+    </div>
+  `;
+
+  document.getElementById('modalFooter').innerHTML = `
+    ${!isNew ? `<button class="btn-danger" onclick="deleteCombo('${combo.id}')">Eliminar</button>` : ''}
+    <button class="btn-secondary" onclick="closeModal()">Cancelar</button>
+    <button class="btn-primary" id="saveBtn" onclick="saveCombo('${combo.id}', ${isNew})">Guardar</button>
+  `;
+
+  showModal();
+}
+
+function previewImg(input) {
+  if (!input.files || !input.files[0]) return;
+  const file = input.files[0];
+  const reader = new FileReader();
+  reader.onload = e => {
+    let preview = document.getElementById('imgPreview');
+    if (!preview) {
+      preview = document.createElement('img');
+      preview.id = 'imgPreview';
+      preview.className = 'img-preview';
+      input.parentElement.prepend(preview);
+    }
+    preview.src = e.target.result;
+    preview.style.display = 'block';
+  };
+  reader.readAsDataURL(file);
+}
+
+// ── SAVE ITEM ─────────────────────────────────
+async function saveItem(id, isNew) {
+  const saveBtn = document.getElementById('saveBtn');
+  saveBtn.disabled = true;
+  saveBtn.textContent = 'Guardando…';
+
+  let imagePath = undefined;
+  const fileInput = document.getElementById('imgFile');
+  if (fileInput && fileInput.files && fileInput.files[0]) {
+    showToast('Subiendo imagen…');
+    imagePath = await uploadImage(fileInput.files[0]);
+  }
+
+  const idx = isNew ? -1 : menuData.menuItems.findIndex(i => i.id === id);
+  const existing = isNew ? {} : menuData.menuItems[idx];
+
+  const updated = {
+    ...existing,
+    id,
+    name: document.getElementById('fName').value.trim(),
+    cat: document.getElementById('fCat').value,
+    desc: document.getElementById('fDesc').value.trim(),
+    price: parseInt(document.getElementById('fPrice').value) || 0,
+    icon: document.getElementById('fIcon').value.trim() || '🍔',
+    available: document.getElementById('fAvailable').checked,
+  };
+  if (imagePath) updated.image = imagePath;
+
+  if (isNew) {
+    menuData.menuItems.push(updated);
+  } else {
+    menuData.menuItems[idx] = updated;
+  }
+
+  const ok = await saveMenuData(isNew ? 'agregar producto' : 'editar producto');
+  if (ok) {
+    closeModal();
+    renderSidebar();
+    renderMain();
+    showToast('✓ Guardado y publicado', 'success');
+  } else {
+    saveBtn.disabled = false;
+    saveBtn.textContent = 'Guardar';
+  }
+}
+
+async function saveCombo(id, isNew) {
+  const saveBtn = document.getElementById('saveBtn');
+  saveBtn.disabled = true;
+  saveBtn.textContent = 'Guardando…';
+
+  let imagePath = undefined;
+  const fileInput = document.getElementById('imgFile');
+  if (fileInput && fileInput.files && fileInput.files[0]) {
+    showToast('Subiendo imagen…');
+    imagePath = await uploadImage(fileInput.files[0]);
+  }
+
+  const idx = isNew ? -1 : menuData.combos.findIndex(c => c.id === id);
+  const existing = isNew ? { sectionTitle: 'Los favoritos de la casa' } : menuData.combos[idx];
+
+  const updated = {
+    ...existing,
+    id,
+    name: document.getElementById('fName').value.trim(),
+    desc: document.getElementById('fDesc').value.trim(),
+    price: parseInt(document.getElementById('fPrice').value) || 0,
+    icon: document.getElementById('fIcon').value.trim() || '🍔',
+    available: document.getElementById('fAvailable').checked,
+  };
+  if (imagePath) updated.image = imagePath;
+
+  if (isNew) {
+    menuData.combos.push(updated);
+  } else {
+    menuData.combos[idx] = updated;
+  }
+
+  const ok = await saveMenuData(isNew ? 'agregar combo' : 'editar combo');
+  if (ok) {
+    closeModal();
+    renderMain();
+    renderSidebar();
+    showToast('✓ Guardado y publicado', 'success');
+  } else {
+    saveBtn.disabled = false;
+    saveBtn.textContent = 'Guardar';
+  }
+}
+
+// ── DELETE ────────────────────────────────────
+async function deleteItem(id) {
+  if (!confirm('¿Eliminar este producto del menú?')) return;
+  menuData.menuItems = menuData.menuItems.filter(i => i.id !== id);
+  const ok = await saveMenuData('eliminar producto');
+  if (ok) { closeModal(); renderSidebar(); renderMain(); showToast('✓ Producto eliminado', 'success'); }
+}
+
+async function deleteCombo(id) {
+  if (!confirm('¿Eliminar este combo?')) return;
+  menuData.combos = menuData.combos.filter(c => c.id !== id);
+  const ok = await saveMenuData('eliminar combo');
+  if (ok) { closeModal(); renderSidebar(); renderMain(); showToast('✓ Combo eliminado', 'success'); }
+}
+
+// ── UTILS ─────────────────────────────────────
+function showModal() { document.getElementById('modalOverlay').classList.remove('hidden'); }
+function closeModal() { document.getElementById('modalOverlay').classList.add('hidden'); }
+function show(id) { document.getElementById(id).style.display = ''; }
+function hide(id) { document.getElementById(id).style.display = 'none'; }
+function esc(str) { return String(str || '').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function formatPrice(n) { return '$' + Number(n).toLocaleString('es-CO'); }
+
+let toastTimer;
+function showToast(msg, type) {
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.className = type ? `show ${type}` : 'show';
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => el.className = '', 2800);
+}
+
+document.getElementById('closeModal').addEventListener('click', closeModal);
+document.getElementById('modalOverlay').addEventListener('click', e => { if (e.target === document.getElementById('modalOverlay')) closeModal(); });
+</script>
 </body>
 </html>

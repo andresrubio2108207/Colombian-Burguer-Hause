@@ -490,6 +490,61 @@
     .img-upload-hint { font-size: 12px; color: var(--text-muted); }
     .img-upload-hint strong { color: var(--gold); }
 
+    /* Position control */
+    .pos-controls {
+      display: flex;
+      gap: 0.75rem;
+      align-items: flex-start;
+    }
+    .pos-preview-wrap {
+      flex-shrink: 0;
+      width: 110px;
+      height: 80px;
+      border-radius: 8px;
+      overflow: hidden;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+    }
+    .pos-preview-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: object-position 0.2s;
+    }
+    .pos-preview-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      color: var(--text-muted);
+    }
+    .pos-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 32px);
+      grid-template-rows: repeat(3, 32px);
+      gap: 3px;
+    }
+    .pos-btn {
+      width: 32px; height: 32px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 5px;
+      color: var(--text-muted);
+      font-size: 14px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.15s, color 0.15s, border-color 0.15s;
+    }
+    .pos-btn:hover { background: var(--gold-dim); color: var(--gold); border-color: rgba(201,168,76,0.4); }
+    .pos-btn.active { background: var(--gold-dim); color: var(--gold); border-color: var(--gold); }
+    .pos-input-row { margin-top: 0.5rem; }
+    .pos-input-row .form-input { font-size: 12px; padding: 7px 10px; }
+
     /* Buttons */
     .btn-primary {
       padding: 11px 24px;
@@ -808,8 +863,9 @@ function renderCombos(el) {
 
 function renderItemCard(item) {
   const available = item.available !== false;
+  const posStyle = item.imagePosition ? ` style="object-position:${item.imagePosition}"` : '';
   const imgHtml = item.image
-    ? `<img class="card-img" src="${item.image.replace(/^\.\//, '../')}" alt="${item.name}" onerror="this.outerHTML='<div class=\\'card-img-placeholder\\'>${item.icon || '🍔'}</div>'">`
+    ? `<img class="card-img" src="${item.image.replace(/^\.\//, '../')}" alt="${item.name}"${posStyle} onerror="this.outerHTML='<div class=\\'card-img-placeholder\\'>${item.icon || '🍔'}</div>'">`
     : `<div class="card-img-placeholder">${item.icon || '🍔'}</div>`;
   return `
     <div class="item-card ${!available ? 'unavailable' : ''}">
@@ -832,8 +888,9 @@ function renderItemCard(item) {
 
 function renderComboCard(combo) {
   const available = combo.available !== false;
+  const posStyle = combo.imagePosition ? ` style="object-position:${combo.imagePosition}"` : '';
   const imgHtml = combo.image
-    ? `<img class="card-img" src="${combo.image.replace(/^\.\//, '../')}" alt="${combo.name}" onerror="this.outerHTML='<div class=\\'card-img-placeholder\\'>${combo.icon || '🍔'}</div>'">`
+    ? `<img class="card-img" src="${combo.image.replace(/^\.\//, '../')}" alt="${combo.name}"${posStyle} onerror="this.outerHTML='<div class=\\'card-img-placeholder\\'>${combo.icon || '🍔'}</div>'">`
     : `<div class="card-img-placeholder">${combo.icon || '🍔'}</div>`;
   return `
     <div class="item-card ${!available ? 'unavailable' : ''}">
@@ -908,13 +965,33 @@ function openItemModal(item, isNew) {
   document.getElementById('modalTitle').textContent = title;
 
   const imgSrc = item.image ? item.image.replace(/^\.\//, '../') : '';
+  const curPos = item.imagePosition || '50% 50%';
   document.getElementById('modalBody').innerHTML = `
     <div class="form-group">
       <label class="form-label">Foto del producto</label>
       <div class="img-upload-area" id="imgUploadArea">
-        ${imgSrc ? `<img class="img-preview" id="imgPreview" src="${imgSrc}" onerror="this.style.display='none'">` : ''}
+        ${imgSrc ? `<img class="img-preview" id="imgPreview" src="${imgSrc}" style="object-position:${curPos}" onerror="this.style.display='none'">` : ''}
         <input type="file" id="imgFile" accept="image/*" onchange="previewImg(this)">
         <div class="img-upload-hint"><strong>Haz clic</strong> para subir una foto</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Posición de la foto en la tarjeta</label>
+      <div class="pos-controls">
+        <div class="pos-preview-wrap">
+          ${imgSrc
+            ? `<img class="pos-preview-img" id="posPreview" src="${imgSrc}" style="object-position:${curPos}" onerror="this.style.display='none'">`
+            : `<div class="pos-preview-placeholder">${item.icon || '🍔'}</div>`}
+        </div>
+        <div class="pos-grid">
+          ${[['↖','0% 0%'],['↑','50% 0%'],['↗','100% 0%'],
+             ['←','0% 50%'],['●','50% 50%'],['→','100% 50%'],
+             ['↙','0% 100%'],['↓','50% 100%'],['↘','100% 100%']]
+            .map(([icon, val]) => `<button type="button" class="pos-btn ${curPos===val?'active':''}" onclick="setPos('${val}')">${icon}</button>`).join('')}
+        </div>
+      </div>
+      <div class="pos-input-row">
+        <input class="form-input" id="fImagePosition" value="${esc(curPos)}" placeholder="ej: 50% 70%" oninput="updatePosPreview(this.value)">
       </div>
     </div>
     <div class="form-row">
@@ -964,13 +1041,33 @@ function openItemModal(item, isNew) {
 function openComboModal(combo, isNew) {
   document.getElementById('modalTitle').textContent = isNew ? 'Nuevo combo' : 'Editar combo';
   const imgSrc = combo.image ? combo.image.replace(/^\.\//, '../') : '';
+  const curPos = combo.imagePosition || '50% 50%';
   document.getElementById('modalBody').innerHTML = `
     <div class="form-group">
       <label class="form-label">Foto del combo</label>
       <div class="img-upload-area">
-        ${imgSrc ? `<img class="img-preview" id="imgPreview" src="${imgSrc}" onerror="this.style.display='none'">` : ''}
+        ${imgSrc ? `<img class="img-preview" id="imgPreview" src="${imgSrc}" style="object-position:${curPos}" onerror="this.style.display='none'">` : ''}
         <input type="file" id="imgFile" accept="image/*" onchange="previewImg(this)">
         <div class="img-upload-hint"><strong>Haz clic</strong> para subir una foto</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Posición de la foto en la tarjeta</label>
+      <div class="pos-controls">
+        <div class="pos-preview-wrap">
+          ${imgSrc
+            ? `<img class="pos-preview-img" id="posPreview" src="${imgSrc}" style="object-position:${curPos}" onerror="this.style.display='none'">`
+            : `<div class="pos-preview-placeholder">${combo.icon || '🍔'}</div>`}
+        </div>
+        <div class="pos-grid">
+          ${[['↖','0% 0%'],['↑','50% 0%'],['↗','100% 0%'],
+             ['←','0% 50%'],['●','50% 50%'],['→','100% 50%'],
+             ['↙','0% 100%'],['↓','50% 100%'],['↘','100% 100%']]
+            .map(([icon, val]) => `<button type="button" class="pos-btn ${curPos===val?'active':''}" onclick="setPos('${val}')">${icon}</button>`).join('')}
+        </div>
+      </div>
+      <div class="pos-input-row">
+        <input class="form-input" id="fImagePosition" value="${esc(curPos)}" placeholder="ej: 50% 70%" oninput="updatePosPreview(this.value)">
       </div>
     </div>
     <div class="form-group">
@@ -1043,6 +1140,7 @@ async function saveItem(id, isNew) {
   const idx = isNew ? -1 : menuData.menuItems.findIndex(i => i.id === id);
   const existing = isNew ? {} : menuData.menuItems[idx];
 
+  const posVal = (document.getElementById('fImagePosition')?.value || '').trim();
   const updated = {
     ...existing,
     id,
@@ -1054,6 +1152,7 @@ async function saveItem(id, isNew) {
     available: document.getElementById('fAvailable').checked,
   };
   if (imagePath) updated.image = imagePath;
+  if (posVal) updated.imagePosition = posVal; else delete updated.imagePosition;
 
   if (isNew) {
     menuData.menuItems.push(updated);
@@ -1088,6 +1187,7 @@ async function saveCombo(id, isNew) {
   const idx = isNew ? -1 : menuData.combos.findIndex(c => c.id === id);
   const existing = isNew ? { sectionTitle: 'Los favoritos de la casa' } : menuData.combos[idx];
 
+  const posVal = (document.getElementById('fImagePosition')?.value || '').trim();
   const updated = {
     ...existing,
     id,
@@ -1098,6 +1198,7 @@ async function saveCombo(id, isNew) {
     available: document.getElementById('fAvailable').checked,
   };
   if (imagePath) updated.image = imagePath;
+  if (posVal) updated.imagePosition = posVal; else delete updated.imagePosition;
 
   if (isNew) {
     menuData.combos.push(updated);
@@ -1147,6 +1248,27 @@ function showToast(msg, type) {
   el.className = type ? `show ${type}` : 'show';
   clearTimeout(toastTimer);
   toastTimer = setTimeout(() => el.className = '', 2800);
+}
+
+function setPos(val) {
+  const input = document.getElementById('fImagePosition');
+  if (input) input.value = val;
+  updatePosPreview(val);
+  document.querySelectorAll('.pos-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.getAttribute('onclick') === `setPos('${val}')`);
+  });
+}
+
+function updatePosPreview(val) {
+  const preview = document.getElementById('posPreview');
+  const mainPreview = document.getElementById('imgPreview');
+  if (preview) preview.style.objectPosition = val;
+  if (mainPreview) mainPreview.style.objectPosition = val;
+  // sync buttons
+  document.querySelectorAll('.pos-btn').forEach(btn => {
+    const btnVal = btn.getAttribute('onclick')?.match(/'([^']+)'/)?.[1];
+    btn.classList.toggle('active', btnVal === val);
+  });
 }
 
 document.getElementById('closeModal').addEventListener('click', closeModal);

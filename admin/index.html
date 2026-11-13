@@ -92,7 +92,7 @@
     .login-btn:hover { background: var(--gold-light); transform: translateY(-1px); }
 
     /* ── APP SHELL ─────────────────────────── */
-    #adminApp { display: none; min-height: 100vh; }
+    #adminApp { min-height: 100vh; }
 
     .admin-header {
       position: sticky; top: 0; z-index: 100;
@@ -600,7 +600,7 @@
 </div>
 
 <!-- APP -->
-<div id="adminApp">
+<div id="adminApp" style="display:none">
   <header class="admin-header">
     <div class="admin-header-brand">
       <img src="../Images/logo.webp" alt="Logo" class="admin-header-logo" onerror="this.style.display='none'">

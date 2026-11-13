@@ -1,0 +1,73 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: Images
+public_folder: ./Images
+
+locale: es
+
+collections:
+  - name: menu
+    label: "Menú"
+    files:
+      - name: menu_items
+        label: "Items del Menú"
+        file: menu-data.json
+        format: json
+        fields:
+          - name: menuItems
+            label: "Items del Menú"
+            label_singular: "Item"
+            widget: list
+            summary: "[{{fields.cat}}] {{fields.name}} — ${{fields.price}}"
+            fields:
+              - { name: id, label: "ID (número único)", widget: number, value_type: int }
+              - name: cat
+                label: "Categoría"
+                widget: select
+                options:
+                  - { label: "Hamburguesas", value: hamburguesas }
+                  - { label: "Alas", value: alas }
+                  - { label: "Perros Calientes", value: perros }
+                  - { label: "Fast Food", value: fast }
+                  - { label: "Salchipapas", value: salchipapas }
+                  - { label: "Patacones", value: patacones }
+                  - { label: "Maicitos", value: maicitos }
+                  - { label: "Recomendados", value: recomendados }
+                  - { label: "Bebidas", value: bebidas }
+                  - { label: "Adicionales", value: adicionales }
+              - { name: name, label: "Nombre del producto", widget: string }
+              - { name: sectionTitle, label: "Título de sección (ej: Hamburguesas desde $13.900)", widget: string, required: false }
+              - { name: desc, label: "Descripción / Ingredientes", widget: text, required: false }
+              - { name: price, label: "Precio (en pesos, sin puntos)", widget: number, value_type: int }
+              - { name: pricePrefix, label: "Prefijo de precio (ej: desde)", widget: string, required: false }
+              - { name: icon, label: "Ícono emoji", widget: string, default: "🍔" }
+              - { name: image, label: "Foto del producto", widget: image, required: false, choose_url: false }
+              - { name: imagePosition, label: "Posición de la foto (ej: 50% 50%)", widget: string, required: false }
+              - { name: available, label: "Disponible para pedir", widget: boolean, default: true, required: false }
+              - { name: optionsLabel, label: "Etiqueta de opciones (ej: sabor, cantidad)", widget: string, required: false }
+              - name: options
+                label: "Opciones del producto"
+                widget: list
+                required: false
+                summary: "{{fields.label}}{{fields.price}}"
+                fields:
+                  - { name: label, label: "Nombre de la opción", widget: string }
+                  - { name: price, label: "Precio de la opción (dejar vacío = usa el precio base)", widget: number, value_type: int, required: false }
+
+          - name: combos
+            label: "Combos"
+            label_singular: "Combo"
+            widget: list
+            summary: "{{fields.name}} — ${{fields.price}}"
+            fields:
+              - { name: id, label: "ID (ej: c4, c5...)", widget: string }
+              - { name: name, label: "Nombre del combo", widget: string }
+              - { name: sectionTitle, label: "Título de sección", widget: string, required: false }
+              - { name: desc, label: "Descripción", widget: text }
+              - { name: price, label: "Precio (en pesos, sin puntos)", widget: number, value_type: int }
+              - { name: icon, label: "Ícono emoji", widget: string, default: "🍔" }
+              - { name: image, label: "Foto del combo", widget: image, required: false, choose_url: false }
+              - { name: imagePosition, label: "Posición de la foto (ej: 50% 50%)", widget: string, required: false }
+              - { name: available, label: "Disponible para pedir", widget: boolean, default: true, required: false }

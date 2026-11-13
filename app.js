@@ -1,10 +1,8 @@
-const menuData = window.CBH_MENU_DATA || {};
-const fallbackMenuItems = menuData.fallbackMenuItems || [];
-const combos = menuData.combos || [];
 const businessWhatsAppNumber = '573156742767';
 const businessWhatsAppUrl = `https://wa.me/${businessWhatsAppNumber}`;
 
-let menuItems = [...fallbackMenuItems];
+let menuItems = [];
+let combos = [];
 let cart = [];
 let activeFilter = 'all';
 let pendingOptionItem = null;
@@ -642,8 +640,23 @@ if (scrollTopButton) {
   }, { passive: true });
 }
 
-updateBusinessStatusUI();
-requestAnimationFrame(() => {
+(async function initApp() {
+  try {
+    const res = await fetch('./menu-data.json');
+    if (res.ok) {
+      const data = await res.json();
+      menuItems = data.menuItems || [];
+      combos = data.combos || [];
+    }
+  } catch (_) {}
+
+  if (!menuItems.length) {
+    const fb = window.CBH_MENU_DATA || {};
+    menuItems = [...(fb.fallbackMenuItems || [])];
+    combos = [...(fb.combos || [])];
+  }
+
+  updateBusinessStatusUI();
   renderMenu(activeFilter);
-});
-setInterval(updateBusinessStatusUI, 60000);
+  setInterval(updateBusinessStatusUI, 60000);
+})();

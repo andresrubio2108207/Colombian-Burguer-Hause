@@ -379,11 +379,12 @@
       "cat": "salchipapas",
       "sectionTitle": "Salchipapas",
       "name": "Salchimonster",
-      "desc": "Papa francesa, pollo y carne desmechado, chorizo, queso, maduro y huevo de codorniz",
+      "desc": "Papa francesa, pollo y carne desmechado, chorizo, queso, maduro, pico de  gallo  y huevo de codorniz.",
       "price": 38900,
       "icon": "🍟",
       "image": "./Images/Salchimonster.jpeg",
-      "imagePosition": "50% 62%"
+      "imagePosition": "50% 62%",
+      "available": true
     },
     {
       "id": 38,

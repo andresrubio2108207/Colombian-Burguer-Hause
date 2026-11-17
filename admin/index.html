@@ -820,17 +820,28 @@ async function saveMenuData(msg) {
 }
 
 async function uploadImage(file) {
-  const token = await getToken();
-  const base64 = await fileToBase64(file);
-  const safeName = file.name.replace(/\s+/g, '-').replace(/[^a-zA-Z0-9.\-_]/g, '');
-  const path = `Images/${Date.now()}-${safeName}`;
-  const res = await fetch(`/.netlify/git/github/contents/${path}`, {
-    method: 'PUT',
-    headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
-    body: JSON.stringify({ message: `subir imagen ${safeName}`, content: base64 })
-  });
-  if (!res.ok) { showToast('Error subiendo imagen', 'error'); return null; }
-  return `./${path}`;
+  try {
+    const token = await getToken();
+    if (!token) { showToast('Sin sesión activa', 'error'); return null; }
+    const base64 = await fileToBase64(file);
+    const safeName = file.name.replace(/\s+/g, '-').replace(/[^a-zA-Z0-9.\-_]/g, '');
+    const path = `Images/${Date.now()}-${safeName}`;
+    const res = await fetch(`/.netlify/git/github/contents/${path}`, {
+      method: 'PUT',
+      headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message: `subir imagen ${safeName}`, content: base64 })
+    });
+    if (!res.ok) {
+      const errBody = await res.json().catch(() => ({}));
+      const msg = errBody.message || res.statusText || '';
+      showToast(`Error imagen (${res.status}${msg ? ': ' + msg.slice(0, 60) : ''})`, 'error');
+      return null;
+    }
+    return `./${path}`;
+  } catch (err) {
+    showToast('Error de conexión al subir imagen', 'error');
+    return null;
+  }
 }
 
 function fileToBase64(file) {
@@ -1226,6 +1237,11 @@ async function saveItem(id, isNew) {
   if (fileInput && fileInput.files && fileInput.files[0]) {
     showToast('Subiendo imagen…');
     imagePath = await uploadImage(fileInput.files[0]);
+    if (imagePath === null) {
+      saveBtn.disabled = false;
+      saveBtn.textContent = 'Guardar';
+      return;
+    }
   }
 
   const idx = isNew ? -1 : menuData.menuItems.findIndex(i => i.id === id);
@@ -1275,6 +1291,11 @@ async function saveCombo(id, isNew) {
   if (fileInput && fileInput.files && fileInput.files[0]) {
     showToast('Subiendo imagen…');
     imagePath = await uploadImage(fileInput.files[0]);
+    if (imagePath === null) {
+      saveBtn.disabled = false;
+      saveBtn.textContent = 'Guardar';
+      return;
+    }
   }
 
   const idx = isNew ? -1 : menuData.combos.findIndex(c => c.id === id);

@@ -21,7 +21,8 @@
       "price": 17900,
       "icon": "🍔",
       "image": "./Images/h callejera_1_11zon.webp",
-      "imagePosition": "50% 50%"
+      "imagePosition": "46% 60%",
+      "available": true
     },
     {
       "id": 13,

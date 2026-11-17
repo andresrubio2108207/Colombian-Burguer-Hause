@@ -182,7 +182,10 @@ function getCategoryOrder(cat) {
 }
 
 function renderProductCard(item) {
-  const imageStyle = item.imagePosition ? ` style="object-position: ${item.imagePosition};"` : '';
+  const _pos = item.imagePosition || '50% 50%';
+  const _zoom = item.imageZoom || 1;
+  const _zoomCss = _zoom > 1 ? `; transform: scale(${_zoom}); transform-origin: ${_pos}` : '';
+  const imageStyle = ` style="object-position: ${_pos}${_zoomCss}"`;
   const priceLabel = item.pricePrefix ? `${item.pricePrefix} ${formatPrice(item.price)}` : formatPrice(item.price);
   const isAvailable = item.available !== false;
   const descMarkup = item.desc ? `<div class="product-desc">${item.desc}</div>` : '';
@@ -244,7 +247,10 @@ function renderCombosToGrid(grid) {
 }
 
 function renderComboCard(combo) {
-  const imageStyle = combo.imagePosition ? ` style="object-position: ${combo.imagePosition};"` : '';
+  const _pos = combo.imagePosition || '50% 50%';
+  const _zoom = combo.imageZoom || 1;
+  const _zoomCss = _zoom > 1 ? `; transform: scale(${_zoom}); transform-origin: ${_pos}` : '';
+  const imageStyle = ` style="object-position: ${_pos}${_zoomCss}"`;
   const isAvailable = combo.available !== false;
   const addBtn = isAvailable
     ? `<button class="add-btn" onclick="addToCartCombo('${combo.id}', '${combo.name}', ${combo.price})">+ Agregar</button>`

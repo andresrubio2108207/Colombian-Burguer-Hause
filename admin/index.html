@@ -490,60 +490,103 @@
     .img-upload-hint { font-size: 12px; color: var(--text-muted); }
     .img-upload-hint strong { color: var(--gold); }
 
-    /* Position control */
-    .pos-controls {
-      display: flex;
-      gap: 0.75rem;
-      align-items: flex-start;
-    }
-    .pos-preview-wrap {
-      flex-shrink: 0;
-      width: 110px;
-      height: 80px;
-      border-radius: 8px;
+    /* ── IMAGE EDITOR ─────────────────────────── */
+    .img-editor-stage {
+      width: 100%;
+      height: 230px;
       overflow: hidden;
+      border-radius: 10px;
+      border: 2px solid var(--border);
+      cursor: grab;
+      user-select: none;
+      touch-action: none;
+      position: relative;
       background: var(--surface2);
-      border: 1px solid var(--border);
+      transition: border-color 0.2s;
     }
-    .pos-preview-img {
+    .img-editor-stage:hover { border-color: rgba(201,168,76,0.4); }
+    .img-editor-stage.dragging { cursor: grabbing; border-color: var(--gold); }
+    .img-editor-img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       display: block;
-      transition: object-position 0.2s;
+      pointer-events: none;
+      will-change: transform;
     }
-    .pos-preview-placeholder {
-      width: 100%;
-      height: 100%;
+    .img-editor-overlay {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 7px 12px;
+      background: linear-gradient(transparent, rgba(0,0,0,0.65));
+      opacity: 0;
+      transition: opacity 0.2s;
+      pointer-events: none;
+    }
+    .img-editor-stage:hover .img-editor-overlay { opacity: 1; }
+    .img-editor-hint { font-size: 10px; color: rgba(255,255,255,0.75); letter-spacing: 0.4px; }
+    .img-editor-placeholder {
+      width: 100%; height: 100%;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 0.5rem; color: var(--text-muted);
+    }
+    .img-editor-placeholder span { font-size: 2.5rem; }
+    .img-editor-placeholder small { font-size: 11px; }
+    .img-editor-controls {
       display: flex;
       align-items: center;
-      justify-content: center;
-      font-size: 1.8rem;
+      gap: 0.6rem;
+      margin-top: 0.6rem;
+    }
+    .img-editor-zoom-icon { font-size: 14px; }
+    .img-zoom-slider {
+      flex: 1;
+      -webkit-appearance: none;
+      appearance: none;
+      height: 4px;
+      background: var(--border);
+      border-radius: 2px;
+      outline: none;
+      cursor: pointer;
+    }
+    .img-zoom-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 16px; height: 16px;
+      border-radius: 50%;
+      background: var(--gold);
+      cursor: pointer;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.4);
+    }
+    .img-zoom-slider::-moz-range-thumb {
+      width: 16px; height: 16px;
+      border-radius: 50%;
+      background: var(--gold);
+      cursor: pointer;
+      border: none;
+    }
+    .img-zoom-slider:disabled { opacity: 0.35; cursor: not-allowed; }
+    .img-editor-zoom-value {
+      font-size: 11px;
       color: var(--text-muted);
+      min-width: 36px;
+      text-align: right;
+      font-variant-numeric: tabular-nums;
     }
-    .pos-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 32px);
-      grid-template-rows: repeat(3, 32px);
-      gap: 3px;
-    }
-    .pos-btn {
-      width: 32px; height: 32px;
-      background: var(--surface2);
+    .btn-zoom-reset {
+      padding: 4px 10px;
+      background: transparent;
       border: 1px solid var(--border);
       border-radius: 5px;
       color: var(--text-muted);
-      font-size: 14px;
+      font-size: 10px;
+      font-family: 'Montserrat', sans-serif;
       cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: background 0.15s, color 0.15s, border-color 0.15s;
+      letter-spacing: 0.5px;
+      white-space: nowrap;
+      transition: border-color 0.15s, color 0.15s;
     }
-    .pos-btn:hover { background: var(--gold-dim); color: var(--gold); border-color: rgba(201,168,76,0.4); }
-    .pos-btn.active { background: var(--gold-dim); color: var(--gold); border-color: var(--gold); }
-    .pos-input-row { margin-top: 0.5rem; }
-    .pos-input-row .form-input { font-size: 12px; padding: 7px 10px; }
+    .btn-zoom-reset:hover:not(:disabled) { border-color: var(--gold); color: var(--gold); }
+    .btn-zoom-reset:disabled { opacity: 0.35; cursor: not-allowed; }
 
     /* Buttons */
     .btn-primary {
@@ -966,33 +1009,32 @@ function openItemModal(item, isNew) {
 
   const imgSrc = item.image ? item.image.replace(/^\.\//, '../') : '';
   const curPos = item.imagePosition || '50% 50%';
+  const curZoom = item.imageZoom || 1.0;
   document.getElementById('modalBody').innerHTML = `
     <div class="form-group">
       <label class="form-label">Foto del producto</label>
       <div class="img-upload-area" id="imgUploadArea">
-        ${imgSrc ? `<img class="img-preview" id="imgPreview" src="${imgSrc}" style="object-position:${curPos}" onerror="this.style.display='none'">` : ''}
+        ${imgSrc ? `<img class="img-preview" id="imgPreview" src="${imgSrc}" onerror="this.style.display='none'">` : ''}
         <input type="file" id="imgFile" accept="image/*" onchange="previewImg(this)">
-        <div class="img-upload-hint"><strong>Haz clic</strong> para subir una foto</div>
+        <div class="img-upload-hint"><strong>Haz clic</strong> para ${imgSrc ? 'cambiar la foto' : 'subir una foto'}</div>
       </div>
     </div>
     <div class="form-group">
-      <label class="form-label">Posición de la foto en la tarjeta</label>
-      <div class="pos-controls">
-        <div class="pos-preview-wrap">
-          ${imgSrc
-            ? `<img class="pos-preview-img" id="posPreview" src="${imgSrc}" style="object-position:${curPos}" onerror="this.style.display='none'">`
-            : `<div class="pos-preview-placeholder">${item.icon || '🍔'}</div>`}
-        </div>
-        <div class="pos-grid">
-          ${[['↖','0% 0%'],['↑','50% 0%'],['↗','100% 0%'],
-             ['←','0% 50%'],['●','50% 50%'],['→','100% 50%'],
-             ['↙','0% 100%'],['↓','50% 100%'],['↘','100% 100%']]
-            .map(([icon, val]) => `<button type="button" class="pos-btn ${curPos===val?'active':''}" onclick="setPos('${val}')">${icon}</button>`).join('')}
-        </div>
+      <label class="form-label">Encuadre &amp; zoom — <span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--text-muted)">arrastra · rueda/pellizca para ajustar</span></label>
+      <div class="img-editor-stage" id="imgEditorStage">
+        ${imgSrc
+          ? `<img class="img-editor-img" id="imgEditorImg" src="${imgSrc}" draggable="false">`
+          : `<div class="img-editor-placeholder" id="imgEditorPlaceholder"><span>${item.icon || '📷'}</span><small>Sube una foto para ajustar el encuadre</small></div>`}
+        <div class="img-editor-overlay"><span class="img-editor-hint">Arrastra para mover &nbsp;·&nbsp; Rueda = zoom</span></div>
       </div>
-      <div class="pos-input-row">
-        <input class="form-input" id="fImagePosition" value="${esc(curPos)}" placeholder="ej: 50% 70%" oninput="updatePosPreview(this.value)">
+      <div class="img-editor-controls">
+        <span class="img-editor-zoom-icon">🔍</span>
+        <input type="range" class="img-zoom-slider" id="fImageZoomSlider" min="100" max="400" step="5" value="${Math.round(curZoom * 100)}" ${!imgSrc ? 'disabled' : ''}>
+        <span class="img-editor-zoom-value" id="zoomValueLabel">${Math.round(curZoom * 100)}%</span>
+        <button type="button" class="btn-zoom-reset" onclick="resetEditor()" ${!imgSrc ? 'disabled' : ''}>Reset</button>
       </div>
+      <input type="hidden" id="fImagePosition" value="${esc(curPos)}">
+      <input type="hidden" id="fImageZoom" value="${curZoom}">
     </div>
     <div class="form-row">
       <div class="form-group">
@@ -1035,6 +1077,7 @@ function openItemModal(item, isNew) {
     <button class="btn-primary" id="saveBtn" onclick="saveItem(${item.id}, ${isNew})">Guardar</button>
   `;
 
+  initEditor(curPos, curZoom);
   showModal();
 }
 
@@ -1042,33 +1085,32 @@ function openComboModal(combo, isNew) {
   document.getElementById('modalTitle').textContent = isNew ? 'Nuevo combo' : 'Editar combo';
   const imgSrc = combo.image ? combo.image.replace(/^\.\//, '../') : '';
   const curPos = combo.imagePosition || '50% 50%';
+  const curZoom = combo.imageZoom || 1.0;
   document.getElementById('modalBody').innerHTML = `
     <div class="form-group">
       <label class="form-label">Foto del combo</label>
       <div class="img-upload-area">
-        ${imgSrc ? `<img class="img-preview" id="imgPreview" src="${imgSrc}" style="object-position:${curPos}" onerror="this.style.display='none'">` : ''}
+        ${imgSrc ? `<img class="img-preview" id="imgPreview" src="${imgSrc}" onerror="this.style.display='none'">` : ''}
         <input type="file" id="imgFile" accept="image/*" onchange="previewImg(this)">
-        <div class="img-upload-hint"><strong>Haz clic</strong> para subir una foto</div>
+        <div class="img-upload-hint"><strong>Haz clic</strong> para ${imgSrc ? 'cambiar la foto' : 'subir una foto'}</div>
       </div>
     </div>
     <div class="form-group">
-      <label class="form-label">Posición de la foto en la tarjeta</label>
-      <div class="pos-controls">
-        <div class="pos-preview-wrap">
-          ${imgSrc
-            ? `<img class="pos-preview-img" id="posPreview" src="${imgSrc}" style="object-position:${curPos}" onerror="this.style.display='none'">`
-            : `<div class="pos-preview-placeholder">${combo.icon || '🍔'}</div>`}
-        </div>
-        <div class="pos-grid">
-          ${[['↖','0% 0%'],['↑','50% 0%'],['↗','100% 0%'],
-             ['←','0% 50%'],['●','50% 50%'],['→','100% 50%'],
-             ['↙','0% 100%'],['↓','50% 100%'],['↘','100% 100%']]
-            .map(([icon, val]) => `<button type="button" class="pos-btn ${curPos===val?'active':''}" onclick="setPos('${val}')">${icon}</button>`).join('')}
-        </div>
+      <label class="form-label">Encuadre &amp; zoom — <span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--text-muted)">arrastra · rueda/pellizca para ajustar</span></label>
+      <div class="img-editor-stage" id="imgEditorStage">
+        ${imgSrc
+          ? `<img class="img-editor-img" id="imgEditorImg" src="${imgSrc}" draggable="false">`
+          : `<div class="img-editor-placeholder" id="imgEditorPlaceholder"><span>${combo.icon || '📷'}</span><small>Sube una foto para ajustar el encuadre</small></div>`}
+        <div class="img-editor-overlay"><span class="img-editor-hint">Arrastra para mover &nbsp;·&nbsp; Rueda = zoom</span></div>
       </div>
-      <div class="pos-input-row">
-        <input class="form-input" id="fImagePosition" value="${esc(curPos)}" placeholder="ej: 50% 70%" oninput="updatePosPreview(this.value)">
+      <div class="img-editor-controls">
+        <span class="img-editor-zoom-icon">🔍</span>
+        <input type="range" class="img-zoom-slider" id="fImageZoomSlider" min="100" max="400" step="5" value="${Math.round(curZoom * 100)}" ${!imgSrc ? 'disabled' : ''}>
+        <span class="img-editor-zoom-value" id="zoomValueLabel">${Math.round(curZoom * 100)}%</span>
+        <button type="button" class="btn-zoom-reset" onclick="resetEditor()" ${!imgSrc ? 'disabled' : ''}>Reset</button>
       </div>
+      <input type="hidden" id="fImagePosition" value="${esc(curPos)}">
+      <input type="hidden" id="fImageZoom" value="${curZoom}">
     </div>
     <div class="form-group">
       <label class="form-label">Nombre</label>
@@ -1103,6 +1145,7 @@ function openComboModal(combo, isNew) {
     <button class="btn-primary" id="saveBtn" onclick="saveCombo('${combo.id}', ${isNew})">Guardar</button>
   `;
 
+  initEditor(curPos, curZoom);
   showModal();
 }
 
@@ -1111,6 +1154,8 @@ function previewImg(input) {
   const file = input.files[0];
   const reader = new FileReader();
   reader.onload = e => {
+    const src = e.target.result;
+    // Update upload area thumbnail
     let preview = document.getElementById('imgPreview');
     if (!preview) {
       preview = document.createElement('img');
@@ -1118,8 +1163,33 @@ function previewImg(input) {
       preview.className = 'img-preview';
       input.parentElement.prepend(preview);
     }
-    preview.src = e.target.result;
+    preview.src = src;
     preview.style.display = 'block';
+
+    // Update editor stage
+    const editorImg = document.getElementById('imgEditorImg');
+    if (editorImg) {
+      editorImg.src = src;
+    } else {
+      const stage = document.getElementById('imgEditorStage');
+      if (stage) {
+        const ph = stage.querySelector('#imgEditorPlaceholder');
+        if (ph) {
+          const img = document.createElement('img');
+          img.className = 'img-editor-img';
+          img.id = 'imgEditorImg';
+          img.draggable = false;
+          img.src = src;
+          stage.insertBefore(img, stage.firstChild);
+          ph.remove();
+        }
+        const slider = document.getElementById('fImageZoomSlider');
+        const resetBtn = document.querySelector('.btn-zoom-reset');
+        if (slider) slider.disabled = false;
+        if (resetBtn) resetBtn.disabled = false;
+      }
+    }
+    initEditor(`${editorPos.x}% ${editorPos.y}%`, editorZoom);
   };
   reader.readAsDataURL(file);
 }
@@ -1141,6 +1211,7 @@ async function saveItem(id, isNew) {
   const existing = isNew ? {} : menuData.menuItems[idx];
 
   const posVal = (document.getElementById('fImagePosition')?.value || '').trim();
+  const zoomVal = parseFloat(document.getElementById('fImageZoom')?.value || 1);
   const updated = {
     ...existing,
     id,
@@ -1153,6 +1224,7 @@ async function saveItem(id, isNew) {
   };
   if (imagePath) updated.image = imagePath;
   if (posVal) updated.imagePosition = posVal; else delete updated.imagePosition;
+  if (zoomVal > 1.0) updated.imageZoom = parseFloat(zoomVal.toFixed(2)); else delete updated.imageZoom;
 
   if (isNew) {
     menuData.menuItems.push(updated);
@@ -1188,6 +1260,7 @@ async function saveCombo(id, isNew) {
   const existing = isNew ? { sectionTitle: 'Los favoritos de la casa' } : menuData.combos[idx];
 
   const posVal = (document.getElementById('fImagePosition')?.value || '').trim();
+  const zoomVal = parseFloat(document.getElementById('fImageZoom')?.value || 1);
   const updated = {
     ...existing,
     id,
@@ -1199,6 +1272,7 @@ async function saveCombo(id, isNew) {
   };
   if (imagePath) updated.image = imagePath;
   if (posVal) updated.imagePosition = posVal; else delete updated.imagePosition;
+  if (zoomVal > 1.0) updated.imageZoom = parseFloat(zoomVal.toFixed(2)); else delete updated.imageZoom;
 
   if (isNew) {
     menuData.combos.push(updated);
@@ -1233,9 +1307,145 @@ async function deleteCombo(id) {
   if (ok) { closeModal(); renderSidebar(); renderMain(); showToast('✓ Combo eliminado', 'success'); }
 }
 
+// ── IMAGE EDITOR ──────────────────────────────
+let editorPos = { x: 50, y: 50 };
+let editorZoom = 1.0;
+let editorDragging = false;
+let editorLastX = 0, editorLastY = 0;
+let touchDist0 = 0, touchZoom0 = 1;
+let editorWindowCleanup = [];
+
+function initEditor(posVal, zoomVal) {
+  editorWindowCleanup.forEach(fn => fn());
+  editorWindowCleanup = [];
+  editorDragging = false;
+
+  const m = (posVal || '50% 50%').match(/(\d+(?:\.\d+)?)%\s+(\d+(?:\.\d+)?)%/);
+  editorPos = { x: m ? parseFloat(m[1]) : 50, y: m ? parseFloat(m[2]) : 50 };
+  editorZoom = Math.max(1, Math.min(4, parseFloat(zoomVal) || 1));
+
+  const stage = document.getElementById('imgEditorStage');
+  if (!stage) return;
+
+  // Clone stage to remove any stale listeners
+  const fresh = stage.cloneNode(true);
+  stage.parentNode.replaceChild(fresh, stage);
+  const s = document.getElementById('imgEditorStage');
+
+  s.addEventListener('mousedown', e => {
+    if (e.button !== 0) return;
+    editorDragging = true;
+    editorLastX = e.clientX; editorLastY = e.clientY;
+    s.classList.add('dragging');
+    e.preventDefault();
+  });
+
+  const onMouseMove = e => {
+    if (!editorDragging) return;
+    editorPan(e.clientX - editorLastX, e.clientY - editorLastY, s);
+    editorLastX = e.clientX; editorLastY = e.clientY;
+  };
+  const onMouseUp = () => {
+    if (editorDragging) { editorDragging = false; s.classList.remove('dragging'); }
+  };
+  window.addEventListener('mousemove', onMouseMove);
+  window.addEventListener('mouseup', onMouseUp);
+  editorWindowCleanup.push(() => window.removeEventListener('mousemove', onMouseMove));
+  editorWindowCleanup.push(() => window.removeEventListener('mouseup', onMouseUp));
+
+  s.addEventListener('wheel', e => {
+    e.preventDefault();
+    editorZoom = Math.max(1, Math.min(4, editorZoom + (e.deltaY < 0 ? 0.1 : -0.1)));
+    applyEditor();
+  }, { passive: false });
+
+  s.addEventListener('touchstart', e => {
+    if (e.touches.length === 1) {
+      editorDragging = true;
+      editorLastX = e.touches[0].clientX; editorLastY = e.touches[0].clientY;
+    } else if (e.touches.length === 2) {
+      editorDragging = false;
+      touchDist0 = Math.hypot(
+        e.touches[0].clientX - e.touches[1].clientX,
+        e.touches[0].clientY - e.touches[1].clientY
+      );
+      touchZoom0 = editorZoom;
+    }
+    e.preventDefault();
+  }, { passive: false });
+
+  s.addEventListener('touchmove', e => {
+    e.preventDefault();
+    if (e.touches.length === 1 && editorDragging) {
+      editorPan(e.touches[0].clientX - editorLastX, e.touches[0].clientY - editorLastY, s);
+      editorLastX = e.touches[0].clientX; editorLastY = e.touches[0].clientY;
+    } else if (e.touches.length === 2) {
+      const d = Math.hypot(
+        e.touches[0].clientX - e.touches[1].clientX,
+        e.touches[0].clientY - e.touches[1].clientY
+      );
+      editorZoom = Math.max(1, Math.min(4, touchZoom0 * d / touchDist0));
+      applyEditor();
+    }
+  }, { passive: false });
+
+  s.addEventListener('touchend', () => { editorDragging = false; });
+
+  const slider = document.getElementById('fImageZoomSlider');
+  if (slider) {
+    slider.value = Math.round(editorZoom * 100);
+    slider.oninput = () => {
+      editorZoom = parseInt(slider.value) / 100;
+      applyEditor();
+    };
+  }
+
+  applyEditor();
+}
+
+function editorPan(dx, dy, stage) {
+  const rect = stage.getBoundingClientRect();
+  const overflow = Math.max(editorZoom - 1, 0.25);
+  editorPos.x = Math.max(0, Math.min(100, editorPos.x - dx * 100 / (overflow * rect.width * 1.5)));
+  editorPos.y = Math.max(0, Math.min(100, editorPos.y - dy * 100 / (overflow * rect.height * 1.5)));
+  applyEditor();
+}
+
+function applyEditor() {
+  const img = document.getElementById('imgEditorImg');
+  const posHidden = document.getElementById('fImagePosition');
+  const zoomHidden = document.getElementById('fImageZoom');
+  const slider = document.getElementById('fImageZoomSlider');
+  const label = document.getElementById('zoomValueLabel');
+
+  const posStr = `${Math.round(editorPos.x)}% ${Math.round(editorPos.y)}%`;
+  const zoomRound = parseFloat(editorZoom.toFixed(2));
+
+  if (img) {
+    img.style.objectPosition = posStr;
+    img.style.transform = editorZoom > 1.001 ? `scale(${zoomRound})` : '';
+    img.style.transformOrigin = posStr;
+  }
+  if (posHidden) posHidden.value = posStr;
+  if (zoomHidden) zoomHidden.value = zoomRound;
+  if (slider) slider.value = Math.round(editorZoom * 100);
+  if (label) label.textContent = Math.round(editorZoom * 100) + '%';
+}
+
+function resetEditor() {
+  editorPos = { x: 50, y: 50 };
+  editorZoom = 1;
+  applyEditor();
+}
+
 // ── UTILS ─────────────────────────────────────
 function showModal() { document.getElementById('modalOverlay').classList.remove('hidden'); }
-function closeModal() { document.getElementById('modalOverlay').classList.add('hidden'); }
+function closeModal() {
+  document.getElementById('modalOverlay').classList.add('hidden');
+  editorWindowCleanup.forEach(fn => fn());
+  editorWindowCleanup = [];
+  editorDragging = false;
+}
 function show(id) { document.getElementById(id).style.display = ''; }
 function hide(id) { document.getElementById(id).style.display = 'none'; }
 function esc(str) { return String(str || '').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
@@ -1250,26 +1460,6 @@ function showToast(msg, type) {
   toastTimer = setTimeout(() => el.className = '', 2800);
 }
 
-function setPos(val) {
-  const input = document.getElementById('fImagePosition');
-  if (input) input.value = val;
-  updatePosPreview(val);
-  document.querySelectorAll('.pos-btn').forEach(btn => {
-    btn.classList.toggle('active', btn.getAttribute('onclick') === `setPos('${val}')`);
-  });
-}
-
-function updatePosPreview(val) {
-  const preview = document.getElementById('posPreview');
-  const mainPreview = document.getElementById('imgPreview');
-  if (preview) preview.style.objectPosition = val;
-  if (mainPreview) mainPreview.style.objectPosition = val;
-  // sync buttons
-  document.querySelectorAll('.pos-btn').forEach(btn => {
-    const btnVal = btn.getAttribute('onclick')?.match(/'([^']+)'/)?.[1];
-    btn.classList.toggle('active', btnVal === val);
-  });
-}
 
 document.getElementById('closeModal').addEventListener('click', closeModal);
 document.getElementById('modalOverlay').addEventListener('click', e => { if (e.target === document.getElementById('modalOverlay')) closeModal(); });

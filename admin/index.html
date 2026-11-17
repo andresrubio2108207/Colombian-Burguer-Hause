@@ -1029,7 +1029,7 @@ function openItemModal(item, isNew) {
       </div>
       <div class="img-editor-controls">
         <span class="img-editor-zoom-icon">🔍</span>
-        <input type="range" class="img-zoom-slider" id="fImageZoomSlider" min="100" max="400" step="5" value="${Math.round(curZoom * 100)}" ${!imgSrc ? 'disabled' : ''}>
+        <input type="range" class="img-zoom-slider" id="fImageZoomSlider" min="25" max="1000" step="5" value="${Math.round(curZoom * 100)}" ${!imgSrc ? 'disabled' : ''}>
         <span class="img-editor-zoom-value" id="zoomValueLabel">${Math.round(curZoom * 100)}%</span>
         <button type="button" class="btn-zoom-reset" onclick="resetEditor()" ${!imgSrc ? 'disabled' : ''}>Reset</button>
       </div>
@@ -1105,7 +1105,7 @@ function openComboModal(combo, isNew) {
       </div>
       <div class="img-editor-controls">
         <span class="img-editor-zoom-icon">🔍</span>
-        <input type="range" class="img-zoom-slider" id="fImageZoomSlider" min="100" max="400" step="5" value="${Math.round(curZoom * 100)}" ${!imgSrc ? 'disabled' : ''}>
+        <input type="range" class="img-zoom-slider" id="fImageZoomSlider" min="25" max="1000" step="5" value="${Math.round(curZoom * 100)}" ${!imgSrc ? 'disabled' : ''}>
         <span class="img-editor-zoom-value" id="zoomValueLabel">${Math.round(curZoom * 100)}%</span>
         <button type="button" class="btn-zoom-reset" onclick="resetEditor()" ${!imgSrc ? 'disabled' : ''}>Reset</button>
       </div>
@@ -1224,7 +1224,7 @@ async function saveItem(id, isNew) {
   };
   if (imagePath) updated.image = imagePath;
   if (posVal) updated.imagePosition = posVal; else delete updated.imagePosition;
-  if (zoomVal > 1.0) updated.imageZoom = parseFloat(zoomVal.toFixed(2)); else delete updated.imageZoom;
+  if (Math.abs(zoomVal - 1.0) > 0.01) updated.imageZoom = parseFloat(zoomVal.toFixed(2)); else delete updated.imageZoom;
 
   if (isNew) {
     menuData.menuItems.push(updated);
@@ -1272,7 +1272,7 @@ async function saveCombo(id, isNew) {
   };
   if (imagePath) updated.image = imagePath;
   if (posVal) updated.imagePosition = posVal; else delete updated.imagePosition;
-  if (zoomVal > 1.0) updated.imageZoom = parseFloat(zoomVal.toFixed(2)); else delete updated.imageZoom;
+  if (Math.abs(zoomVal - 1.0) > 0.01) updated.imageZoom = parseFloat(zoomVal.toFixed(2)); else delete updated.imageZoom;
 
   if (isNew) {
     menuData.combos.push(updated);
@@ -1322,7 +1322,7 @@ function initEditor(posVal, zoomVal) {
 
   const m = (posVal || '50% 50%').match(/(\d+(?:\.\d+)?)%\s+(\d+(?:\.\d+)?)%/);
   editorPos = { x: m ? parseFloat(m[1]) : 50, y: m ? parseFloat(m[2]) : 50 };
-  editorZoom = Math.max(1, Math.min(4, parseFloat(zoomVal) || 1));
+  editorZoom = Math.max(0.25, Math.min(10, parseFloat(zoomVal) || 1));
 
   const stage = document.getElementById('imgEditorStage');
   if (!stage) return;
@@ -1355,7 +1355,8 @@ function initEditor(posVal, zoomVal) {
 
   s.addEventListener('wheel', e => {
     e.preventDefault();
-    editorZoom = Math.max(1, Math.min(4, editorZoom + (e.deltaY < 0 ? 0.1 : -0.1)));
+    const delta = editorZoom < 1 ? 0.05 : editorZoom < 3 ? 0.1 : 0.25;
+    editorZoom = Math.max(0.25, Math.min(10, editorZoom + (e.deltaY < 0 ? delta : -delta)));
     applyEditor();
   }, { passive: false });
 
@@ -1384,7 +1385,7 @@ function initEditor(posVal, zoomVal) {
         e.touches[0].clientX - e.touches[1].clientX,
         e.touches[0].clientY - e.touches[1].clientY
       );
-      editorZoom = Math.max(1, Math.min(4, touchZoom0 * d / touchDist0));
+      editorZoom = Math.max(0.25, Math.min(10, touchZoom0 * d / touchDist0));
       applyEditor();
     }
   }, { passive: false });

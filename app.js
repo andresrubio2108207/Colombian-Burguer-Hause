@@ -184,7 +184,7 @@ function getCategoryOrder(cat) {
 function renderProductCard(item) {
   const _pos = item.imagePosition || '50% 50%';
   const _zoom = item.imageZoom || 1;
-  const _zoomCss = _zoom > 1 ? `; transform: scale(${_zoom}); transform-origin: ${_pos}` : '';
+  const _zoomCss = Math.abs(_zoom - 1) > 0.01 ? `; transform: scale(${_zoom}); transform-origin: ${_pos}` : '';
   const imageStyle = ` style="object-position: ${_pos}${_zoomCss}"`;
   const priceLabel = item.pricePrefix ? `${item.pricePrefix} ${formatPrice(item.price)}` : formatPrice(item.price);
   const isAvailable = item.available !== false;
@@ -249,7 +249,7 @@ function renderCombosToGrid(grid) {
 function renderComboCard(combo) {
   const _pos = combo.imagePosition || '50% 50%';
   const _zoom = combo.imageZoom || 1;
-  const _zoomCss = _zoom > 1 ? `; transform: scale(${_zoom}); transform-origin: ${_pos}` : '';
+  const _zoomCss = Math.abs(_zoom - 1) > 0.01 ? `; transform: scale(${_zoom}); transform-origin: ${_pos}` : '';
   const imageStyle = ` style="object-position: ${_pos}${_zoomCss}"`;
   const isAvailable = combo.available !== false;
   const addBtn = isAvailable

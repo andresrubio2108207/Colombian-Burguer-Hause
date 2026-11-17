@@ -782,20 +782,41 @@ async function loadMenuData() {
 }
 
 async function saveMenuData(msg) {
-  if (saving) return;
+  if (saving) return false;
   saving = true;
-  const token = await getToken();
-  const content = btoa(unescape(encodeURIComponent(JSON.stringify(menuData, null, 2))));
-  const res = await fetch('/.netlify/git/github/contents/menu-data.json', {
-    method: 'PUT',
-    headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
-    body: JSON.stringify({ message: msg || 'actualizar menú', content, sha: fileSha })
-  });
-  saving = false;
-  if (!res.ok) { showToast('Error al guardar', 'error'); return false; }
-  const data = await res.json();
-  fileSha = data.content.sha;
-  return true;
+  try {
+    const token = await getToken();
+    const content = btoa(unescape(encodeURIComponent(JSON.stringify(menuData, null, 2))));
+    let res = await fetch('/.netlify/git/github/contents/menu-data.json', {
+      method: 'PUT',
+      headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message: msg || 'actualizar menú', content, sha: fileSha })
+    });
+    // Si hay conflicto de SHA (409), re-obtenemos el sha y reintentamos
+    if (res.status === 409 || res.status === 422) {
+      const fetchRes = await fetch('/.netlify/git/github/contents/menu-data.json', {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      if (fetchRes.ok) {
+        const fetchJson = await fetchRes.json();
+        fileSha = fetchJson.sha;
+        res = await fetch('/.netlify/git/github/contents/menu-data.json', {
+          method: 'PUT',
+          headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
+          body: JSON.stringify({ message: msg || 'actualizar menú', content, sha: fileSha })
+        });
+      }
+    }
+    if (!res.ok) { showToast('Error al guardar (' + res.status + ')', 'error'); return false; }
+    const data = await res.json();
+    fileSha = data.content.sha;
+    return true;
+  } catch (err) {
+    showToast('Error de conexión', 'error');
+    return false;
+  } finally {
+    saving = false;
+  }
 }
 
 async function uploadImage(file) {

@@ -259,8 +259,10 @@
       "desc": "Combo con alas y papas",
       "price": 28900,
       "icon": "🍗",
-      "image": "./Images/h mas 3 alas_6_11zon.webp",
-      "imagePosition": "50% 20%"
+      "image": "./Images/1794959249622-burger-mas-3-alas.jpeg",
+      "imagePosition": "73% 36%",
+      "available": true,
+      "imageZoom": 0.25
     },
     {
       "id": 91,

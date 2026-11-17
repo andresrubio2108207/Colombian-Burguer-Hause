@@ -279,7 +279,11 @@
       "name": "Perro Clasico",
       "desc": "Pan, salchicha americana, queso, papa ripio",
       "price": 13900,
-      "icon": "🌭"
+      "icon": "🌭",
+      "available": true,
+      "image": "./Images/1794959542338-combo-amigos.jpeg",
+      "imagePosition": "2% 63%",
+      "imageZoom": 2.7
     },
     {
       "id": 27,

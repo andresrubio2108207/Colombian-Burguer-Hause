@@ -10,7 +10,7 @@
       "icon": "🍔",
       "image": "./Images/burguer clasica_4_11zon.webp",
       "imagePosition": "27% 83%",
-      "available": false
+      "available": true
     },
     {
       "id": 12,

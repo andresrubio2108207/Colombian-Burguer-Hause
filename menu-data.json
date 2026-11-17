@@ -291,7 +291,10 @@
       "name": "Perro Especial ⭐",
       "desc": "Pan, salchicha, queso, cebolla, tocineta, papa ripio + papa francesa",
       "price": 17900,
-      "icon": "🌭"
+      "icon": "🌭",
+      "available": true,
+      "image": "./Images/1794959657349-ssss2026-11-17-at-6.48.20-PM.jpeg",
+      "imagePosition": "18% 100%"
     },
     {
       "id": 28,

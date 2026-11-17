@@ -8,9 +8,10 @@
       "desc": "Pan, carne, queso, tomate, lechuga",
       "price": 13900,
       "icon": "🍔",
-      "image": "./Images/burguer clasica_4_11zon.webp",
-      "imagePosition": "27% 83%",
-      "available": true
+      "image": "./Images/1794959179414-2x1.jpeg",
+      "imagePosition": "100% 87%",
+      "available": true,
+      "imageZoom": 1.4
     },
     {
       "id": 12,

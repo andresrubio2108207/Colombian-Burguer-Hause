@@ -10,7 +10,7 @@
       "icon": "🍔",
       "image": "./Images/burguer clasica_4_11zon.webp",
       "imagePosition": "50% 50%",
-      "available": false
+      "available": true
     },
     {
       "id": 12,
@@ -322,7 +322,10 @@
       "name": "Crispetas de Pollo",
       "desc": "Trozos pechuga apanado + papa francesa",
       "price": 18900,
-      "icon": "⚡"
+      "icon": "⚡",
+      "available": true,
+      "image": "./Images/1794958432260-crispetas-de-pollo-pequena.jpg",
+      "imagePosition": "50% 50%"
     },
     {
       "id": 32,

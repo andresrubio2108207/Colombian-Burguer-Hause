@@ -834,7 +834,11 @@ async function uploadImage(file) {
     if (!res.ok) {
       const errBody = await res.json().catch(() => ({}));
       const msg = errBody.message || res.statusText || '';
-      showToast(`Error imagen (${res.status}${msg ? ': ' + msg.slice(0, 60) : ''})`, 'error');
+      if (res.status === 401 || res.status === 403) {
+        showToast('Sin permisos — cierra sesión y vuelve a entrar', 'error');
+      } else {
+        showToast(`Error imagen (${res.status}${msg ? ': ' + msg.slice(0, 60) : ''})`, 'error');
+      }
       return null;
     }
     return `./${path}`;

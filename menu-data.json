@@ -261,8 +261,7 @@
       "icon": "🍗",
       "image": "./Images/1794959745513-burger-mas-3-alas.jpeg",
       "imagePosition": "55% 45%",
-      "available": true,
-      "imageZoom": 0.5
+      "available": true
     },
     {
       "id": 91,

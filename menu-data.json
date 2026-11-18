@@ -405,9 +405,8 @@
       "price": 38900,
       "icon": "🍟",
       "image": "./Images/Salchimonster.jpeg",
-      "imagePosition": "18% 48%",
-      "available": true,
-      "imageZoom": 0.25
+      "imagePosition": "50% 50%",
+      "available": true
     },
     {
       "id": 38,

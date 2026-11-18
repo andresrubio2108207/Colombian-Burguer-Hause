@@ -647,26 +647,41 @@ if (scrollTopButton) {
 }
 
 let _lastMenuSig = '';
+let _menuSource = '';
 
 // Lee menu-data.json directo desde GitHub (sin pasar por el deploy de Netlify)
-// Si el repo es privado o falla, cae al archivo servido por Netlify
+// Si falla, cae al archivo servido por Netlify
 const _MENU_URLS = [
-  'https://raw.githubusercontent.com/andresrubio2108207/Colombian-Burguer-Hause/main/menu-data.json',
-  './menu-data.json'
+  ['GH', 'https://raw.githubusercontent.com/andresrubio2108207/Colombian-Burguer-Hause/main/menu-data.json'],
+  ['NL', './menu-data.json']
 ];
 
+function _showDataBadge(src, count) {
+  let badge = document.getElementById('_dbg');
+  if (!badge) {
+    badge = document.createElement('div');
+    badge.id = '_dbg';
+    badge.style.cssText = 'position:fixed;bottom:8px;right:8px;background:rgba(0,0,0,.7);color:#0f0;font:11px monospace;padding:4px 8px;border-radius:4px;z-index:9999;pointer-events:none';
+    document.body.appendChild(badge);
+  }
+  const t = new Date().toLocaleTimeString('es-CO', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+  badge.textContent = `[${src}] ${count} items · ${t}`;
+}
+
 async function _fetchMenuData() {
-  for (const base of _MENU_URLS) {
+  for (const [src, base] of _MENU_URLS) {
     try {
       const res = await fetch(base + '?_=' + Date.now(), { cache: 'no-store' });
       if (!res.ok) continue;
       const data = await res.json();
       if (!Array.isArray(data.menuItems) || !data.menuItems.length) continue;
       const sig = JSON.stringify(data);
-      if (sig === _lastMenuSig) return false;
+      _menuSource = src;
+      if (sig === _lastMenuSig) { _showDataBadge(src + '=', data.menuItems.length); return false; }
       _lastMenuSig = sig;
       menuItems = data.menuItems;
       combos = data.combos || [];
+      _showDataBadge(src + '✓', data.menuItems.length);
       return true;
     } catch (_) { continue; }
   }

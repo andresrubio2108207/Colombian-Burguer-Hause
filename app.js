@@ -648,7 +648,7 @@ if (scrollTopButton) {
 
 (async function initApp() {
   try {
-    const res = await fetch('./menu-data.json');
+    const res = await fetch('./menu-data.json?_=' + Date.now(), { cache: 'no-store' });
     if (res.ok) {
       const data = await res.json();
       menuItems = data.menuItems || [];
@@ -658,7 +658,7 @@ if (scrollTopButton) {
 
   if (!menuItems.length) {
     const fb = window.CBH_MENU_DATA || {};
-    menuItems = [...(fb.fallbackMenuItems || [])];
+    menuItems = [...(fb.menuItems || [])];
     combos = [...(fb.combos || [])];
   }
 

@@ -19,7 +19,7 @@ Cache-Control = "no-cache"
 [[headers]]
 for = "/*.json"
 [headers.values]
-Cache-Control = "no-cache"
+Cache-Control = "no-store, no-cache, must-revalidate"
 
 [[headers]]
 for = "/Images/*"

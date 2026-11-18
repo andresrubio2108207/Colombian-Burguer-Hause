@@ -9,9 +9,9 @@
       "price": 13900,
       "icon": "🍔",
       "image": "./Images/1794959581992-2x1.jpeg",
-      "imagePosition": "100% 92%",
+      "imagePosition": "91% 100%",
       "available": true,
-      "imageZoom": 1.4
+      "imageZoom": 10
     },
     {
       "id": 12,

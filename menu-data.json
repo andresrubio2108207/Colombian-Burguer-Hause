@@ -10,7 +10,8 @@
       "icon": "🍔",
       "image": "./Images/1794959581992-2x1.jpeg",
       "imagePosition": "48% 81%",
-      "available": true
+      "available": true,
+      "imageZoom": 10
     },
     {
       "id": 12,

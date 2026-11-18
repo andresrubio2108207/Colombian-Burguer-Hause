@@ -648,17 +648,29 @@ if (scrollTopButton) {
 
 let _lastMenuSig = '';
 
+// Lee menu-data.json directo desde GitHub (sin pasar por el deploy de Netlify)
+// Si el repo es privado o falla, cae al archivo servido por Netlify
+const _MENU_URLS = [
+  'https://raw.githubusercontent.com/andresrubio2108207/Colombian-Burguer-Hause/main/menu-data.json',
+  './menu-data.json'
+];
+
 async function _fetchMenuData() {
-  const res = await fetch('./menu-data.json?_=' + Date.now(), { cache: 'no-store' });
-  if (!res.ok) return false;
-  const data = await res.json();
-  if (!Array.isArray(data.menuItems) || !data.menuItems.length) return false;
-  const sig = data.menuItems.length + '|' + data.combos.length + '|' + (data.menuItems[0]?.name || '');
-  if (sig === _lastMenuSig) return false;
-  _lastMenuSig = sig;
-  menuItems = data.menuItems;
-  combos = data.combos || [];
-  return true;
+  for (const base of _MENU_URLS) {
+    try {
+      const res = await fetch(base + '?_=' + Date.now(), { cache: 'no-store' });
+      if (!res.ok) continue;
+      const data = await res.json();
+      if (!Array.isArray(data.menuItems) || !data.menuItems.length) continue;
+      const sig = JSON.stringify(data);
+      if (sig === _lastMenuSig) return false;
+      _lastMenuSig = sig;
+      menuItems = data.menuItems;
+      combos = data.combos || [];
+      return true;
+    } catch (_) { continue; }
+  }
+  return false;
 }
 
 (async function initApp() {

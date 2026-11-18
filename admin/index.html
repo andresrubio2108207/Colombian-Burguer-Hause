@@ -849,8 +849,11 @@ async function uploadImage(file) {
     showToast('Comprimiendo imagen…');
     const base64 = await compressImage(file);
     if (!base64) { showToast('Error al procesar imagen', 'error'); return null; }
+    const approxKB = Math.round(base64.length * 0.75 / 1024);
+    console.log(`Imagen comprimida: ~${approxKB} KB`);
     const nameNoExt = file.name.replace(/\.[^.]+$/, '').replace(/\s+/g, '-').replace(/[^a-zA-Z0-9\-_]/g, '');
     const path = `Images/${Date.now()}-${nameNoExt}.jpg`;
+    showToast('Subiendo imagen…');
     const res = await fetch(`/.netlify/git/github/contents/${path}`, {
       method: 'PUT',
       headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
@@ -868,7 +871,8 @@ async function uploadImage(file) {
     }
     return `./${path}`;
   } catch (err) {
-    showToast('Error de conexión al subir imagen', 'error');
+    console.error('uploadImage error:', err);
+    showToast('Error: ' + (err?.message || 'fallo al subir').slice(0, 80), 'error');
     return null;
   }
 }

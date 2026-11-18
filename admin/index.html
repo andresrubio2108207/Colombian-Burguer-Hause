@@ -743,10 +743,9 @@ const CAT_ORDER = ['hamburguesas','alas','perros','fast','salchipapas','patacone
 let user = null;
 let menuData = { menuItems: [], combos: [] };
 
-// Las fotos recién subidas están en GitHub pero no en Netlify (no se redespliega por contenido)
+// Las fotos se muestran desde GitHub: una recién subida tarda ~1 min en llegar a Netlify (deploy)
 const RAW_BASE = 'https://raw.githubusercontent.com/andresrubio2108207/Colombian-Burguer-Hause/main/';
 const adminImgSrc = path => path ? RAW_BASE + encodeURI(path.replace(/^\.\//, '')) : '';
-let fileSha = '';
 let activeSection = 'items';
 let activeCategory = 'all';
 let saving = false;
@@ -775,53 +774,83 @@ async function initApp() {
 }
 
 // ── DATA ──────────────────────────────────────
-async function loadMenuData() {
-  const token = await getToken();
+// Versión más reciente del menú en GitHub. Sin caché del navegador: la API responde con
+// max-age=60, y guardar sobre una copia vieja borra cambios hechos desde otra sesión.
+async function fetchMenuFile(token) {
   const res = await fetch('/.netlify/git/github/contents/menu-data.json', {
-    headers: { Authorization: `Bearer ${token}` }
+    headers: { Authorization: `Bearer ${token}` },
+    cache: 'no-store'
   });
-  if (!res.ok) { showToast('Error cargando datos', 'error'); return; }
+  if (!res.ok) return null;
   const json = await res.json();
-  fileSha = json.sha;
-  menuData = JSON.parse(decodeURIComponent(escape(atob(json.content.replace(/\n/g, '')))));
+  return { sha: json.sha, data: JSON.parse(decodeURIComponent(escape(atob(json.content.replace(/\n/g, ''))))) };
 }
 
-async function saveMenuData(msg) {
-  if (saving) return false;
+async function loadMenuData() {
+  const file = await fetchMenuFile(await getToken());
+  if (!file) { showToast('Error cargando datos', 'error'); return; }
+  menuData = file.data;
+}
+
+// Cada guardado relee el menú de GitHub y aplica SOLO su cambio (mutate) sobre esa versión,
+// así dos sesiones abiertas (otro usuario, el celular, otra pestaña) no se pisan los cambios.
+async function saveMenuData(msg, mutate) {
+  if (saving) { showToast('Espera, hay un guardado en curso…'); return false; }
   saving = true;
   try {
     const token = await getToken();
-    const content = btoa(unescape(encodeURIComponent(JSON.stringify(menuData, null, 2))));
-    let res = await fetch('/.netlify/git/github/contents/menu-data.json', {
-      method: 'PUT',
-      headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
-      body: JSON.stringify({ message: msg || 'actualizar menú', content, sha: fileSha })
-    });
-    // Si hay conflicto de SHA (409), re-obtenemos el sha y reintentamos
-    if (res.status === 409 || res.status === 422) {
-      const fetchRes = await fetch('/.netlify/git/github/contents/menu-data.json', {
-        headers: { Authorization: `Bearer ${token}` }
+    for (let attempt = 0; attempt < 4; attempt++) {
+      const file = await fetchMenuFile(token);
+      if (!file) { showToast('Error leyendo el menú', 'error'); return false; }
+      mutate(file.data);
+      // Siempre mayor que el anterior, aunque los relojes de dos dispositivos no coincidan
+      file.data.updatedAt = Math.max(Date.now(), (file.data.updatedAt || 0) + 1);
+      const content = btoa(unescape(encodeURIComponent(JSON.stringify(file.data, null, 2))));
+      const res = await fetch('/.netlify/git/github/contents/menu-data.json', {
+        method: 'PUT',
+        headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: msg || 'actualizar menú', content, sha: file.sha })
       });
-      if (fetchRes.ok) {
-        const fetchJson = await fetchRes.json();
-        fileSha = fetchJson.sha;
-        res = await fetch('/.netlify/git/github/contents/menu-data.json', {
-          method: 'PUT',
-          headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
-          body: JSON.stringify({ message: msg || 'actualizar menú', content, sha: fileSha })
-        });
+      if (res.ok) {
+        menuData = file.data;
+        watchPublish(file.data.updatedAt);
+        return true;
+      }
+      // 409/422: otra sesión guardó entre la lectura y este guardado → reintentar sobre lo nuevo
+      if (res.status !== 409 && res.status !== 422) {
+        showToast('Error al guardar (' + res.status + ')', 'error');
+        return false;
       }
     }
-    if (!res.ok) { showToast('Error al guardar (' + res.status + ')', 'error'); return false; }
-    const data = await res.json();
-    fileSha = data.content.sha;
-    return true;
+    showToast('Error al guardar: el menú cambió varias veces seguidas, intenta de nuevo', 'error');
+    return false;
   } catch (err) {
     showToast('Error de conexión', 'error');
     return false;
   } finally {
     saving = false;
   }
+}
+
+// Cada guardado redespliega la web en Netlify (~1 min): avisa cuando el cambio ya se ve en la página.
+let publishWatch = 0;
+function watchPublish(savedAt) {
+  const watchId = ++publishWatch;
+  const deadline = Date.now() + 4 * 60 * 1000;
+  const check = async () => {
+    if (watchId !== publishWatch) return; // un guardado más nuevo tiene su propio aviso
+    try {
+      const res = await fetch('/menu-data.json?_=' + Date.now(), { cache: 'no-store' });
+      const live = res.ok ? await res.json() : null;
+      if (live && (live.updatedAt || 0) >= savedAt) {
+        showToast('✓ Ya se ve en la página web', 'success');
+        return;
+      }
+    } catch (_) {}
+    if (Date.now() < deadline) setTimeout(check, 5000);
+    else showToast('La página está tardando en actualizarse, revísala en unos minutos');
+  };
+  setTimeout(check, 5000);
 }
 
 async function normalizeToBlob(file) {
@@ -1040,21 +1069,33 @@ function renderComboCard(combo) {
 
 // ── TOGGLE AVAILABILITY ───────────────────────
 async function toggleItem(id) {
-  const idx = menuData.menuItems.findIndex(i => i.id === id);
-  if (idx < 0) return;
-  menuData.menuItems[idx].available = !(menuData.menuItems[idx].available !== false);
+  const item = menuData.menuItems.find(i => i.id === id);
+  if (!item) return;
+  const available = item.available === false;
+  item.available = available;
   renderMain(); renderSidebar();
-  const ok = await saveMenuData('cambiar disponibilidad producto');
-  showToast(ok ? '✓ Guardado' : 'Error', ok ? 'success' : 'error');
+  const ok = await saveMenuData('cambiar disponibilidad producto', d => {
+    const it = d.menuItems.find(i => i.id === id);
+    if (it) it.available = available;
+  });
+  if (!ok) item.available = !available;
+  renderMain(); renderSidebar();
+  if (ok) showToast('✓ Guardado', 'success');
 }
 
 async function toggleCombo(id) {
-  const idx = menuData.combos.findIndex(c => c.id === id);
-  if (idx < 0) return;
-  menuData.combos[idx].available = !(menuData.combos[idx].available !== false);
+  const combo = menuData.combos.find(c => c.id === id);
+  if (!combo) return;
+  const available = combo.available === false;
+  combo.available = available;
   renderMain();
-  const ok = await saveMenuData('cambiar disponibilidad combo');
-  showToast(ok ? '✓ Guardado' : 'Error', ok ? 'success' : 'error');
+  const ok = await saveMenuData('cambiar disponibilidad combo', d => {
+    const c = d.combos.find(x => x.id === id);
+    if (c) c.available = available;
+  });
+  if (!ok) combo.available = !available;
+  renderMain();
+  if (ok) showToast('✓ Guardado', 'success');
 }
 
 // ── MODALS ────────────────────────────────────
@@ -1301,14 +1342,9 @@ async function saveItem(id, isNew) {
     }
   }
 
-  const idx = isNew ? -1 : menuData.menuItems.findIndex(i => i.id === id);
-  const existing = isNew ? {} : menuData.menuItems[idx];
-
   const posVal = (document.getElementById('fImagePosition')?.value || '').trim();
   const zoomVal = parseFloat(document.getElementById('fImageZoom')?.value || 1);
-  const updated = {
-    ...existing,
-    id,
+  const fields = {
     name: document.getElementById('fName').value.trim(),
     cat: document.getElementById('fCat').value,
     desc: document.getElementById('fDesc').value.trim(),
@@ -1316,22 +1352,29 @@ async function saveItem(id, isNew) {
     icon: document.getElementById('fIcon').value.trim() || '🍔',
     available: document.getElementById('fAvailable').checked,
   };
-  if (imagePath) updated.image = imagePath;
-  if (posVal) updated.imagePosition = posVal; else delete updated.imagePosition;
-  if (Math.abs(zoomVal - 1.0) > 0.01) updated.imageZoom = parseFloat(zoomVal.toFixed(2)); else delete updated.imageZoom;
+  // El formulario se aplica sobre el producto tal como está en GitHub al momento de guardar
+  const build = base => {
+    const it = { ...base, ...fields };
+    if (imagePath) it.image = imagePath;
+    if (posVal) it.imagePosition = posVal; else delete it.imagePosition;
+    if (Math.abs(zoomVal - 1.0) > 0.01) it.imageZoom = parseFloat(zoomVal.toFixed(2)); else delete it.imageZoom;
+    return it;
+  };
 
-  if (isNew) {
-    menuData.menuItems.push(updated);
-  } else {
-    menuData.menuItems[idx] = updated;
-  }
-
-  const ok = await saveMenuData(isNew ? 'agregar producto' : 'editar producto');
+  const ok = await saveMenuData(isNew ? 'agregar producto' : 'editar producto', d => {
+    if (isNew) {
+      // id según la versión actual: otra sesión pudo agregar productos mientras tanto
+      d.menuItems.push(build({ id: Math.max(0, ...d.menuItems.map(i => i.id)) + 1 }));
+      return;
+    }
+    const i = d.menuItems.findIndex(x => x.id === id);
+    if (i >= 0) d.menuItems[i] = build(d.menuItems[i]);
+  });
   if (ok) {
     closeModal();
     renderSidebar();
     renderMain();
-    showToast('✓ Guardado y publicado', 'success');
+    showToast('✓ Guardado — la web se actualiza en ~1 min', 'success');
   } else {
     saveBtn.disabled = false;
     saveBtn.textContent = 'Guardar';
@@ -1354,36 +1397,39 @@ async function saveCombo(id, isNew) {
     }
   }
 
-  const idx = isNew ? -1 : menuData.combos.findIndex(c => c.id === id);
-  const existing = isNew ? { sectionTitle: 'Los favoritos de la casa' } : menuData.combos[idx];
-
   const posVal = (document.getElementById('fImagePosition')?.value || '').trim();
   const zoomVal = parseFloat(document.getElementById('fImageZoom')?.value || 1);
-  const updated = {
-    ...existing,
-    id,
+  const fields = {
     name: document.getElementById('fName').value.trim(),
     desc: document.getElementById('fDesc').value.trim(),
     price: parseInt(document.getElementById('fPrice').value) || 0,
     icon: document.getElementById('fIcon').value.trim() || '🍔',
     available: document.getElementById('fAvailable').checked,
   };
-  if (imagePath) updated.image = imagePath;
-  if (posVal) updated.imagePosition = posVal; else delete updated.imagePosition;
-  if (Math.abs(zoomVal - 1.0) > 0.01) updated.imageZoom = parseFloat(zoomVal.toFixed(2)); else delete updated.imageZoom;
+  // El formulario se aplica sobre el combo tal como está en GitHub al momento de guardar
+  const build = base => {
+    const it = { ...base, ...fields };
+    if (imagePath) it.image = imagePath;
+    if (posVal) it.imagePosition = posVal; else delete it.imagePosition;
+    if (Math.abs(zoomVal - 1.0) > 0.01) it.imageZoom = parseFloat(zoomVal.toFixed(2)); else delete it.imageZoom;
+    return it;
+  };
 
-  if (isNew) {
-    menuData.combos.push(updated);
-  } else {
-    menuData.combos[idx] = updated;
-  }
-
-  const ok = await saveMenuData(isNew ? 'agregar combo' : 'editar combo');
+  const ok = await saveMenuData(isNew ? 'agregar combo' : 'editar combo', d => {
+    if (isNew) {
+      // id según la versión actual: otra sesión pudo agregar combos mientras tanto
+      const n = Math.max(0, ...d.combos.map(c => parseInt(String(c.id).replace('c', '')) || 0)) + 1;
+      d.combos.push(build({ id: 'c' + n, sectionTitle: 'Los favoritos de la casa' }));
+      return;
+    }
+    const i = d.combos.findIndex(c => c.id === id);
+    if (i >= 0) d.combos[i] = build(d.combos[i]);
+  });
   if (ok) {
     closeModal();
     renderMain();
     renderSidebar();
-    showToast('✓ Guardado y publicado', 'success');
+    showToast('✓ Guardado — la web se actualiza en ~1 min', 'success');
   } else {
     saveBtn.disabled = false;
     saveBtn.textContent = 'Guardar';
@@ -1393,15 +1439,13 @@ async function saveCombo(id, isNew) {
 // ── DELETE ────────────────────────────────────
 async function deleteItem(id) {
   if (!confirm('¿Eliminar este producto del menú?')) return;
-  menuData.menuItems = menuData.menuItems.filter(i => i.id !== id);
-  const ok = await saveMenuData('eliminar producto');
+  const ok = await saveMenuData('eliminar producto', d => { d.menuItems = d.menuItems.filter(i => i.id !== id); });
   if (ok) { closeModal(); renderSidebar(); renderMain(); showToast('✓ Producto eliminado', 'success'); }
 }
 
 async function deleteCombo(id) {
   if (!confirm('¿Eliminar este combo?')) return;
-  menuData.combos = menuData.combos.filter(c => c.id !== id);
-  const ok = await saveMenuData('eliminar combo');
+  const ok = await saveMenuData('eliminar combo', d => { d.combos = d.combos.filter(c => c.id !== id); });
   if (ok) { closeModal(); renderSidebar(); renderMain(); showToast('✓ Combo eliminado', 'success'); }
 }
 

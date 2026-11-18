@@ -646,10 +646,11 @@ if (scrollTopButton) {
   }, { passive: true });
 }
 
-// Netlify no redespliega los guardados del admin (ver netlify.toml): datos y fotos nuevas
-// existen en GitHub antes que en Netlify, así que se leen de ahí.
+// El menú se lee del propio Netlify (cada guardado del admin redespliega la web en ~1 min).
+// No usar raw.githubusercontent.com para el menú: su CDN sirve copias de hasta 5 minutos
+// e ignora el ?_= anti-caché, así que mostraba fotos viejas.
+// Las fotos sí usan GitHub como respaldo por si alguna todavía no está en Netlify.
 const _RAW_BASE = 'https://raw.githubusercontent.com/andresrubio2108207/Colombian-Burguer-Hause/main/';
-const _MENU_URLS = [_RAW_BASE + 'menu-data.json', './menu-data.json'];
 let _lastMenuSig = '';
 
 function _imgFallback(img, placeholderClass, icon) {
@@ -662,21 +663,16 @@ function _imgFallback(img, placeholderClass, icon) {
 }
 
 async function _fetchMenuData() {
-  for (const url of _MENU_URLS) {
-    try {
-      const res = await fetch(url + '?_=' + Date.now(), { cache: 'no-store' });
-      if (!res.ok) continue;
-      const data = await res.json();
-      if (!Array.isArray(data.menuItems) || !data.menuItems.length) continue;
-      const sig = JSON.stringify(data);
-      if (sig === _lastMenuSig) return false;
-      _lastMenuSig = sig;
-      menuItems = data.menuItems;
-      combos = data.combos || [];
-      return true;
-    } catch (_) { continue; }
-  }
-  return false;
+  const res = await fetch('./menu-data.json?_=' + Date.now(), { cache: 'no-store' });
+  if (!res.ok) return false;
+  const data = await res.json();
+  if (!Array.isArray(data.menuItems) || !data.menuItems.length) return false;
+  const sig = JSON.stringify(data);
+  if (sig === _lastMenuSig) return false;
+  _lastMenuSig = sig;
+  menuItems = data.menuItems;
+  combos = data.combos || [];
+  return true;
 }
 
 (async function initApp() {

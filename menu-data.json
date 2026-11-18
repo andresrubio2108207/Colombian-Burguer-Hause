@@ -270,7 +270,10 @@
       "name": "2 Burger clasica o perro clasico + 3 alas BBQ + papas",
       "desc": "Combo doble con alas y papas",
       "price": 38900,
-      "icon": "🍗"
+      "icon": "🍗",
+      "available": true,
+      "image": "./Images/1794965178668-ssss2026-11-17-at-64820-PM.jpg",
+      "imagePosition": "50% 50%"
     },
     {
       "id": 26,

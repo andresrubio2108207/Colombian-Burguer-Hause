@@ -646,23 +646,45 @@ if (scrollTopButton) {
   }, { passive: true });
 }
 
-(async function initApp() {
-  try {
-    const res = await fetch('./menu-data.json?_=' + Date.now(), { cache: 'no-store' });
-    if (res.ok) {
-      const data = await res.json();
-      menuItems = data.menuItems || [];
-      combos = data.combos || [];
-    }
-  } catch (_) {}
+let _lastMenuSig = '';
 
-  if (!menuItems.length) {
+async function _fetchMenuData() {
+  const res = await fetch('./menu-data.json?_=' + Date.now(), { cache: 'no-store' });
+  if (!res.ok) return false;
+  const data = await res.json();
+  if (!Array.isArray(data.menuItems) || !data.menuItems.length) return false;
+  const sig = data.menuItems.length + '|' + data.combos.length + '|' + (data.menuItems[0]?.name || '');
+  if (sig === _lastMenuSig) return false;
+  _lastMenuSig = sig;
+  menuItems = data.menuItems;
+  combos = data.combos || [];
+  return true;
+}
+
+(async function initApp() {
+  let loaded = false;
+  try {
+    loaded = await _fetchMenuData();
+  } catch (err) {
+    console.error('[menu] Error cargando menu-data.json:', err);
+  }
+
+  if (!loaded && !menuItems.length) {
     const fb = window.CBH_MENU_DATA || {};
     menuItems = [...(fb.menuItems || [])];
     combos = [...(fb.combos || [])];
+    console.warn('[menu] Usando datos estáticos de menu-data.js (fallback)');
   }
 
   updateBusinessStatusUI();
   renderMenu(activeFilter);
   setInterval(updateBusinessStatusUI, 60000);
+
+  // Revisa cambios cada 30 segundos para reflejar ediciones del admin sin recargar
+  setInterval(async () => {
+    try {
+      const changed = await _fetchMenuData();
+      if (changed) renderMenu(activeFilter);
+    } catch (_) {}
+  }, 30000);
 })();

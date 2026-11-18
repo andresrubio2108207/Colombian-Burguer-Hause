@@ -970,16 +970,6 @@
       "name": "Porción de Tajada madura X2",
       "price": 5900,
       "icon": "➕"
-    },
-    {
-      "id": 93,
-      "name": "prueba",
-      "cat": "hamburguesas",
-      "desc": "",
-      "price": 15000,
-      "icon": "🍔",
-      "available": true,
-      "imagePosition": "50% 50%"
     }
   ],
   "combos": [

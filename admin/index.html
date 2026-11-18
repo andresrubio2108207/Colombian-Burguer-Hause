@@ -857,7 +857,7 @@ async function uploadImage(file) {
     const res = await fetch(`/.netlify/git/github/contents/${path}`, {
       method: 'PUT',
       headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
-      body: JSON.stringify({ message: `subir imagen ${safeName}`, content: base64 })
+      body: JSON.stringify({ message: `subir imagen ${nameNoExt}`, content: base64 })
     });
     if (!res.ok) {
       const errBody = await res.json().catch(() => ({}));

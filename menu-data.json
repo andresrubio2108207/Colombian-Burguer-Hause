@@ -474,7 +474,10 @@
       "name": "Pincho de pollo, res, o mixto",
       "desc": "Ensalada + papa a la francesa",
       "price": 23900,
-      "icon": "🍢"
+      "icon": "🍢",
+      "available": true,
+      "image": "./Images/1794966401321-WhatsApp-Image-2026-11-12-at-93316-PM.jpg",
+      "imagePosition": "48% 82%"
     },
     {
       "id": 46,

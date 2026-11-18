@@ -358,7 +358,10 @@
       "name": "Salchipapa",
       "desc": "Trozos de salchicha, papas y queso",
       "price": 13900,
-      "icon": "🍟"
+      "icon": "🍟",
+      "available": true,
+      "image": "./Images/1794966336536-salchipapa.jpg",
+      "imagePosition": "48% 78%"
     },
     {
       "id": 35,

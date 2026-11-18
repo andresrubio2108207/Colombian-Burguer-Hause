@@ -876,10 +876,11 @@ async function uploadImage(file) {
     if (!res.ok) {
       const errBody = await res.json().catch(() => ({}));
       const msg = errBody.message || res.statusText || '';
+      console.error('[uploadImage] FALLO:', res.status, res.statusText, errBody);
       if (res.status === 401 || res.status === 403) {
         showToast('Sin permisos — cierra sesión y vuelve a entrar', 'error');
       } else {
-        showToast(`Error imagen (${res.status}${msg ? ': ' + msg.slice(0, 60) : ''})`, 'error');
+        showToast(`Error imagen ${res.status}: ${msg || '(sin detalle — abre consola F12)'}`, 'error');
       }
       return null;
     }

@@ -819,13 +819,38 @@ async function saveMenuData(msg) {
   }
 }
 
+function compressImage(file, maxPx = 1400, quality = 0.82) {
+  return new Promise(resolve => {
+    const img = new Image();
+    const url = URL.createObjectURL(file);
+    img.onload = () => {
+      URL.revokeObjectURL(url);
+      let { width, height } = img;
+      if (width > maxPx || height > maxPx) {
+        const r = Math.min(maxPx / width, maxPx / height);
+        width = Math.round(width * r);
+        height = Math.round(height * r);
+      }
+      const canvas = document.createElement('canvas');
+      canvas.width = width; canvas.height = height;
+      canvas.getContext('2d').drawImage(img, 0, 0, width, height);
+      const dataUrl = canvas.toDataURL('image/jpeg', quality);
+      resolve(dataUrl.split(',')[1]);
+    };
+    img.onerror = () => { URL.revokeObjectURL(url); resolve(null); };
+    img.src = url;
+  });
+}
+
 async function uploadImage(file) {
   try {
     const token = await getToken();
     if (!token) { showToast('Sin sesión activa', 'error'); return null; }
-    const base64 = await fileToBase64(file);
-    const safeName = file.name.replace(/\s+/g, '-').replace(/[^a-zA-Z0-9.\-_]/g, '');
-    const path = `Images/${Date.now()}-${safeName}`;
+    showToast('Comprimiendo imagen…');
+    const base64 = await compressImage(file);
+    if (!base64) { showToast('Error al procesar imagen', 'error'); return null; }
+    const nameNoExt = file.name.replace(/\.[^.]+$/, '').replace(/\s+/g, '-').replace(/[^a-zA-Z0-9\-_]/g, '');
+    const path = `Images/${Date.now()}-${nameNoExt}.jpg`;
     const res = await fetch(`/.netlify/git/github/contents/${path}`, {
       method: 'PUT',
       headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
@@ -1239,7 +1264,6 @@ async function saveItem(id, isNew) {
   let imagePath = undefined;
   const fileInput = document.getElementById('imgFile');
   if (fileInput && fileInput.files && fileInput.files[0]) {
-    showToast('Subiendo imagen…');
     imagePath = await uploadImage(fileInput.files[0]);
     if (imagePath === null) {
       saveBtn.disabled = false;
@@ -1293,7 +1317,6 @@ async function saveCombo(id, isNew) {
   let imagePath = undefined;
   const fileInput = document.getElementById('imgFile');
   if (fileInput && fileInput.files && fileInput.files[0]) {
-    showToast('Subiendo imagen…');
     imagePath = await uploadImage(fileInput.files[0]);
     if (imagePath === null) {
       saveBtn.disabled = false;

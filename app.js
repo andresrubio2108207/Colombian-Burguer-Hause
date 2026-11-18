@@ -194,7 +194,7 @@ function renderProductCard(item) {
     : `<button class="add-btn disabled" disabled>Próximamente</button>`;
   return `
     <div class="product-card">
-      ${item.image ? `<img class="product-img" src="${item.image}" alt="${item.name}" width="640" height="480" loading="lazy" decoding="async" fetchpriority="low"${imageStyle} onerror="this.outerHTML='<div class=\\'product-img-placeholder\\'>${item.icon}</div>'">` : `<div class="product-img-placeholder">${item.icon}</div>`}
+      ${item.image ? `<img class="product-img" src="${item.image}" alt="${item.name}" width="640" height="480" loading="lazy" decoding="async" fetchpriority="low"${imageStyle} onerror="_imgFallback(this,'product-img-placeholder','${item.icon}')">` : `<div class="product-img-placeholder">${item.icon}</div>`}
       <div class="product-body">
         <span class="product-badge">${getCatLabel(item.cat)}</span>
         <div class="product-name">${item.name}</div>
@@ -257,7 +257,7 @@ function renderComboCard(combo) {
     : `<button class="add-btn disabled" disabled>Próximamente</button>`;
   return `
     <div class="combo-card">
-      ${combo.image ? `<img class="combo-img" src="${combo.image}" alt="${combo.name}" width="640" height="480" loading="lazy" decoding="async" fetchpriority="low"${imageStyle} onerror="this.outerHTML='<div class=\\'combo-img-placeholder\\'>${combo.icon}</div>'">` : `<div class="combo-img-placeholder">${combo.icon}</div>`}
+      ${combo.image ? `<img class="combo-img" src="${combo.image}" alt="${combo.name}" width="640" height="480" loading="lazy" decoding="async" fetchpriority="low"${imageStyle} onerror="_imgFallback(this,'combo-img-placeholder','${combo.icon}')">` : `<div class="combo-img-placeholder">${combo.icon}</div>`}
       <div class="combo-body">
         <div class="combo-tag">Combo Especial</div>
         <div class="combo-name">${combo.name}</div>
@@ -646,42 +646,33 @@ if (scrollTopButton) {
   }, { passive: true });
 }
 
+// Netlify no redespliega los guardados del admin (ver netlify.toml): datos y fotos nuevas
+// existen en GitHub antes que en Netlify, así que se leen de ahí.
+const _RAW_BASE = 'https://raw.githubusercontent.com/andresrubio2108207/Colombian-Burguer-Hause/main/';
+const _MENU_URLS = [_RAW_BASE + 'menu-data.json', './menu-data.json'];
 let _lastMenuSig = '';
-let _menuSource = '';
 
-// Lee menu-data.json directo desde GitHub (sin pasar por el deploy de Netlify)
-// Si falla, cae al archivo servido por Netlify
-const _MENU_URLS = [
-  ['GH', 'https://raw.githubusercontent.com/andresrubio2108207/Colombian-Burguer-Hause/main/menu-data.json'],
-  ['NL', './menu-data.json']
-];
-
-function _showDataBadge(src, count) {
-  let badge = document.getElementById('_dbg');
-  if (!badge) {
-    badge = document.createElement('div');
-    badge.id = '_dbg';
-    badge.style.cssText = 'position:fixed;bottom:8px;right:8px;background:rgba(0,0,0,.7);color:#0f0;font:11px monospace;padding:4px 8px;border-radius:4px;z-index:9999;pointer-events:none';
-    document.body.appendChild(badge);
+function _imgFallback(img, placeholderClass, icon) {
+  if (!img.dataset.raw) {
+    img.dataset.raw = '1';
+    img.src = _RAW_BASE + encodeURI(img.getAttribute('src').replace(/^\.\//, ''));
+    return;
   }
-  const t = new Date().toLocaleTimeString('es-CO', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
-  badge.textContent = `[${src}] ${count} items · ${t}`;
+  img.outerHTML = `<div class="${placeholderClass}">${icon}</div>`;
 }
 
 async function _fetchMenuData() {
-  for (const [src, base] of _MENU_URLS) {
+  for (const url of _MENU_URLS) {
     try {
-      const res = await fetch(base + '?_=' + Date.now(), { cache: 'no-store' });
+      const res = await fetch(url + '?_=' + Date.now(), { cache: 'no-store' });
       if (!res.ok) continue;
       const data = await res.json();
       if (!Array.isArray(data.menuItems) || !data.menuItems.length) continue;
       const sig = JSON.stringify(data);
-      _menuSource = src;
-      if (sig === _lastMenuSig) { _showDataBadge(src + '=', data.menuItems.length); return false; }
+      if (sig === _lastMenuSig) return false;
       _lastMenuSig = sig;
       menuItems = data.menuItems;
       combos = data.combos || [];
-      _showDataBadge(src + '✓', data.menuItems.length);
       return true;
     } catch (_) { continue; }
   }
@@ -709,6 +700,7 @@ async function _fetchMenuData() {
 
   // Revisa cambios cada 30 segundos para reflejar ediciones del admin sin recargar
   setInterval(async () => {
+    if (document.hidden) return;
     try {
       const changed = await _fetchMenuData();
       if (changed) renderMenu(activeFilter);

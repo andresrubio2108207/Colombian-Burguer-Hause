@@ -742,6 +742,10 @@ const CAT_ORDER = ['hamburguesas','alas','perros','fast','salchipapas','patacone
 
 let user = null;
 let menuData = { menuItems: [], combos: [] };
+
+// Las fotos recién subidas están en GitHub pero no en Netlify (no se redespliega por contenido)
+const RAW_BASE = 'https://raw.githubusercontent.com/andresrubio2108207/Colombian-Burguer-Hause/main/';
+const adminImgSrc = path => path ? RAW_BASE + encodeURI(path.replace(/^\.\//, '')) : '';
 let fileSha = '';
 let activeSection = 'items';
 let activeCategory = 'all';
@@ -988,7 +992,7 @@ function renderItemCard(item) {
   const available = item.available !== false;
   const posStyle = item.imagePosition ? ` style="object-position:${item.imagePosition}"` : '';
   const imgHtml = item.image
-    ? `<img class="card-img" src="${item.image.replace(/^\.\//, '../')}" alt="${item.name}"${posStyle} onerror="this.outerHTML='<div class=\\'card-img-placeholder\\'>${item.icon || '🍔'}</div>'">`
+    ? `<img class="card-img" src="${adminImgSrc(item.image)}" alt="${item.name}"${posStyle} onerror="this.outerHTML='<div class=\\'card-img-placeholder\\'>${item.icon || '🍔'}</div>'">`
     : `<div class="card-img-placeholder">${item.icon || '🍔'}</div>`;
   return `
     <div class="item-card ${!available ? 'unavailable' : ''}">
@@ -1013,7 +1017,7 @@ function renderComboCard(combo) {
   const available = combo.available !== false;
   const posStyle = combo.imagePosition ? ` style="object-position:${combo.imagePosition}"` : '';
   const imgHtml = combo.image
-    ? `<img class="card-img" src="${combo.image.replace(/^\.\//, '../')}" alt="${combo.name}"${posStyle} onerror="this.outerHTML='<div class=\\'card-img-placeholder\\'>${combo.icon || '🍔'}</div>'">`
+    ? `<img class="card-img" src="${adminImgSrc(combo.image)}" alt="${combo.name}"${posStyle} onerror="this.outerHTML='<div class=\\'card-img-placeholder\\'>${combo.icon || '🍔'}</div>'">`
     : `<div class="card-img-placeholder">${combo.icon || '🍔'}</div>`;
   return `
     <div class="item-card ${!available ? 'unavailable' : ''}">
@@ -1087,7 +1091,7 @@ function openItemModal(item, isNew) {
   const title = isNew ? 'Nuevo producto' : 'Editar producto';
   document.getElementById('modalTitle').textContent = title;
 
-  const imgSrc = item.image ? item.image.replace(/^\.\//, '../') : '';
+  const imgSrc = adminImgSrc(item.image);
   const curPos = item.imagePosition || '50% 50%';
   const curZoom = item.imageZoom || 1.0;
   document.getElementById('modalBody').innerHTML = `
@@ -1163,7 +1167,7 @@ function openItemModal(item, isNew) {
 
 function openComboModal(combo, isNew) {
   document.getElementById('modalTitle').textContent = isNew ? 'Nuevo combo' : 'Editar combo';
-  const imgSrc = combo.image ? combo.image.replace(/^\.\//, '../') : '';
+  const imgSrc = adminImgSrc(combo.image);
   const curPos = combo.imagePosition || '50% 50%';
   const curZoom = combo.imageZoom || 1.0;
   document.getElementById('modalBody').innerHTML = `

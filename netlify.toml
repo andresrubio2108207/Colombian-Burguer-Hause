@@ -1,5 +1,7 @@
 [build]
 publish = "."
+# Los guardados del admin (menu-data.json e Images/) no redespliegan: el sitio los lee directo de GitHub
+ignore = "git diff --quiet $CACHED_COMMIT_REF $COMMIT_REF -- . ':(exclude)menu-data.json' ':(exclude)Images'"
 
 [[headers]]
 for = "/*.html"

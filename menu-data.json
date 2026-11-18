@@ -22,7 +22,8 @@
       "icon": "🍔",
       "image": "./Images/h callejera_1_11zon.webp",
       "imagePosition": "46% 60%",
-      "available": true
+      "available": true,
+      "imageZoom": 1.1
     },
     {
       "id": 13,

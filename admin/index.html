@@ -9,6 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/heic2any@0.0.4/dist/heic2any.min.js"></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -819,26 +820,39 @@ async function saveMenuData(msg) {
   }
 }
 
+async function normalizeToBlob(file) {
+  const isHeic = file.type === 'image/heic' || file.type === 'image/heif'
+    || /\.(heic|heif)$/i.test(file.name);
+  if (!isHeic) return file;
+  try {
+    const result = await heic2any({ blob: file, toType: 'image/jpeg', quality: 0.92 });
+    return Array.isArray(result) ? result[0] : result;
+  } catch (_) { return null; }
+}
+
 function compressImage(file, maxPx = 1400, quality = 0.82) {
-  return new Promise(resolve => {
-    const img = new Image();
-    const url = URL.createObjectURL(file);
-    img.onload = () => {
-      URL.revokeObjectURL(url);
-      let { width, height } = img;
-      if (width > maxPx || height > maxPx) {
-        const r = Math.min(maxPx / width, maxPx / height);
-        width = Math.round(width * r);
-        height = Math.round(height * r);
-      }
-      const canvas = document.createElement('canvas');
-      canvas.width = width; canvas.height = height;
-      canvas.getContext('2d').drawImage(img, 0, 0, width, height);
-      const dataUrl = canvas.toDataURL('image/jpeg', quality);
-      resolve(dataUrl.split(',')[1]);
-    };
-    img.onerror = () => { URL.revokeObjectURL(url); resolve(null); };
-    img.src = url;
+  return normalizeToBlob(file).then(blob => {
+    if (!blob) return null;
+    return new Promise(resolve => {
+      const img = new Image();
+      const url = URL.createObjectURL(blob);
+      img.onload = () => {
+        URL.revokeObjectURL(url);
+        let { width, height } = img;
+        if (width > maxPx || height > maxPx) {
+          const r = Math.min(maxPx / width, maxPx / height);
+          width = Math.round(width * r);
+          height = Math.round(height * r);
+        }
+        const canvas = document.createElement('canvas');
+        canvas.width = width; canvas.height = height;
+        canvas.getContext('2d').drawImage(img, 0, 0, width, height);
+        const dataUrl = canvas.toDataURL('image/jpeg', quality);
+        resolve(dataUrl.split(',')[1]);
+      };
+      img.onerror = () => { URL.revokeObjectURL(url); resolve(null); };
+      img.src = url;
+    });
   });
 }
 
@@ -1214,13 +1228,20 @@ function openComboModal(combo, isNew) {
   showModal();
 }
 
-function previewImg(input) {
+async function previewImg(input) {
   if (!input.files || !input.files[0]) return;
   const file = input.files[0];
+
+  // Convertir HEIC/HEIF a blob displayable antes de mostrar el preview
+  const displayBlob = await normalizeToBlob(file);
+  if (!displayBlob) {
+    showToast('Formato de imagen no soportado', 'error');
+    return;
+  }
+
   const reader = new FileReader();
   reader.onload = e => {
     const src = e.target.result;
-    // Update upload area thumbnail
     let preview = document.getElementById('imgPreview');
     if (!preview) {
       preview = document.createElement('img');
@@ -1231,7 +1252,6 @@ function previewImg(input) {
     preview.src = src;
     preview.style.display = 'block';
 
-    // Update editor stage
     const editorImg = document.getElementById('imgEditorImg');
     if (editorImg) {
       editorImg.src = src;
@@ -1256,7 +1276,7 @@ function previewImg(input) {
     }
     initEditor(`${editorPos.x}% ${editorPos.y}%`, editorZoom);
   };
-  reader.readAsDataURL(file);
+  reader.readAsDataURL(displayBlob);
 }
 
 // ── SAVE ITEM ─────────────────────────────────
